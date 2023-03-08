@@ -1,0 +1,7 @@
+/build/
+/cmake-build-debug/
+CMakeLists.txt
+/compute/CMakeLists.txt
+source.txt
+simple.txt
+solution.txt

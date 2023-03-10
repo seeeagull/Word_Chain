@@ -111,7 +111,7 @@ void Graph::DfsGetChains(char now, std::deque<StringPointer>& records) {
     }
 }
 
-void Graph::FindAllWordChains() {
+int Graph::FindAllWordChains() {
     int total_chains = 0;
     std::queue<char> q{};
     std::vector<int> in_degree{};
@@ -166,30 +166,31 @@ void Graph::FindAllWordChains() {
             DfsGetChains(i, records);
         }
     }
-
+    return total_chains;
 }
 
-void Graph::FindMostWordsChain() {
+int Graph::FindMostWordsChain() {
     if (has_loop_) {
-        FindMostWordsChainWithLoops();
+         return FindMostWordsChainWithLoops();
     } else {
-        FindMostWordsChainWithoutLoops();
+        return FindMostWordsChainWithoutLoops();
     }
 }
 
-void Graph::FindMostLettersChain() {
+int Graph::FindMostLettersChain() {
     if (has_loop_) {
-        FindMostLettersChainWithLoops();
+        return FindMostLettersChainWithLoops();
     } else {
-        FindMostLettersChainWithoutLoops();
+        return FindMostLettersChainWithoutLoops();
     }
 }
 
-void Graph::FindMostWordsChainWithLoops() {
+int Graph::FindMostWordsChainWithLoops() {
     // TODO
+    return 0;
 }
 
-void Graph::FindMostWordsChainWithoutLoops() {
+int Graph::FindMostWordsChainWithoutLoops() {
     char optimal = 0;
     std::vector<StringPointer> prev{};
     std::deque<StringPointer> answer{};
@@ -243,6 +244,7 @@ void Graph::FindMostWordsChainWithoutLoops() {
             }
         }
     }
+    int ret = words_cnt[optimal];
     while (prev[optimal] != nullptr) {
         if (self_loop_[optimal] != nullptr) {
             answer.push_front(self_loop_[optimal]->word);
@@ -256,13 +258,15 @@ void Graph::FindMostWordsChainWithoutLoops() {
     for (const auto& it : answer) {
         file_io_->PrintWord(it);
     }
+    return ret;
 }
 
-void Graph::FindMostLettersChainWithLoops() {
+int Graph::FindMostLettersChainWithLoops() {
     // TODO
+    return 0;
 }
 
-void Graph::FindMostLettersChainWithoutLoops() {
+int Graph::FindMostLettersChainWithoutLoops() {
     char optimal = 0;
     std::vector<StringPointer> prev{};
     std::deque<StringPointer> answer{};
@@ -316,6 +320,7 @@ void Graph::FindMostLettersChainWithoutLoops() {
             }
         }
     }
+    int ret = letters_cnt[optimal];
     while (prev[optimal] != nullptr) {
         if (self_loop_[optimal] != nullptr) {
             answer.push_front(self_loop_[optimal]->word);
@@ -329,4 +334,5 @@ void Graph::FindMostLettersChainWithoutLoops() {
     for (const auto& it : answer) {
         file_io_->PrintWord(it);
     }
+    return ret;
 }

@@ -11,7 +11,7 @@
 class Controller {
 public:
     void ParseCmd(int argc, char *argv[]);
-    void Cmd(int argc, char *argv[]);
+    int Cmd(int argc, char *argv[], int* res, const char* file_name = "./solution.txt");
 
 private:
     FUNCTION_TYPE function_type_ = kNone;

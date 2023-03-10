@@ -20,6 +20,7 @@ public:
     FileIo();
     ~FileIo();
     void SetInputFile(StringPointer file);
+    void SetOutputFile(StringPointer file);
     void ReadFile(std::vector<StringPointer>& words);
     void PrintNumber(int number);
     void PrintLine(std::deque<StringPointer>* words);

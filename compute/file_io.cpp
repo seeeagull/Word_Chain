@@ -19,6 +19,10 @@ void FileIo::SetInputFile(StringPointer file) {
     input_file_ = std::move(file);
 }
 
+void FileIo::SetOutputFile(StringPointer file) {
+    output_file_ = *file;
+}
+
 void FileIo::ReadFile(std::vector<StringPointer>& words) {
     std::ifstream source(*input_file_);
     if (!source.is_open()) {

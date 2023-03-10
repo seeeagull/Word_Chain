@@ -14,6 +14,25 @@ enum FUNCTION_TYPE {
     kFindWordChainWithMostLetters
 };
 
+enum ERROR_CODE {
+    kNoError,
+    kNoFilePath,
+    kMultiFilePath,
+    kFileNotExists,
+    kFileTypeError,
+    kIllegalParam,
+    kNoFunctionalParam,
+    kParamsConflict,
+    kDuplicateParam,
+    kCharNotAssign,
+    kIllegalChar,
+    kUnexpectedLoop,
+    kLengthOverflow,
+    kIllegalInput
+};
+
+
+
 struct ConflictFunctionalParamsException
         : public std::exception {
     const char * what () const noexcept override {
@@ -49,11 +68,5 @@ struct CannotFindInputFile
     }
 };
 
-struct ShouldNotContainLoops
-        : public std::exception {
-    const char * what () const noexcept override {
-        return "The input file should not contain word loops without parameter '-r'!";
-    }
-};
 
 #endif //WORD_CHAIN_TYPES_H

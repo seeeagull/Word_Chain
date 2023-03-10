@@ -23,18 +23,18 @@ public:
     void SetBannedHead(char bh);
     void SetFileIO(FileIo* file_io);
     bool DetectLoop();
-    void FindAllWordChains();
-    void FindMostWordsChain();
-    void FindMostLettersChain();
+    int FindAllWordChains();
+    int FindMostWordsChain();
+    int FindMostLettersChain();
     void OutputAllWords();
 
 private:
     bool DfsFindLoop(char now, std::vector<int>& visited);
     void DfsGetChains(char now, std::deque<StringPointer>& records);
-    void FindMostWordsChainWithLoops();
-    void FindMostWordsChainWithoutLoops();
-    void FindMostLettersChainWithLoops();
-    void FindMostLettersChainWithoutLoops();
+    int FindMostWordsChainWithLoops();
+    int FindMostWordsChainWithoutLoops();
+    int FindMostLettersChainWithLoops();
+    int FindMostLettersChainWithoutLoops();
     void Tarjan();
 
     struct Edge {

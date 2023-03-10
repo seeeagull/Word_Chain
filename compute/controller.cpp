@@ -8,6 +8,9 @@
 void Controller::ParseCmd(int argc, char *argv[]) {
     int i = 1;
     while (i < argc) {
+        if (argv[i][0] != '-') {
+            // TODO: throw error
+        }
         switch (argv[i][1]) {
             case 'n':
                 if (function_type_ != kNone) {
@@ -34,16 +37,33 @@ void Controller::ParseCmd(int argc, char *argv[]) {
                 i += 2;
                 break;
             case 'h':
-                // TODO: 'A'-'Z'
-                head = argv[i + 1][0] - 'a';
+                if (argv[i + 1][0] >='A' && argv[i + 1][0] <= 'Z') {
+                    head = argv[i + 1][0] - 'A';
+                } else if (argv[i + 1][0] >= 'a' && argv[i + 1][0] <= 'z') {
+                    head = argv[i + 1][0] - 'a';
+                } else  {
+                    // TODO: throw error
+                }
                 i += 2;
                 break;
             case 't':
-                tail = argv[i + 1][0] - 'a';
+                if (argv[i + 1][0] >='A' && argv[i + 1][0] <= 'Z') {
+                    tail = argv[i + 1][0] - 'A';
+                } else if (argv[i + 1][0] >= 'a' && argv[i + 1][0] <= 'z') {
+                    tail = argv[i + 1][0] - 'a';
+                } else  {
+                    // TODO: throw error
+                }
                 i += 2;
                 break;
             case 'j':
-                banned_head_ = argv[i + 1][0] - 'a';
+                if (argv[i + 1][0] >='A' && argv[i + 1][0] <= 'Z') {
+                    banned_head_ = argv[i + 1][0] - 'A';
+                } else if (argv[i + 1][0] >= 'a' && argv[i + 1][0] <= 'z') {
+                    banned_head_ = argv[i + 1][0] - 'a';
+                } else  {
+                    // TODO: throw error
+                }
                 i += 2;
                 break;
             case 'r':
@@ -64,13 +84,19 @@ void Controller::ParseCmd(int argc, char *argv[]) {
     }
 }
 
-void Controller::Cmd(int argc, char **argv) {
-    ParseCmd(argc, argv);
+int Controller::Cmd(int argc, char **argv, int *res, const char* file_name) {
+    try {
+        ParseCmd(argc, argv);
+    } catch (NoInputFileException e) {
+        return kNoFilePath;
+    }
     graph.SetHead(head);
     graph.setTail(tail);
     graph.SetBannedHead(banned_head_);
     graph.SetFileIO(&file_io_);
     file_io_.SetInputFile(std::make_shared<std::string>(input_file_));
+    std::string output_file(file_name);
+    file_io_.SetOutputFile(std::make_shared<std::string>(output_file));
     std::vector<std::shared_ptr<std::string>> words{};
     file_io_.ReadFile(words);
 
@@ -79,20 +105,21 @@ void Controller::Cmd(int argc, char **argv) {
     }
     bool has_loop = graph.DetectLoop();
     if (has_loop && !allow_loop_) {
-        throw ShouldNotContainLoops();
+        return kUnexpectedLoop;
     }
     switch (function_type_) {
         case kFindAllWordChains:
-            graph.FindAllWordChains();
+            *res = graph.FindAllWordChains();
             break;
         case kFindWordChainWithMostWords:
-            graph.FindMostWordsChain();
+            *res = graph.FindMostWordsChain();
             break;
         case kFindWordChainWithMostLetters:
-            graph.FindMostLettersChain();
+            *res = graph.FindMostLettersChain();
             break;
         default:
             break;
     }
+    return kNoError;
 }
 

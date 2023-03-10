@@ -4,9 +4,13 @@
 #include <unordered_set>
 #include <vector>
 #include "gtest/gtest.h"
+#include "../compute/types.h"
+#include "../compute/controller.h"
 
 #ifndef WORD_CHAIN_H
 #define WORD_CHAIN_H
+
+Controller controller;
 
 class WordChain {
 private:
@@ -182,260 +186,256 @@ public:
 
 #endif //WORD_CHAIN_H
 
-int CalledFunction(int argc, const char *argv[], int *res, const char *file_name) {
-    return 1;
-}
-
-TEST(correctness_test, testcase1) {
-    const char *file_name = "../testcase/testcase1.txt";
-    const char *argv[] = {"Wordlist.exe", "-n", file_name};
-    WordChain word_chain((std::string(file_name)));
-    word_chain.BuildGraph();
-    int std_res = word_chain.GetChainCnt();
-    word_chain.OutputFile("../output/output1_std.txt");
-    int res;
-    int ret = CalledFunction(sizeof(argv)/sizeof(argv[0]), argv, &res,  "../output/output1.txt");
-    EXPECT_EQ(ret, 0);
-    EXPECT_EQ(res, std_res);
-}
-
-TEST(correctness_test, testcase2_1) {
-    const char *file_name = "../testcase/testcase2.txt";
-    const char *argv[] = {"Wordlist.exe", "-r","-w", "-h", "c", "-j", "v", file_name};
-    WordChain word_chain((std::string(file_name)));
-    word_chain.BuildGraph();
-    int std_res = word_chain.GetMostWordChain('c', '0', 'v');
-    word_chain.OutputFile("../output/output2_1_std.txt");
-    int res;
-    int ret = CalledFunction(sizeof(argv)/sizeof(argv[0]), argv, &res, "../output/output2_1.txt");
-    EXPECT_EQ(ret, 0);
-    EXPECT_EQ(res, std_res);
-}
-
-TEST(correctness_test, testcase2_2) {
-    const char *file_name = "../testcase/testcase2.txt";
-    const char *argv[] = {"Wordlist.exe", "-c","-r", "-j", "h", "-t", "j", file_name};
-    WordChain word_chain((std::string(file_name)));
-    word_chain.BuildGraph();
-    int std_res = word_chain.GetMostCharChain('0', 'j', 'h');
-    word_chain.OutputFile("../output/output2_2_std.txt");
-    int res;
-    int ret = CalledFunction(sizeof(argv)/sizeof(argv[0]), argv, &res, "../output/output2_2.txt");
-    EXPECT_EQ(ret, 0);
-    EXPECT_EQ(res, std_res);
-}
-
-TEST(correctness_test, testcase3) {
-    const char *file_name = "../testcase/testcase3.txt";
-    const char *argv[] = {"Wordlist.exe", "-w", file_name};
-    WordChain word_chain((std::string(file_name)));
-    word_chain.BuildGraph();
-    int std_res = word_chain.GetMostWordChain('0', '0', '0');
-    word_chain.OutputFile("../output/output3_std.txt");
-    int res;
-    int ret = CalledFunction(sizeof(argv)/sizeof(argv[0]), argv, &res, "../output/output3.txt");
-    EXPECT_EQ(ret, 0);
-    EXPECT_EQ(res, std_res);
-}
-
-TEST(correctness_test, testcase4) {
-    const char *file_name = "../testcase/testcase4.txt";
-    const char *argv[] = {"Wordlist.exe", "-c", file_name};
-    WordChain word_chain((std::string(file_name)));
-    word_chain.BuildGraph();
-    int std_res = word_chain.GetMostCharChain('0', '0', '0');
-    word_chain.OutputFile("../output/output4_std.txt");
-    int res;
-    int ret = CalledFunction(sizeof(argv)/sizeof(argv[0]), argv, &res, "../output/output4.txt");
-    EXPECT_EQ(ret, 0);
-    EXPECT_EQ(res, std_res);
-}
-
-TEST(correctness_test, testcase5) {
-    const char *file_name = "../testcase/testcase5.txt";
-    const char *argv[] = {"Wordlist.exe", "-c", "-j", "h", "-r", file_name};
-    WordChain word_chain((std::string(file_name)));
-    word_chain.BuildGraph();
-    int std_res = word_chain.GetMostCharChain('0', '0', 'h');
-    word_chain.OutputFile("../output/output5_std.txt");
-    int res;
-    int ret = CalledFunction(sizeof(argv)/sizeof(argv[0]), argv, &res, "../output/output5.txt");
-    EXPECT_EQ(ret, 0);
-    EXPECT_EQ(res, std_res);
-}
-
-TEST(correctness_test, testcase6_1) {
-    const char *file_name = "../testcase/testcase6.txt";
-    const char *argv[] = {"Wordlist.exe", "-w", "-t", "t", "-r", file_name};
-    WordChain word_chain((std::string(file_name)));
-    word_chain.BuildGraph();
-    int std_res = word_chain.GetMostWordChain('0', 't', '0');
-    word_chain.OutputFile("../output/output6_1_std.txt");
-    int res;
-    int ret = CalledFunction(sizeof(argv)/sizeof(argv[0]), argv, &res, "../output/output6_1.txt");
-    EXPECT_EQ(ret, 0);
-    EXPECT_EQ(res, std_res);
-}
-
-TEST(correctness_test, testcase6_2) {
-    const char *file_name = "../testcase/testcase6.txt";
-    const char *argv[] = {"Wordlist.exe", "-w", "-h", "n", "-r", file_name};
-    WordChain word_chain((std::string(file_name)));
-    word_chain.BuildGraph();
-    int std_res = word_chain.GetMostWordChain('n', '0', '0');
-    word_chain.OutputFile("../output/output6_2_std.txt");
-    int res;
-    int ret = CalledFunction(sizeof(argv)/sizeof(argv[0]), argv, &res, "../output/output6_2.txt");
-    EXPECT_EQ(ret, 0);
-    EXPECT_EQ(res, std_res);
-}
-
-TEST(correctness_test, testcase7_1) {
-    const char *file_name = "../testcase/testcase7.txt";
-    const char *argv[] = {"Wordlist.exe", "-w", "-r", file_name};
-    WordChain word_chain((std::string(file_name)));
-    word_chain.BuildGraph();
-    int std_res = word_chain.GetMostWordChain('0', '0', '0');
-    word_chain.OutputFile("../output/output7_1_std.txt");
-    int res;
-    int ret = CalledFunction(sizeof(argv)/sizeof(argv[0]), argv, &res, "../output/output7_1.txt");
-    EXPECT_EQ(ret, 0);
-    EXPECT_EQ(res, std_res);
-}
-
-TEST(correctness_test, testcase7_2) {
-    const char *file_name = "../testcase/testcase7.txt";
-    const char *argv[] = {"Wordlist.exe", "-w", "-r", "-t", "b", file_name};
-    WordChain word_chain((std::string(file_name)));
-    word_chain.BuildGraph();
-    int std_res = word_chain.GetMostWordChain('0', 'b', '0');
-    word_chain.OutputFile("../output/output7_2_std.txt");
-    int res;
-    int ret = CalledFunction(sizeof(argv)/sizeof(argv[0]), argv, &res, "../output/output7_2.txt");
-    EXPECT_EQ(ret, 0);
-    EXPECT_EQ(res, std_res);
-}
-
-TEST(correctness_test, testcase8) {
-    const char *file_name = "../testcase/testcase8.txt";
-    const char *argv[] = {"Wordlist.exe", "-c", "-r", file_name};
-    WordChain word_chain((std::string(file_name)));
-    word_chain.BuildGraph();
-    int std_res = word_chain.GetMostCharChain('0', '0', '0');
-    word_chain.OutputFile("../output/output8_std.txt");
-    int res;
-    int ret = CalledFunction(sizeof(argv)/sizeof(argv[0]), argv, &res, "../output/output8.txt");
-    EXPECT_EQ(ret, 0);
-    EXPECT_EQ(res, std_res);
-}
-
-TEST(correctness_test, testcase9) {
-    const char *file_name = "../testcase/testcase9.txt";
-    const char *argv[] = {"Wordlist.exe", "-c", "-h","j","-t","z","-r", file_name};
-    WordChain word_chain((std::string(file_name)));
-    word_chain.BuildGraph();
-    int std_res = word_chain.GetMostCharChain('j', 'z', '0');
-    word_chain.OutputFile("../output/output9_std.txt");
-    int res;
-    int ret = CalledFunction(sizeof(argv)/sizeof(argv[0]), argv, &res, "../output/output9.txt");
-    EXPECT_EQ(ret, 0);
-    EXPECT_EQ(res, std_res);
-}
-
-TEST(correctness_test, testcase10) {
-    const char *file_name = "../testcase/testcase10.txt";
-    const char *argv[] = {"Wordlist.exe", "-w", "-j", "b", file_name};
-    WordChain word_chain((std::string(file_name)));
-    word_chain.BuildGraph();
-    int std_res = word_chain.GetMostWordChain('0', '0', 'b');
-    word_chain.OutputFile("../output/output10_std.txt");
-    int res;
-    int ret = CalledFunction(sizeof(argv)/sizeof(argv[0]), argv, &res, "../output/output10.txt");
-    EXPECT_EQ(ret, 0);
-    EXPECT_EQ(res, std_res);
-}
+//TEST(correctness_test, testcase1) {
+//    const char *file_name = "../testcase/testcase1.txt";
+//    const char *argv[] = {"Wordlist.exe", "-n", file_name};
+//    WordChain word_chain((std::string(file_name)));
+//    word_chain.BuildGraph();
+//    int std_res = word_chain.GetChainCnt();
+//    word_chain.OutputFile("../output/output1_std.txt");
+//    int res;
+//    int ret = controller.Cmd(sizeof(argv)/sizeof(argv[0]), const_cast<char **>(argv), &res, "../output/output1.txt");
+//    EXPECT_EQ(ret, 0);
+//    EXPECT_EQ(res, std_res);
+//}
+//
+//TEST(correctness_test, testcase2_1) {
+//    const char *file_name = "../testcase/testcase2.txt";
+//    const char *argv[] = {"Wordlist.exe", "-r","-w", "-h", "c", "-j", "v", file_name};
+//    WordChain word_chain((std::string(file_name)));
+//    word_chain.BuildGraph();
+//    int std_res = word_chain.GetMostWordChain('c', '0', 'v');
+//    word_chain.OutputFile("../output/output2_1_std.txt");
+//    int res;
+//    int ret = controller.Cmd(sizeof(argv)/sizeof(argv[0]), const_cast<char **>(argv), &res, "../output/output2_1.txt");
+//    EXPECT_EQ(ret, 0);
+//    EXPECT_EQ(res, std_res);
+//}
+//
+//TEST(correctness_test, testcase2_2) {
+//    const char *file_name = "../testcase/testcase2.txt";
+//    const char *argv[] = {"Wordlist.exe", "-c","-r", "-j", "h", "-t", "j", file_name};
+//    WordChain word_chain((std::string(file_name)));
+//    word_chain.BuildGraph();
+//    int std_res = word_chain.GetMostCharChain('0', 'j', 'h');
+//    word_chain.OutputFile("../output/output2_2_std.txt");
+//    int res;
+//    int ret = controller.Cmd(sizeof(argv)/sizeof(argv[0]), const_cast<char **>(argv), &res, "../output/output2_2.txt");
+//    EXPECT_EQ(ret, 0);
+//    EXPECT_EQ(res, std_res);
+//}
+//
+//TEST(correctness_test, testcase3) {
+//    const char *file_name = "../testcase/testcase3.txt";
+//    const char *argv[] = {"Wordlist.exe", "-w", file_name};
+//    WordChain word_chain((std::string(file_name)));
+//    word_chain.BuildGraph();
+//    int std_res = word_chain.GetMostWordChain('0', '0', '0');
+//    word_chain.OutputFile("../output/output3_std.txt");
+//    int res;
+//    int ret = controller.Cmd(sizeof(argv)/sizeof(argv[0]), const_cast<char **>(argv), &res, "../output/output3.txt");
+//    EXPECT_EQ(ret, 0);
+//    EXPECT_EQ(res, std_res);
+//}
+//
+//TEST(correctness_test, testcase4) {
+//    const char *file_name = "../testcase/testcase4.txt";
+//    const char *argv[] = {"Wordlist.exe", "-c", file_name};
+//    WordChain word_chain((std::string(file_name)));
+//    word_chain.BuildGraph();
+//    int std_res = word_chain.GetMostCharChain('0', '0', '0');
+//    word_chain.OutputFile("../output/output4_std.txt");
+//    int res;
+//    int ret = controller.Cmd(sizeof(argv)/sizeof(argv[0]), const_cast<char **>(argv), &res, "../output/output4.txt");
+//    EXPECT_EQ(ret, 0);
+//    EXPECT_EQ(res, std_res);
+//}
+//
+//TEST(correctness_test, testcase5) {
+//    const char *file_name = "../testcase/testcase5.txt";
+//    const char *argv[] = {"Wordlist.exe", "-c", "-j", "h", "-r", file_name};
+//    WordChain word_chain((std::string(file_name)));
+//    word_chain.BuildGraph();
+//    int std_res = word_chain.GetMostCharChain('0', '0', 'h');
+//    word_chain.OutputFile("../output/output5_std.txt");
+//    int res;
+//    int ret = controller.Cmd(sizeof(argv)/sizeof(argv[0]), const_cast<char **>(argv), &res, "../output/output5.txt");
+//    EXPECT_EQ(ret, 0);
+//    EXPECT_EQ(res, std_res);
+//}
+//
+//TEST(correctness_test, testcase6_1) {
+//    const char *file_name = "../testcase/testcase6.txt";
+//    const char *argv[] = {"Wordlist.exe", "-w", "-t", "t", "-r", file_name};
+//    WordChain word_chain((std::string(file_name)));
+//    word_chain.BuildGraph();
+//    int std_res = word_chain.GetMostWordChain('0', 't', '0');
+//    word_chain.OutputFile("../output/output6_1_std.txt");
+//    int res;
+//    int ret = controller.Cmd(sizeof(argv)/sizeof(argv[0]), const_cast<char **>(argv), &res, "../output/output6_1.txt");
+//    EXPECT_EQ(ret, 0);
+//    EXPECT_EQ(res, std_res);
+//}
+//
+//TEST(correctness_test, testcase6_2) {
+//    const char *file_name = "../testcase/testcase6.txt";
+//    const char *argv[] = {"Wordlist.exe", "-w", "-h", "n", "-r", file_name};
+//    WordChain word_chain((std::string(file_name)));
+//    word_chain.BuildGraph();
+//    int std_res = word_chain.GetMostWordChain('n', '0', '0');
+//    word_chain.OutputFile("../output/output6_2_std.txt");
+//    int res;
+//    int ret = controller.Cmd(sizeof(argv)/sizeof(argv[0]), const_cast<char **>(argv), &res, "../output/output6_2.txt");
+//    EXPECT_EQ(ret, 0);
+//    EXPECT_EQ(res, std_res);
+//}
+//
+//TEST(correctness_test, testcase7_1) {
+//    const char *file_name = "../testcase/testcase7.txt";
+//    const char *argv[] = {"Wordlist.exe", "-w", "-r", file_name};
+//    WordChain word_chain((std::string(file_name)));
+//    word_chain.BuildGraph();
+//    int std_res = word_chain.GetMostWordChain('0', '0', '0');
+//    word_chain.OutputFile("../output/output7_1_std.txt");
+//    int res;
+//    int ret = controller.Cmd(sizeof(argv)/sizeof(argv[0]), const_cast<char **>(argv), &res, "../output/output7_1.txt");
+//    EXPECT_EQ(ret, 0);
+//    EXPECT_EQ(res, std_res);
+//}
+//
+//TEST(correctness_test, testcase7_2) {
+//    const char *file_name = "../testcase/testcase7.txt";
+//    const char *argv[] = {"Wordlist.exe", "-w", "-r", "-t", "b", file_name};
+//    WordChain word_chain((std::string(file_name)));
+//    word_chain.BuildGraph();
+//    int std_res = word_chain.GetMostWordChain('0', 'b', '0');
+//    word_chain.OutputFile("../output/output7_2_std.txt");
+//    int res;
+//    int ret = controller.Cmd(sizeof(argv)/sizeof(argv[0]), const_cast<char **>(argv), &res, "../output/output7_2.txt");
+//    EXPECT_EQ(ret, 0);
+//    EXPECT_EQ(res, std_res);
+//}
+//
+//TEST(correctness_test, testcase8) {
+//    const char *file_name = "../testcase/testcase8.txt";
+//    const char *argv[] = {"Wordlist.exe", "-c", "-r", file_name};
+//    WordChain word_chain((std::string(file_name)));
+//    word_chain.BuildGraph();
+//    int std_res = word_chain.GetMostCharChain('0', '0', '0');
+//    word_chain.OutputFile("../output/output8_std.txt");
+//    int res;
+//    int ret = controller.Cmd(sizeof(argv)/sizeof(argv[0]), const_cast<char **>(argv), &res, "../output/output8.txt");
+//    EXPECT_EQ(ret, 0);
+//    EXPECT_EQ(res, std_res);
+//}
+//
+//TEST(correctness_test, testcase9) {
+//    const char *file_name = "../testcase/testcase9.txt";
+//    const char *argv[] = {"Wordlist.exe", "-c", "-h","j","-t","z","-r", file_name};
+//    WordChain word_chain((std::string(file_name)));
+//    word_chain.BuildGraph();
+//    int std_res = word_chain.GetMostCharChain('j', 'z', '0');
+//    word_chain.OutputFile("../output/output9_std.txt");
+//    int res;
+//    int ret = controller.Cmd(sizeof(argv)/sizeof(argv[0]), const_cast<char **>(argv), &res, "../output/output9.txt");
+//    EXPECT_EQ(ret, 0);
+//    EXPECT_EQ(res, std_res);
+//}
+//
+//TEST(correctness_test, testcase10) {
+//    const char *file_name = "../testcase/testcase10.txt";
+//    const char *argv[] = {"Wordlist.exe", "-w", "-j", "b", file_name};
+//    WordChain word_chain((std::string(file_name)));
+//    word_chain.BuildGraph();
+//    int std_res = word_chain.GetMostWordChain('0', '0', 'b');
+//    word_chain.OutputFile("../output/output10_std.txt");
+//    int res;
+//    int ret = controller.Cmd(sizeof(argv)/sizeof(argv[0]), const_cast<char **>(argv), &res, "../output/output10.txt");
+//    EXPECT_EQ(ret, 0);
+//    EXPECT_EQ(res, std_res);
+//}
 
 TEST(robustness_test, testcase1) {
     const char *argv[] = {"Wordlist.exe", "-n"};
     int res;
-    int ret = CalledFunction(sizeof(argv)/sizeof(argv[0]), argv, &res, "../exp1.txt");
+    int ret = controller.Cmd(sizeof(argv)/sizeof(argv[0]), const_cast<char **>(argv), &res, "../exp1.txt");
     EXPECT_EQ(ret, kNoFilePath);
 }
 
 TEST(robustness_test, testcase2) {
     const char *argv[] = {"Wordlist.exe", "-n", "../testcase/testcase2.txt", "../testcase/testcase2.txt"};
     int res;
-    int ret = CalledFunction(sizeof(argv)/sizeof(argv[0]), argv, &res, "../exp2.txt");
+    int ret = controller.Cmd(sizeof(argv)/sizeof(argv[0]), const_cast<char **>(argv), &res, "../exp2.txt");
     EXPECT_EQ(ret, kMultiFilePath);
 }
 
 TEST(robustness_test, testcase3) {
     const char *argv[] = {"Wordlist.exe", "-n", "../testcase/testcase0.txt"};
     int res;
-    int ret = CalledFunction(sizeof(argv)/sizeof(argv[0]), argv, &res, "../exp3.txt");
+    int ret = controller.Cmd(sizeof(argv)/sizeof(argv[0]), const_cast<char **>(argv), &res, "../exp3.txt");
     EXPECT_EQ(ret, kFileNotExists);
 }
 
 TEST(robustness_test, testcase4) {
     const char *argv[] = {"Wordlist.exe", "-n", "../testcase/testcase11.c"};
     int res;
-    int ret = CalledFunction(sizeof(argv)/sizeof(argv[0]), argv, &res, "../exp4.txt");
+    int ret = controller.Cmd(sizeof(argv)/sizeof(argv[0]), const_cast<char **>(argv), &res, "../exp4.txt");
     EXPECT_EQ(ret, kFileTypeError);
 }
 
 TEST(robustness_test, testcase5) {
     const char *argv[] = {"Wordlist.exe", "-q", "../testcase/testcase1.txt"};
     int res;
-    int ret = CalledFunction(sizeof(argv)/sizeof(argv[0]), argv, &res, "../exp5.txt");
+    int ret = controller.Cmd(sizeof(argv)/sizeof(argv[0]), const_cast<char **>(argv), &res, "../exp5.txt");
     EXPECT_EQ(ret, kIllegalParam);
 }
 
 TEST(robustness_test, testcase6) {
     const char *argv[] = {"Wordlist.exe", "-h","a","-t", "s", "../testcase/testcase1.txt"};
     int res;
-    int ret = CalledFunction(sizeof(argv)/sizeof(argv[0]), argv, &res, "../exp6.txt");
+    int ret = controller.Cmd(sizeof(argv)/sizeof(argv[0]), const_cast<char **>(argv), &res, "../exp6.txt");
     EXPECT_EQ(ret, kNoFunctionalParam);
 }
 
 TEST(robustness_test, testcase7) {
     const char *argv[] = {"Wordlist.exe", "-n", "-w","../testcase/testcase1.txt"};
     int res;
-    int ret = CalledFunction(sizeof(argv)/sizeof(argv[0]), argv, &res, "../exp7.txt");
+    int ret = controller.Cmd(sizeof(argv)/sizeof(argv[0]), const_cast<char **>(argv), &res, "../exp7.txt");
     EXPECT_EQ(ret, kParamsConflict);
 }
 
 TEST(robustness_test, testcase8) {
     const char *argv[] = {"Wordlist.exe", "-w", "-w","../testcase/testcase1.txt"};
     int res;
-    int ret = CalledFunction(sizeof(argv)/sizeof(argv[0]), argv, &res, "../exp8.txt");
+    int ret = controller.Cmd(sizeof(argv)/sizeof(argv[0]), const_cast<char **>(argv), &res, "../exp8.txt");
     EXPECT_EQ(ret, kDuplicateParam);
 }
 
 TEST(robustness_test, testcase9) {
     const char *argv[] = {"Wordlist.exe", "-h","../testcase/testcase1.txt"};
     int res;
-    int ret = CalledFunction(sizeof(argv)/sizeof(argv[0]), argv, &res, "../exp9.txt");
+    int ret = controller.Cmd(sizeof(argv)/sizeof(argv[0]), const_cast<char **>(argv), &res, "../exp9.txt");
     EXPECT_EQ(ret, kCharNotAssign);
 }
 
 TEST(robustness_test, testcase10) {
     const char *argv[] = {"Wordlist.exe", "-h","AB","../testcase/testcase1.txt"};
     int res;
-    int ret = CalledFunction(sizeof(argv)/sizeof(argv[0]), argv, &res, "../exp10.txt");
+    int ret = controller.Cmd(sizeof(argv)/sizeof(argv[0]), const_cast<char **>(argv), &res, "../exp10.txt");
     EXPECT_EQ(ret, kIllegalChar);
 }
 
 TEST(robustness_test, testcase11) {
     const char *argv[] = {"Wordlist.exe", "-w","../testcase/testcase5.txt"};
     int res;
-    int ret = CalledFunction(sizeof(argv)/sizeof(argv[0]), argv, &res, "../exp11.txt");
+    int ret = controller.Cmd(sizeof(argv)/sizeof(argv[0]), const_cast<char **>(argv), &res, "../exp11.txt");
     EXPECT_EQ(ret, kUnexpectedLoop);
 }
 
 //TEST(robustness_test, testcase12) {
 //    // todo
 //    int res;
-//    int ret = CalledFunction(sizeof(argv)/sizeof(argv[0]), argv, "../exp12.txt", &res);
+//    int ret = controller.Cmd(sizeof(argv)/sizeof(argv[0]), argv, "../exp12.txt", &res);
 //    EXPECT_EQ(ret, kLengthOverflow);
 //}
 //

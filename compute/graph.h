@@ -49,7 +49,7 @@ private:
             if (last_pos != s.last_pos) {
                 return last_pos < s.last_pos;
             }
-            for (int i = 99; i >= 0; --i) {
+            for (int i = 0; i <= 99; ++i) {
                 if (passed_edges[i] != s.passed_edges[i]) {
                     return passed_edges[i] < s.passed_edges[i];
                 }
@@ -60,7 +60,7 @@ private:
             if (last_pos != s.last_pos) {
                 return last_pos > s.last_pos;
             }
-            for (int i = 99; i >= 0; --i) {
+            for (int i = 0; i <= 99; ++i) {
                 if (passed_edges[i] != s.passed_edges[i]) {
                     return passed_edges[i] > s.passed_edges[i];
                 }

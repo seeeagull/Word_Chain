@@ -10,6 +10,8 @@
 #include <vector>
 #include <deque>
 #include <map>
+#include <stack>
+#include <bitset>
 #include "file_io.h"
 
 class Graph {
@@ -24,27 +26,64 @@ public:
     void SetFileIO(FileIo* file_io);
     bool DetectLoop();
     int FindAllWordChains();
-    int FindMostWordsChain();
-    int FindMostLettersChain();
+    int FindLongestChain(bool weighted);
     void OutputAllWords();
 
 private:
     bool DfsFindLoop(char now, std::vector<int>& visited);
     void DfsGetChains(char now, std::deque<StringPointer>& records);
-    int FindMostWordsChainWithLoops();
-    int FindMostWordsChainWithoutLoops();
-    int FindMostLettersChainWithLoops();
-    int FindMostLettersChainWithoutLoops();
-    void Tarjan();
+    int FindLongestChainWithLoops(bool weighted);
+    int FindLongestChainWithoutLoops(bool weighted);
+    void Tarjan(char u, int& dfn_num, int& fa_num,
+                std::vector<int>& dfn,
+                std::vector<int>& low,
+                std::stack<int>& stack,
+                std::vector<bool>& instack,
+                std::vector<int>& fa);
+
+    struct State {
+        std::bitset<100> passed_edges;
+        char last_pos;
+        explicit State(char pos) : last_pos(pos) {}
+        bool operator < (const State &s) const {
+            if (last_pos != s.last_pos) {
+                return last_pos < s.last_pos;
+            }
+            for (int i = 99; i >= 0; --i) {
+                if (passed_edges[i] != s.passed_edges[i]) {
+                    return passed_edges[i] < s.passed_edges[i];
+                }
+            }
+            return false;
+        }
+        bool operator > (const State &s) const {
+            if (last_pos != s.last_pos) {
+                return last_pos > s.last_pos;
+            }
+            for (int i = 99; i >= 0; --i) {
+                if (passed_edges[i] != s.passed_edges[i]) {
+                    return passed_edges[i] > s.passed_edges[i];
+                }
+            }
+            return false;
+        }
+    };
+    void DfsLongestChain(char u, State& cur,
+                         std::map<State, std::pair<int, char>>& longest,
+                         std::map<std::pair<char, char>, int>& pos,
+                         std::vector<int>& fa);
 
     struct Edge {
+        int id;
         StringPointer word;
         int length;
+        char src;
         char tar;
         bool used;
-        explicit Edge(const StringPointer& word) : word(word) {
+        explicit Edge(int id, const StringPointer& word) : id(id), word(word) {
             used = false;
             length = word->length();
+            src = word->at(0) - 'a';
             tar = word->at(length - 1) - 'a';
         }
         bool operator < (const Edge &e) const {
@@ -58,7 +97,10 @@ private:
     typedef std::shared_ptr<Edge> EdgePointer;
 
     std::vector<std::vector<EdgePointer>*> edges_{};
+    std::map<int, EdgePointer> edges_map_{};
+    std::map<std::pair<char, char>, std::vector<std::pair<int, int>>> edges2_{};
     std::vector<EdgePointer> self_loop_{};
+    int edges_num_ = 0;
     char head_ = 30;
     char tail_ = 30;
     char banned_head_ = 30;

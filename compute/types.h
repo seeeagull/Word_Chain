@@ -33,17 +33,17 @@ enum ERROR_CODE {
 
 
 
-struct ConflictFunctionalParamsException
+struct ParamsConflictException
         : public std::exception {
     const char * what () const noexcept override {
-        return "Cannot specify more than one functional parameters!";
+        return "Parameters conflict!";
     }
 };
 
-struct ConflictAdditionalParamsException
+struct DuplicateParamException
         : public std::exception {
     const char * what () const noexcept override {
-        return "Cannot add any additional parameters with functional parameter '-n'!";
+        return "Duplicate parameter exists!";
     }
 };
 
@@ -61,12 +61,46 @@ struct NoInputFileException
     }
 };
 
-struct CannotFindInputFile
+struct FileTypeErrorException
+        : public std::exception {
+    const char * what () const noexcept override {
+        return "Should input a .txt file!";
+    }
+};
+
+struct MultipleFileException
+        : public std::exception {
+    const char * what () const noexcept override {
+        return "Can only input one .txt file!";
+    }
+};
+
+struct InputFileNotExists
         : public std::exception {
     const char * what () const noexcept override {
         return "Cannot find text file!";
     }
 };
 
+struct IllegalParamException
+        : public std::exception {
+    const char * what () const noexcept override {
+        return "Input contains illegal parameters!";
+    }
+};
+
+struct CharNotAssignException
+        : public std::exception {
+    const char * what () const noexcept override {
+        return "Should assign a char for additional parameters!";
+    }
+};
+
+struct IllegalCharException
+        : public std::exception {
+    const char * what () const noexcept override {
+        return "The assigned char for additional parameters is illegal!";
+    }
+};
 
 #endif //WORD_CHAIN_TYPES_H

@@ -3,6 +3,8 @@
 int main(int argc, char **argv) {
     auto controller = new Controller();
     int ret;
-    controller->Cmd(argc, argv, &ret);
+    int code = controller->Cmd(argc, argv, &ret);
+    // TODO: error handling?
+    std::cout << "return code: " << code << std::endl;
     return 0;
 }

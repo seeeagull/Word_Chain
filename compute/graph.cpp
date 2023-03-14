@@ -13,15 +13,6 @@ Graph::Graph() {
     }
 }
 
-void Graph::OutputAllWords() {
-    for (char i = 0; i < 26; ++i) {
-        std::cout << "now letter " << (char)(i + 'a') << std::endl;
-        for (const auto& it : *edges_[i]) {
-            std::cout << *(it->word) << " " << it->tar << std::endl;
-        }
-    }
-}
-
 void Graph::AddWord(const StringPointer& word) {
     if (word->at(0) - 'a' != banned_head_) {
         auto edge = new Edge(edges_num_, word);
@@ -35,7 +26,7 @@ void Graph::SetHead(char h) {
     this->head_ = h;
 }
 
-void Graph::setTail(char t) {
+void Graph::SetTail(char t) {
     this->tail_ = t;
 }
 
@@ -93,10 +84,18 @@ bool Graph::DfsFindLoop(char now, std::vector<int>& visited) {
     return false;
 }
 
-void Graph::DfsGetChains(char now, std::deque<StringPointer>& records) {
+void Graph::DfsGetChains(char now, std::deque<StringPointer>& records,
+                         std::vector<StringPointer>& wordlist) {
     if (tail_ == 30 || tail_ == now) {
         if (records.size() > 1) {
             file_io_->PrintLine(&records);
+            int size = records.size();
+            std::string word_chain = *records[0];
+            for (int i = 1; i < size; ++i) {
+                word_chain += " ";
+                word_chain += *records[i];
+            }
+            wordlist.push_back(std::make_shared<std::string>(word_chain));
         }
     }
     for (const auto& it : *edges_[now]) {
@@ -105,13 +104,13 @@ void Graph::DfsGetChains(char now, std::deque<StringPointer>& records) {
         }
         it->used = true;
         records.push_back(it->word);
-        DfsGetChains(it->tar, records);
+        DfsGetChains(it->tar, records, wordlist);
         records.pop_back();
         it->used = false;
     }
 }
 
-int Graph::FindAllWordChains() {
+int Graph::FindAllWordChains(std::vector<StringPointer>& wordlist) {
     int total_chains = 0;
     std::queue<char> q{};
     std::vector<int> in_degree(26);
@@ -156,7 +155,7 @@ int Graph::FindAllWordChains() {
     std::deque<StringPointer> records{};
     for (char i = 0; i < 26; ++i) {
         if (head_ == 30 || head_ == i) {
-            DfsGetChains(i, records);
+            DfsGetChains(i, records, wordlist);
         }
     }
     return total_chains;
@@ -193,11 +192,11 @@ void Graph::Tarjan(char u, int& dfn_num, int& fa_num,
     }
 }
 
-int Graph::FindLongestChain(bool weighted) {
+int Graph::FindLongestChain(bool weighted, std::vector<StringPointer>& wordlist) {
     if (has_loop_) {
-        return FindLongestChainWithLoops(weighted);
+        return FindLongestChainWithLoops(weighted, wordlist);
     } else {
-        return FindLongestChainWithoutLoops(weighted);
+        return FindLongestChainWithoutLoops(weighted, wordlist);
     }
 }
 
@@ -215,19 +214,19 @@ void Graph::DfsLongestChain(char u, State& cur,
     }
     if (pos[std::make_pair(u, u)] < edges2_[std::make_pair(u, u)].size()) {
         auto edge = std::make_pair(u, u);
-        cur.passed_edges.set(edges2_[edge][pos[edge]].second);
+        cur.set(edges2_[edge][pos[edge]].second);
         pos[edge] += 1;
         DfsLongestChain(u, cur, longest, pos, fa);
         pos[edge] -= 1;
         to = u;
         length = longest[cur].first + edges2_[edge][pos[edge]].first;
-        cur.passed_edges.reset(edges2_[edge][pos[edge]].second);
+        cur.reset(edges2_[edge][pos[edge]].second);
     } else {
         for (char v = 0; v < 26; ++v) {
             auto edge = std::make_pair(u, v);
             if (pos[edge] < edges2_[edge].size()) {
                 if (fa[u] == fa[v]) {
-                    cur.passed_edges.set(edges2_[edge][pos[edge]].second);
+                    cur.set(edges2_[edge][pos[edge]].second);
                     cur.last_pos = v;
                     pos[edge] += 1;
                     DfsLongestChain(v, cur, longest, pos, fa);
@@ -237,7 +236,7 @@ void Graph::DfsLongestChain(char u, State& cur,
                         length = longest[cur].first + edges2_[edge][pos[edge]].first;
                     }
                     cur.last_pos = u;
-                    cur.passed_edges.reset(edges2_[edge][pos[edge]].second);
+                    cur.reset(edges2_[edge][pos[edge]].second);
                 } else {
                     State new_scc(v);
                     pos[edge] += 1;
@@ -254,7 +253,7 @@ void Graph::DfsLongestChain(char u, State& cur,
     longest[cur] = {length, to};
 }
 
-int Graph::FindLongestChainWithLoops(bool weighted) {
+int Graph::FindLongestChainWithLoops(bool weighted, std::vector<StringPointer>& wordlist) {
     int dfn_cnt = 0, fa_num = 0;
     std::vector<int> dfn(26);
     std::vector<int> low(26);
@@ -303,7 +302,7 @@ int Graph::FindLongestChainWithLoops(bool weighted) {
                 char j = it->tar;
                 State first(j);
                 if (fa[i] == fa[j]) {
-                    first.passed_edges.set(it->id);
+                    first.set(it->id);
                 }
                 // A chain should contain at least two words.
                 if (longest.count(first) == 0 || longest[first].first <= 0) {
@@ -319,11 +318,13 @@ int Graph::FindLongestChainWithLoops(bool weighted) {
         }
     }
     State cur(last_pos);
+    int tmp = 0;
     if (max_id != -1) {
         file_io_->PrintWord(edges_map_[max_id]->word);
+        wordlist.push_back(edges_map_[max_id]->word);
         last_pos = edges_map_[max_id]->tar;
         if (fa[edges_map_[max_id]->src] == fa[edges_map_[max_id]->tar]) {
-            cur.passed_edges.set(max_id);
+            cur.set(max_id);
             cur.last_pos = last_pos;
             auto edge = std::make_pair(edges_map_[max_id]->src, edges_map_[max_id]->tar);
             pos[edge] += 1;
@@ -333,10 +334,11 @@ int Graph::FindLongestChainWithLoops(bool weighted) {
             auto edge = std::make_pair(last_pos, to);
             auto id = edges2_[edge][pos[edge]].second;
             file_io_->PrintWord(edges_map_[id]->word);
+            wordlist.push_back(edges_map_[id]->word);
             if (fa[last_pos] == fa[to]) {
-                cur.passed_edges.set(id);
+                cur.set(id);
             } else {
-                cur.passed_edges.reset();
+                cur.reset();
             }
             pos[edge] += 1;
             last_pos = to;
@@ -346,7 +348,7 @@ int Graph::FindLongestChainWithLoops(bool weighted) {
     return max_length;
 }
 
-int Graph::FindLongestChainWithoutLoops(bool weighted) {
+int Graph::FindLongestChainWithoutLoops(bool weighted, std::vector<StringPointer>& wordlist) {
     char optimal = -1;
     std::vector<StringPointer> prev(26, nullptr);
     std::deque<StringPointer> answer{};
@@ -436,6 +438,7 @@ int Graph::FindLongestChainWithoutLoops(bool weighted) {
         }
         for (const auto &it: answer) {
             file_io_->PrintWord(it);
+            wordlist.push_back(it);
         }
     }
     return ret;

@@ -21,19 +21,19 @@ public:
     ~Graph() = default;
     void AddWord(const StringPointer& word);
     void SetHead(char h);
-    void setTail(char t);
+    void SetTail(char t);
     void SetBannedHead(char bh);
     void SetFileIO(FileIo* file_io);
     bool DetectLoop();
-    int FindAllWordChains();
-    int FindLongestChain(bool weighted);
-    void OutputAllWords();
+    int FindAllWordChains(std::vector<StringPointer>& wordlist);
+    int FindLongestChain(bool weighted, std::vector<StringPointer>& wordlist);
 
 private:
     bool DfsFindLoop(char now, std::vector<int>& visited);
-    void DfsGetChains(char now, std::deque<StringPointer>& records);
-    int FindLongestChainWithLoops(bool weighted);
-    int FindLongestChainWithoutLoops(bool weighted);
+    void DfsGetChains(char now, std::deque<StringPointer>& records,
+                      std::vector<StringPointer>& wordlist);
+    int FindLongestChainWithLoops(bool weighted, std::vector<StringPointer>& wordlist);
+    int FindLongestChainWithoutLoops(bool weighted, std::vector<StringPointer>& wordlist);
     void Tarjan(char u, int& dfn_num, int& fa_num,
                 std::vector<int>& dfn,
                 std::vector<int>& low,
@@ -42,17 +42,19 @@ private:
                 std::vector<int>& fa);
 
     struct State {
-        std::bitset<100> passed_edges;
+        long long passed_edges_high = 0;
+        long long passed_edges_low = 0;
         char last_pos;
         explicit State(char pos) : last_pos(pos) {}
         bool operator < (const State &s) const {
             if (last_pos != s.last_pos) {
                 return last_pos < s.last_pos;
             }
-            for (int i = 0; i <= 99; ++i) {
-                if (passed_edges[i] != s.passed_edges[i]) {
-                    return passed_edges[i] < s.passed_edges[i];
-                }
+            if (passed_edges_high != s.passed_edges_high) {
+                return passed_edges_high < s.passed_edges_high;
+            }
+            if (passed_edges_low != s.passed_edges_low) {
+                return passed_edges_low < s.passed_edges_low;
             }
             return false;
         }
@@ -60,12 +62,30 @@ private:
             if (last_pos != s.last_pos) {
                 return last_pos > s.last_pos;
             }
-            for (int i = 0; i <= 99; ++i) {
-                if (passed_edges[i] != s.passed_edges[i]) {
-                    return passed_edges[i] > s.passed_edges[i];
-                }
+            if (passed_edges_high != s.passed_edges_high) {
+                return passed_edges_high > s.passed_edges_high;
             }
-            return false;
+            if (passed_edges_low != s.passed_edges_low) {
+                return passed_edges_low > s.passed_edges_low;
+            }
+            return true;
+        }
+        void set(int pos) {
+            if (pos < 64) {
+                passed_edges_low ^= (1ll << pos);
+            } else {
+                passed_edges_high ^= (1ll << (pos - 64));
+            }
+        }
+        void reset(int pos) {
+            if (pos < 64) {
+                passed_edges_low ^= (1ll << pos);
+            } else {
+                passed_edges_high ^= (1ll << (pos - 64));
+            }
+        }
+        void reset() {
+            passed_edges_low = passed_edges_high = 0;
         }
     };
     void DfsLongestChain(char u, State& cur,

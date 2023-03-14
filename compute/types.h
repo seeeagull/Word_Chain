@@ -103,4 +103,11 @@ struct IllegalCharException
     }
 };
 
+struct UnexpectedLoopException
+        : public std::exception {
+    const char * what () const noexcept override {
+        return "The input should not contain loops without param -r!";
+    }
+};
+
 #endif //WORD_CHAIN_TYPES_H

@@ -186,7 +186,7 @@ int Controller::Cmd(int argc, char **argv, int *res, const char* file_name) {
         return kIllegalChar;
     }
     graph.SetHead(head);
-    graph.setTail(tail);
+    graph.SetTail(tail);
     graph.SetBannedHead(banned_head_);
     graph.SetFileIO(&file_io_);
     file_io_.SetInputFile(std::make_shared<std::string>(input_file_));
@@ -206,15 +206,16 @@ int Controller::Cmd(int argc, char **argv, int *res, const char* file_name) {
     if (has_loop && !allow_loop_) {
         return kUnexpectedLoop;
     }
+    std::vector<std::shared_ptr<std::string>> wordlist{};
     switch (function_type_) {
         case kFindAllWordChains:
-            *res = graph.FindAllWordChains();
+            *res = graph.FindAllWordChains(wordlist);
             break;
         case kFindWordChainWithMostWords:
-            *res = graph.FindLongestChain(false);
+            *res = graph.FindLongestChain(false, wordlist);
             break;
         case kFindWordChainWithMostLetters:
-            *res = graph.FindLongestChain(true);
+            *res = graph.FindLongestChain(true, wordlist);
             break;
         default:
             break;

@@ -39,7 +39,6 @@ void Graph::SetFileIO(FileIo *file_io) {
 }
 
 bool Graph::DetectLoop() {
-    bool self_loops = false;
     std::vector<int> visited(26);
     for (char i = 0; i < 26; ++i) {
         self_loop_.push_back(nullptr);
@@ -48,13 +47,13 @@ bool Graph::DetectLoop() {
         for (const auto& it : *edges_[i]) {
             if (i == it->tar) {
                 if (self_loop_[i]) {
-                    self_loops = true;
+                    has_loop_ = true;
                 }
                 self_loop_[i] = it;
             }
         }
     }
-    if (self_loops) {
+    if (has_loop_) {
         return true;
     }
     for (char i = 0; i < 26; ++i) {

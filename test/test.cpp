@@ -418,14 +418,14 @@ TEST(robustness_test, testcase6) {
 }
 
 TEST(robustness_test, testcase7) {
-    const char *argv[] = {"Wordlist.exe", "-n", "-w", "../testcase/testcase1.txt"};
+    const char *argv[] = {"Wordlist.exe", "-n", "../testcase/testcase1.txt", "-w"};
     int res;
     int ret = controller.Cmd(sizeof(argv) / sizeof(argv[0]), const_cast<char **>(argv), &res, "../exp7.txt");
     EXPECT_EQ(ret, kParamsConflict);
 }
 
 TEST(robustness_test, testcase8) {
-    const char *argv[] = {"Wordlist.exe", "-w", "-w", "../testcase/testcase1.txt"};
+    const char *argv[] = {"Wordlist.exe", "-w", "../testcase/testcase1.txt", "-w"};
     int res;
     int ret = controller.Cmd(sizeof(argv) / sizeof(argv[0]), const_cast<char **>(argv), &res, "../exp8.txt");
     EXPECT_EQ(ret, kDuplicateParam);

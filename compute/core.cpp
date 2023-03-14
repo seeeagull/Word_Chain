@@ -6,51 +6,60 @@
 
 int gen_chains_all(char* words[], int len, char* result[]) {
     Graph graph{};
-    AddWords(std::make_shared<Graph>(graph), words, len);
+    auto graph_pointer = std::make_shared<Graph>(graph);
+    AddWords(graph_pointer, words, len);
+    try {
+        HandleEnableLoop(graph_pointer, false);
+    } catch (UnexpectedLoopException& e) {
+        std::cout << "error: " << e.what() << std::endl;
+        return -1;
+    }
     std::vector<std::shared_ptr<std::string>> wordlist{};
-    int ret = graph.FindAllWordChains(wordlist);
+    int ret = graph_pointer->FindAllWordChains(wordlist);
     Vector2Result(wordlist, result);
     return ret;
 }
 
 int gen_chain_word(char* words[], int len, char* result[], char head, char tail, char reject, bool enable_loop) {
     Graph graph{};
+    auto graph_pointer = std::make_shared<Graph>(graph);
     try {
-        HandleAdditionalParams(std::make_shared<Graph>(graph), head, tail, reject);
+        HandleAdditionalParams(graph_pointer, head, tail, reject);
     } catch (IllegalCharException& e) {
         std::cout << "error: " << e.what() << std::endl;
         return -1;
     }
-    AddWords(std::make_shared<Graph>(graph), words, len);
+    AddWords(graph_pointer, words, len);
     try {
-        HandleEnableLoop(std::make_shared<Graph>(graph), enable_loop);
+        HandleEnableLoop(graph_pointer, enable_loop);
     } catch (UnexpectedLoopException& e) {
         std::cout << "error: " << e.what() << std::endl;
         return -1;
     }
     std::vector<std::shared_ptr<std::string>> wordlist{};
-    int ret = graph.FindLongestChain(false, wordlist);
+    int ret = graph_pointer->FindLongestChain(false, wordlist);
     Vector2Result(wordlist, result);
     return ret;
 }
 
 int gen_chain_char(char* words[], int len, char* result[], char head, char tail, char reject, bool enable_loop) {
     Graph graph{};
+    auto graph_pointer = std::make_shared<Graph>(graph);
     try {
-        HandleAdditionalParams(std::make_shared<Graph>(graph), head, tail, reject);
+        HandleAdditionalParams(graph_pointer, head, tail, reject);
     } catch (IllegalCharException& e) {
         std::cout << "error: " << e.what() << std::endl;
         return -1;
     }
-    AddWords(std::make_shared<Graph>(graph), words, len);
+    AddWords(graph_pointer, words, len);
     try {
-        HandleEnableLoop(std::make_shared<Graph>(graph), enable_loop);
+        HandleEnableLoop(graph_pointer, enable_loop);
     } catch (UnexpectedLoopException& e) {
         std::cout << "error: " << e.what() << std::endl;
         return -1;
     }
     std::vector<std::shared_ptr<std::string>> wordlist{};
-    int ret =  graph.FindLongestChain(true, wordlist);
+    int ret = graph_pointer->FindLongestChain(true, wordlist);
     Vector2Result(wordlist, result);
     return ret;
 }

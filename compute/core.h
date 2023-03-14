@@ -18,7 +18,7 @@ EXPOSED_FUNCTION int gen_chains_all(char* words[], int len, char* result[]);
 EXPOSED_FUNCTION int gen_chain_word(char* words[], int len, char* result[], char head, char tail, char reject, bool enable_loop);
 EXPOSED_FUNCTION int gen_chain_char(char* words[], int len, char* result[], char head, char tail, char reject, bool enable_loop);
 
-static void AddWords(const std::shared_ptr<Graph>& graph, char **words, int len) {
+static void AddWords(const std::shared_ptr<Graph>& graph, char *words[], int len) {
     std::set<std::string> unique_words{};
     for (int i = 0; i < len; ++i) {
         if (unique_words.count(words[i]) == 0) {

@@ -3,11 +3,11 @@
 #include <QRegularExpression>
 #include <QRegularExpressionValidator>
 #include <QApplication>
+#include <iostream>
 
 #include "gui.h"
 
-WordChainUI::WordChainUI()
-{
+WordChainUI::WordChainUI() {
     createMenu();
     createControlBox();
     createDisplayBox();
@@ -29,15 +29,14 @@ WordChainUI::WordChainUI()
     scrollArea->setWidget(scrollAreaContent);
 
     auto *scrollLayout = new QVBoxLayout;
-    scrollLayout->setContentsMargins(0,0,0,0);
+    scrollLayout->setContentsMargins(0, 0, 0, 0);
     scrollLayout->addWidget(scrollArea);
 
     setLayout(scrollLayout);
     setWindowTitle("最长单词链");
 }
 
-void WordChainUI::createMenu()
-{
+void WordChainUI::createMenu() {
     menuBar = new QMenuBar;
     fileMenu = new QMenu("&File", this);
     exitAction = fileMenu->addAction("E&xit");
@@ -45,15 +44,14 @@ void WordChainUI::createMenu()
     connect(exitAction, &QAction::triggered, this, &QDialog::accept);
 }
 
-void WordChainUI::createControlBox()
-{
+void WordChainUI::createControlBox() {
     controlGroupBox = new QGroupBox;
     auto *layout = new QGridLayout;
     functionalParamsGroup = new QButtonGroup;
     for (int i = 0; i < NumFunctions; ++i) {
         functionalParamsRadio[i] = new QRadioButton(functions[i]);
         functionalParamsGroup->addButton(functionalParamsRadio[i]);
-        layout->addWidget(functionalParamsRadio[i], 0, 4*i, 1, 4);
+        layout->addWidget(functionalParamsRadio[i], 0, 4 * i, 1, 4);
     }
     for (int i = 0; i < NumLimits; ++i) {
         if (i < 3) {
@@ -63,75 +61,87 @@ void WordChainUI::createControlBox()
             QRegularExpression regex("[a-zA-Z]{1}");
             QValidator *validator = new QRegularExpressionValidator(regex);
             limitChar[i]->setValidator(validator);
-            layout->addWidget(limitLabels[i], i/2+1, 6*(i%2), 1, 2);
-            layout->addWidget(limitChar[i], i/2+1, 6*(i%2)+2, 1, 4);
-        }else {
+            layout->addWidget(limitLabels[i], i / 2 + 1, 6 * (i % 2), 1, 2);
+            layout->addWidget(limitChar[i], i / 2 + 1, 6 * (i % 2) + 2, 1, 4);
+        } else {
             allowRingsRadio = new QRadioButton(limits[i]);
             layout->addWidget(allowRingsRadio, 2, 6, 1, 4);
         }
     }
     inputPathChooseButton = new QPushButton("导入");
     connect(inputPathChooseButton, SIGNAL(clicked()), this, SLOT(onInputPathChooseButtonClicked()));
-    chosenPath = new QLineEdit;
-    chosenPath->setReadOnly(true);
-    chosenPath->setPlaceholderText("输入文件路径");
+    inputPathLineEdit = new QLineEdit;
+    inputPathLineEdit->setReadOnly(true);
+    inputPathLineEdit->setPlaceholderText("输入文件路径");
     solveButton = new QPushButton("求解");
+    connect(solveButton, SIGNAL(clicked()), this, SLOT(onSolveButtonClicked()));
     outputPathChooseButton = new QPushButton("导出");
     connect(outputPathChooseButton, SIGNAL(clicked()), this, SLOT(onOutputPathChooseButtonClicked()));
     layout->addWidget(inputPathChooseButton, 3, 0, 1, 2);
-    layout->addWidget(chosenPath, 3, 2, 1, 6);
+    layout->addWidget(inputPathLineEdit, 3, 2, 1, 6);
     layout->addWidget(solveButton, 3, 8, 1, 2);
     layout->addWidget(outputPathChooseButton, 3, 10, 1, 2);
     controlGroupBox->setLayout(layout);
 }
 
-void WordChainUI::createDisplayBox()
-{
+void WordChainUI::createDisplayBox() {
     displayGroupBox = new QGroupBox;
     auto *layout = new QGridLayout;
-    inputText = new QTextEdit;
-    inputText->setPlaceholderText("在此处输入单词或导入单词文件");
-    layout->addWidget(inputText, 0, 0);
-    outputRes = new QTextEdit;
-    outputRes->setPlaceholderText("求解结果");
-    outputRes->setReadOnly(true);
-    layout->addWidget(outputRes, 0, 1);
+    inputContentTextEdit = new QTextEdit;
+    inputContentTextEdit->setPlaceholderText("在此处输入单词或导入单词文件");
+    layout->addWidget(inputContentTextEdit, 0, 0);
+    outputContentTextEdit = new QTextEdit;
+    outputContentTextEdit->setPlaceholderText("求解结果");
+    outputContentTextEdit->setReadOnly(true);
+    layout->addWidget(outputContentTextEdit, 0, 1);
     layout->setColumnStretch(0, 1);
     layout->setColumnStretch(1, 1);
     displayGroupBox->setLayout(layout);
 }
 
-void WordChainUI::onInputPathChooseButtonClicked()
-{
+void WordChainUI::onInputPathChooseButtonClicked() {
     QString curPath = QDir::currentPath();
     QString dlgTitle = "选择待导入文件";
     QString filter = "文本文件(*.txt)";
     QString inputPath = QFileDialog::getOpenFileName(this, dlgTitle, curPath, filter);
     if (!inputPath.isEmpty()) {
-        // todo
+        QFile inputFile(inputPath);
+        if (!inputFile.open(QIODevice::ReadOnly | QIODevice::Text)) return;
+        QTextStream inputContentTextStream(&inputFile);
+        QString line = inputContentTextStream.readLine();
+        QString inputContent;
+        while (!line.isNull()) {
+            inputContent.append(line);
+            line = inputContentTextStream.readLine();
+        }
+        inputPathLineEdit->setText(inputPath);
+        inputContentTextEdit->setText(inputContent);
     }
 }
 
-//void WordChainUI::onSolveButtonClicked()
-//{
-//    // todo
-//}
+void WordChainUI::onSolveButtonClicked() {
+    QString outputContent = "666";  // todo
+    outputContentTextEdit->setText(outputContent);
+}
 
-void WordChainUI::onOutputPathChooseButtonClicked()
-{
+void WordChainUI::onOutputPathChooseButtonClicked() {
     QString curPath = QDir::currentPath();
     QString dlgTitle = "保存文件";
     QString filter = "文本文件(*.txt)";
-    QString outputPath = QFileDialog::getSaveFileName(this,dlgTitle,curPath,filter);
+    QString outputPath = QFileDialog::getSaveFileName(this, dlgTitle, curPath, filter);
     if (!outputPath.isEmpty()) {
-        // todo
+        QFile outputFile(outputPath);
+        if (!outputFile.open(QIODevice::ReadWrite)) return;
+        QString outputContent = "666";  // todo
+        outputFile.write(outputContent.toUtf8());
+        outputFile.close();
     }
 }
 
-int main(int argc, char *argv[]){
+int main(int argc, char *argv[]) {
     QApplication app(argc, argv);
-    WordChainUI gui;
-    gui.show();
+    WordChainUI wordChainUi;
+    wordChainUi.show();
     return QApplication::exec();
 }
 

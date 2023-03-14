@@ -1,5 +1,4 @@
 #include <iostream>
-#include <fstream>
 #include <cctype>
 #include <unordered_set>
 #include <vector>
@@ -203,7 +202,7 @@ TEST(correctness_test, testcase1) {
 
 TEST(correctness_test, testcase2_1) {
     const char *file_name = "../testcase/testcase2.txt";
-    const char *argv[] = {"Wordlist.exe", "-r", "-w", "-h", "c", "-j", "v", file_name};
+    const char *argv[] = {"Wordlist.exe", "-r", "-h", "c", "-j", "v", "-w", file_name};
     WordChain word_chain((std::string(file_name)));
     word_chain.BuildGraph();
     int std_res = word_chain.GetMostWordChain('c', '0', 'v');
@@ -217,7 +216,7 @@ TEST(correctness_test, testcase2_1) {
 
 TEST(correctness_test, testcase2_2) {
     const char *file_name = "../testcase/testcase2.txt";
-    const char *argv[] = {"Wordlist.exe", "-c", "-r", "-j", "h", "-t", "j", file_name};
+    const char *argv[] = {"Wordlist.exe", "-r", "-j", "h", "-t", "j", "-c", file_name};
     WordChain word_chain((std::string(file_name)));
     word_chain.BuildGraph();
     int std_res = word_chain.GetMostCharChain('0', 'j', 'h');
@@ -257,7 +256,7 @@ TEST(correctness_test, testcase4) {
 
 TEST(correctness_test, testcase5) {
     const char *file_name = "../testcase/testcase5.txt";
-    const char *argv[] = {"Wordlist.exe", "-c", "-j", "h", "-r", file_name};
+    const char *argv[] = {"Wordlist.exe", "-j", "h", "-r", "-c", file_name};
     WordChain word_chain((std::string(file_name)));
     word_chain.BuildGraph();
     int std_res = word_chain.GetMostCharChain('0', '0', 'h');
@@ -270,7 +269,7 @@ TEST(correctness_test, testcase5) {
 
 TEST(correctness_test, testcase6_1) {
     const char *file_name = "../testcase/testcase6.txt";
-    const char *argv[] = {"Wordlist.exe", "-w", "-t", "t", "-r", file_name};
+    const char *argv[] = {"Wordlist.exe", "-t", "t", "-r", "-w", file_name};
     WordChain word_chain((std::string(file_name)));
     word_chain.BuildGraph();
     int std_res = word_chain.GetMostWordChain('0', 't', '0');
@@ -284,7 +283,7 @@ TEST(correctness_test, testcase6_1) {
 
 TEST(correctness_test, testcase6_2) {
     const char *file_name = "../testcase/testcase6.txt";
-    const char *argv[] = {"Wordlist.exe", "-w", "-h", "n", "-r", file_name};
+    const char *argv[] = {"Wordlist.exe", "-h", "n", "-r", "-w", file_name};
     WordChain word_chain((std::string(file_name)));
     word_chain.BuildGraph();
     int std_res = word_chain.GetMostWordChain('n', '0', '0');
@@ -298,7 +297,7 @@ TEST(correctness_test, testcase6_2) {
 
 TEST(correctness_test, testcase7_1) {
     const char *file_name = "../testcase/testcase7.txt";
-    const char *argv[] = {"Wordlist.exe", "-w", "-r", file_name};
+    const char *argv[] = {"Wordlist.exe", "-r", "-w", file_name};
     WordChain word_chain((std::string(file_name)));
     word_chain.BuildGraph();
     int std_res = word_chain.GetMostWordChain('0', '0', '0');
@@ -312,7 +311,7 @@ TEST(correctness_test, testcase7_1) {
 
 TEST(correctness_test, testcase7_2) {
     const char *file_name = "../testcase/testcase7.txt";
-    const char *argv[] = {"Wordlist.exe", "-w", "-r", "-t", "b", file_name};
+    const char *argv[] = {"Wordlist.exe", "-r", "-t", "b", "-w", file_name};
     WordChain word_chain((std::string(file_name)));
     word_chain.BuildGraph();
     int std_res = word_chain.GetMostWordChain('0', 'b', '0');
@@ -326,7 +325,7 @@ TEST(correctness_test, testcase7_2) {
 
 TEST(correctness_test, testcase8) {
     const char *file_name = "../testcase/testcase8.txt";
-    const char *argv[] = {"Wordlist.exe", "-c", "-r", file_name};
+    const char *argv[] = {"Wordlist.exe", "-r", "-c", file_name};
     WordChain word_chain((std::string(file_name)));
     word_chain.BuildGraph();
     int std_res = word_chain.GetMostCharChain('0', '0', '0');
@@ -339,7 +338,7 @@ TEST(correctness_test, testcase8) {
 
 TEST(correctness_test, testcase9) {
     const char *file_name = "../testcase/testcase9.txt";
-    const char *argv[] = {"Wordlist.exe", "-c", "-h", "j", "-t", "z", "-r", file_name};
+    const char *argv[] = {"Wordlist.exe", "-h", "j", "-t", "z", "-r", "-c", file_name};
     WordChain word_chain((std::string(file_name)));
     word_chain.BuildGraph();
     int std_res = word_chain.GetMostCharChain('j', 'z', '0');
@@ -352,7 +351,7 @@ TEST(correctness_test, testcase9) {
 
 TEST(correctness_test, testcase10) {
     const char *file_name = "../testcase/testcase10.txt";
-    const char *argv[] = {"Wordlist.exe", "-w", "-j", "b", file_name};
+    const char *argv[] = {"Wordlist.exe", "-j", "b", "-w", file_name};
     WordChain word_chain((std::string(file_name)));
     word_chain.BuildGraph();
     int std_res = word_chain.GetMostWordChain('0', '0', 'b');

@@ -93,11 +93,11 @@ void Controller::ParseCmd(int argc, char *argv[]) {
                 if (strlen(argv[i + 1]) > 1) {
                     throw IllegalCharException();
                 }
-                if (argv[i + 1][0] >='A' && argv[i + 1][0] <= 'Z') {
+                if (argv[i + 1][0] >= 'A' && argv[i + 1][0] <= 'Z') {
                     head = argv[i + 1][0] - 'A';
                 } else if (argv[i + 1][0] >= 'a' && argv[i + 1][0] <= 'z') {
                     head = argv[i + 1][0] - 'a';
-                } else  {
+                } else {
                     throw IllegalCharException();
                 }
                 i += 2;
@@ -112,11 +112,11 @@ void Controller::ParseCmd(int argc, char *argv[]) {
                 if (strlen(argv[i + 1]) > 1) {
                     throw IllegalCharException();
                 }
-                if (argv[i + 1][0] >='A' && argv[i + 1][0] <= 'Z') {
+                if (argv[i + 1][0] >= 'A' && argv[i + 1][0] <= 'Z') {
                     tail = argv[i + 1][0] - 'A';
                 } else if (argv[i + 1][0] >= 'a' && argv[i + 1][0] <= 'z') {
                     tail = argv[i + 1][0] - 'a';
-                } else  {
+                } else {
                     throw IllegalCharException();
                 }
                 i += 2;
@@ -131,11 +131,11 @@ void Controller::ParseCmd(int argc, char *argv[]) {
                 if (strlen(argv[i + 1]) > 1) {
                     throw IllegalCharException();
                 }
-                if (argv[i + 1][0] >='A' && argv[i + 1][0] <= 'Z') {
+                if (argv[i + 1][0] >= 'A' && argv[i + 1][0] <= 'Z') {
                     banned_head_ = argv[i + 1][0] - 'A';
                 } else if (argv[i + 1][0] >= 'a' && argv[i + 1][0] <= 'z') {
                     banned_head_ = argv[i + 1][0] - 'a';
-                } else  {
+                } else {
                     throw IllegalCharException();
                 }
                 i += 2;
@@ -163,26 +163,26 @@ void Controller::ParseCmd(int argc, char *argv[]) {
     }
 }
 
-int Controller::Cmd(int argc, char **argv, int *res, const char* file_name) {
+int Controller::Cmd(int argc, char **argv, int *res, const char *file_name) {
     try {
         ParseCmd(argc, argv);
-    } catch (NoInputFileException& e) {
+    } catch (NoInputFileException &e) {
         return kNoFilePath;
-    } catch (MultipleFileException& e) {
+    } catch (MultipleFileException &e) {
         return kMultiFilePath;
-    } catch (FileTypeErrorException& e) {
+    } catch (FileTypeErrorException &e) {
         return kFileTypeError;
-    } catch (IllegalParamException& e) {
+    } catch (IllegalParamException &e) {
         return kIllegalParam;
-    } catch (NoFunctionalParamException& e) {
+    } catch (NoFunctionalParamException &e) {
         return kNoFunctionalParam;
-    } catch (ParamsConflictException& e) {
+    } catch (ParamsConflictException &e) {
         return kParamsConflict;
-    } catch (DuplicateParamException& e) {
+    } catch (DuplicateParamException &e) {
         return kDuplicateParam;
-    } catch (CharNotAssignException& e) {
+    } catch (CharNotAssignException &e) {
         return kCharNotAssign;
-    } catch (IllegalCharException& e) {
+    } catch (IllegalCharException &e) {
         return kIllegalChar;
     }
     graph.SetHead(head);
@@ -195,11 +195,11 @@ int Controller::Cmd(int argc, char **argv, int *res, const char* file_name) {
     std::vector<std::shared_ptr<std::string>> words{};
     try {
         file_io_.ReadFile(words);
-    } catch (InputFileNotExists& e) {
+    } catch (InputFileNotExists &e) {
         return kFileNotExists;
     }
 
-    for(const auto& it : words) {
+    for (const auto &it: words) {
         graph.AddWord(it);
     }
     bool has_loop = graph.DetectLoop();

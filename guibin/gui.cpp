@@ -3,7 +3,9 @@
 #include <QRegularExpression>
 #include <QRegularExpressionValidator>
 #include <QApplication>
+#include <QMessageBox>
 #include <iostream>
+#include "../compute/types.h"
 
 #include "gui.h"
 
@@ -66,9 +68,11 @@ void WordChainUI::createControlBox() {
             layout->addWidget(limitChar[i], i / 2 + 1, 6 * (i % 2) + 2, 1, 4);
         } else {
             allowRingsRadio = new QRadioButton(limits[i]);
-            layout->addWidget(allowRingsRadio, 2, 6, 1, 4);
+            layout->addWidget(allowRingsRadio, 2, 6, 1, 2);
         }
     }
+    usedTimeLabel = new QLabel("");
+    layout->addWidget(usedTimeLabel, 2, 8, 1, 4);
     inputPathChooseButton = new QPushButton("导入");
     connect(inputPathChooseButton, SIGNAL(clicked()), this, SLOT(onInputPathChooseButtonClicked()));
     inputPathLineEdit = new QLineEdit;
@@ -120,23 +124,25 @@ void WordChainUI::onInputPathChooseButtonClicked() {
     }
 }
 
-int gen_chains_all(char *words[], int len, char *result[]){
+int gen_chains_all(char *words[], int len, char *result[]) {
     result[0] = new char[2], result[0][0] = 't', result[0][1] = '\0';
     result[1] = new char[2], result[1][0] = 'e', result[1][1] = '\0';
     result[2] = new char[2], result[2][0] = 's', result[2][1] = '\0';
     result[3] = new char[2], result[3][0] = 't', result[3][1] = '\0';
     result[4] = nullptr;
-    return 0;
+    return -11;
 }
-int gen_chain_word(char *words[], int len, char *result[], char head, char tail, char reject, bool enable_loop){
+
+int gen_chain_word(char *words[], int len, char *result[], char head, char tail, char reject, bool enable_loop) {
     result[0] = new char[2], result[0][0] = 't', result[0][1] = '\0';
     result[1] = new char[2], result[1][0] = 'e', result[1][1] = '\0';
     result[2] = new char[2], result[2][0] = 's', result[2][1] = '\0';
     result[3] = new char[2], result[3][0] = 't', result[3][1] = '\0';
     result[4] = nullptr;
-    return 0;
+    return -12;
 }
-int gen_chain_char(char *words[], int len, char *result[], char head, char tail, char reject, bool enable_loop){
+
+int gen_chain_char(char *words[], int len, char *result[], char head, char tail, char reject, bool enable_loop) {
     result[0] = new char[2], result[0][0] = 't', result[0][1] = '\0';
     result[1] = new char[2], result[1][0] = 'e', result[1][1] = '\0';
     result[2] = new char[2], result[2][0] = 's', result[2][1] = '\0';
@@ -168,28 +174,43 @@ void WordChainUI::onSolveButtonClicked() {
                 for (int j = 0; j < s.length(); ++j) {
                     words[len][j] = s[j];
                 }
-                words[len++][s.length()]='\0';
+                words[len++][s.length()] = '\0';
                 s = "";
             }
         }
     }
+    QElapsedTimer timer;
+    timer.start();
+    int ret;
     switch (functionalParam) {
         case 'n':
-            gen_chains_all(words, len, res);
+            ret = gen_chains_all(words, len, res);
             break;
         case 'w':
-            gen_chain_word(words,len, res, head, tail, reject, enable_loop);
+            ret = gen_chain_word(words, len, res, head, tail, reject, enable_loop);
             break;
         case 'c':
-            gen_chain_char(words,len, res, head, tail, reject, enable_loop);
+            ret = gen_chain_char(words, len, res, head, tail, reject, enable_loop);
             break;
         default:
             // never hit here
             break;
     }
+    qint64 elapsed = timer.nsecsElapsed();
+    if (ret < 0) {
+        if (ret == -kUnexpectedLoop) {
+            QMessageBox::information(nullptr, "提示", "输入存在环，请勾选\"允许出现环\"");
+        } else if (ret == -kLengthOverflow) {
+            QMessageBox::information(nullptr, "提示", "输出单词链过长");
+        }
+        return;
+    }
+    std::string usedTimePrompt = "用时: " + std::to_string(abs(elapsed / 1000)) + "秒";
+    QString usedTimePromptQ = QString::fromStdString(usedTimePrompt);
+    usedTimeLabel->setText(usedTimePromptQ);
     QStringList strList;
     int i = 0;
-    while(res[i]!= nullptr) strList << QString(res[i++]);
+    while (res[i] != nullptr) strList << QString(res[i++]);
     QString outputContent = strList.join("\n");
     outputContentTextEdit->setText(outputContent);
 }
@@ -202,7 +223,7 @@ void WordChainUI::onOutputPathChooseButtonClicked() {
     if (!outputPath.isEmpty()) {
         QFile outputFile(outputPath);
         if (!outputFile.open(QIODevice::ReadWrite)) return;
-        QString outputContent = "666";  // todo
+        QString outputContent = outputContentTextEdit->toPlainText();
         outputFile.write(outputContent.toUtf8());
         outputFile.close();
     }
@@ -214,4 +235,3 @@ int main(int argc, char *argv[]) {
     wordChainUi.show();
     return QApplication::exec();
 }
-

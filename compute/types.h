@@ -27,8 +27,7 @@ enum ERROR_CODE {
     kCharNotAssign,
     kIllegalChar,
     kUnexpectedLoop,
-    kLengthOverflow,
-    kIllegalInput
+    kLengthOverflow
 };
 
 

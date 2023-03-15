@@ -66,6 +66,7 @@ private:
     QGroupBox *displayGroupBox{};
     QTextEdit *inputContentTextEdit{};
     QTextEdit *outputContentTextEdit{};
+    QLabel *usedTimeLabel{};
 };
 
 #endif // DIALOG_H

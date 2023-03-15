@@ -6,6 +6,7 @@
 #include <QMessageBox>
 #include <iostream>
 #include "../compute/types.h"
+#include "../compute/core.h"
 
 #include "gui.h"
 
@@ -124,32 +125,32 @@ void WordChainUI::onInputPathChooseButtonClicked() {
     }
 }
 
-int gen_chains_all(char *words[], int len, char *result[]) {
-    result[0] = new char[2], result[0][0] = 't', result[0][1] = '\0';
-    result[1] = new char[2], result[1][0] = 'e', result[1][1] = '\0';
-    result[2] = new char[2], result[2][0] = 's', result[2][1] = '\0';
-    result[3] = new char[2], result[3][0] = 't', result[3][1] = '\0';
-    result[4] = nullptr;
-    return -11;
-}
-
-int gen_chain_word(char *words[], int len, char *result[], char head, char tail, char reject, bool enable_loop) {
-    result[0] = new char[2], result[0][0] = 't', result[0][1] = '\0';
-    result[1] = new char[2], result[1][0] = 'e', result[1][1] = '\0';
-    result[2] = new char[2], result[2][0] = 's', result[2][1] = '\0';
-    result[3] = new char[2], result[3][0] = 't', result[3][1] = '\0';
-    result[4] = nullptr;
-    return -12;
-}
-
-int gen_chain_char(char *words[], int len, char *result[], char head, char tail, char reject, bool enable_loop) {
-    result[0] = new char[2], result[0][0] = 't', result[0][1] = '\0';
-    result[1] = new char[2], result[1][0] = 'e', result[1][1] = '\0';
-    result[2] = new char[2], result[2][0] = 's', result[2][1] = '\0';
-    result[3] = new char[2], result[3][0] = 't', result[3][1] = '\0';
-    result[4] = nullptr;
-    return 0;
-}
+//int gen_chains_all(char *words[], int len, char *result[]) {
+//    result[0] = new char[2], result[0][0] = 't', result[0][1] = '\0';
+//    result[1] = new char[2], result[1][0] = 'e', result[1][1] = '\0';
+//    result[2] = new char[2], result[2][0] = 's', result[2][1] = '\0';
+//    result[3] = new char[2], result[3][0] = 't', result[3][1] = '\0';
+//    result[4] = nullptr;
+//    return -11;
+//}
+//
+//int gen_chain_word(char *words[], int len, char *result[], char head, char tail, char reject, bool enable_loop) {
+//    result[0] = new char[2], result[0][0] = 't', result[0][1] = '\0';
+//    result[1] = new char[2], result[1][0] = 'e', result[1][1] = '\0';
+//    result[2] = new char[2], result[2][0] = 's', result[2][1] = '\0';
+//    result[3] = new char[2], result[3][0] = 't', result[3][1] = '\0';
+//    result[4] = nullptr;
+//    return -12;
+//}
+//
+//int gen_chain_char(char *words[], int len, char *result[], char head, char tail, char reject, bool enable_loop) {
+//    result[0] = new char[2], result[0][0] = 't', result[0][1] = '\0';
+//    result[1] = new char[2], result[1][0] = 'e', result[1][1] = '\0';
+//    result[2] = new char[2], result[2][0] = 's', result[2][1] = '\0';
+//    result[3] = new char[2], result[3][0] = 't', result[3][1] = '\0';
+//    result[4] = nullptr;
+//    return 0;
+//}
 
 void WordChainUI::onSolveButtonClicked() {
     char functionalParam = functionalParamsRadio[0]->isChecked() ? 'n' :
@@ -194,6 +195,7 @@ void WordChainUI::onSolveButtonClicked() {
             break;
         default:
             // never hit here
+            ret = -1;
             break;
     }
     qint64 elapsed = timer.nsecsElapsed();

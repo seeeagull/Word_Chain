@@ -247,7 +247,7 @@ TEST(robustness_test, testcase11) {
 }
 
 TEST(robustness_test, testcase12) {
-    const char *argv[] = {"Wordlist.exe", "-w", "../testcase/testcase13.txt"};
+    const char *argv[] = {"Wordlist.exe", "-w", "-r", "../testcase/testcase13.txt"};
     int res;
     int ret = controller.Cmd(sizeof(argv) / sizeof(argv[0]), const_cast<char **>(argv), &res, "../exp12.txt");
     EXPECT_EQ(ret, kLengthOverflow);

@@ -95,7 +95,7 @@ private :
     void DFSWord(int p) {
         vis_.insert(p);
         chain_.push_back(p);
-        if ((tail_ == '0' || tail_ == pts_[p][pts_[p].length() - 1]) &&
+        if ((tail_ == 0 || tail_ == pts_[p][pts_[p].length() - 1]) &&
             res_.size() < chain_.size() && chain_.size() >= 2)
             res_ = chain_;
         for (int next: edges_[p]) {
@@ -110,7 +110,7 @@ private :
         vis_.insert(p);
         chain_.push_back(p);
         char_cnt_ += pts_[p].length();
-        if ((tail_ == '0' || tail_ == pts_[p][pts_[p].length() - 1]) &&
+        if ((tail_ == 0 || tail_ == pts_[p][pts_[p].length() - 1]) &&
             max_char_cnt_ < char_cnt_ && chain_.size() >= 2) {
             res_ = chain_;
             max_char_cnt_ = char_cnt_;
@@ -154,7 +154,7 @@ public:
         chain_.clear();
         res_.clear();
         for (int i = 0; i < pts_.size(); ++i) {
-            if ((head_ == '0' || head_ == pts_[i][0]) && pts_[i][0] != banned_)
+            if ((head_ == 0 || head_ == pts_[i][0]) && pts_[i][0] != banned_)
                 DFSWord(i);
         }
         output_.clear();
@@ -174,7 +174,7 @@ public:
         chain_.clear();
         res_.clear();
         for (int i = 0; i < pts_.size(); ++i) {
-            if ((head_ == '0' || head_ == pts_[i][0]) && pts_[i][0] != banned_)
+            if ((head_ == 0 || head_ == pts_[i][0]) && pts_[i][0] != banned_)
                 DFSChar(i);
         }
         output_.clear();
@@ -205,7 +205,7 @@ TEST(correctness_test, testcase2_1) {
     const char *argv[] = {"Wordlist.exe", "-r", "-h", "c", "-j", "v", "-w", file_name};
     WordChain word_chain((std::string(file_name)));
     word_chain.BuildGraph();
-    int std_res = word_chain.GetMostWordChain('c', '0', 'v');
+    int std_res = word_chain.GetMostWordChain('c', 0, 'v');
     word_chain.OutputFile("../output/output2_1_std.txt");
     int res;
     int ret = controller.Cmd(sizeof(argv) / sizeof(argv[0]), const_cast<char **>(argv), &res,
@@ -219,7 +219,7 @@ TEST(correctness_test, testcase2_2) {
     const char *argv[] = {"Wordlist.exe", "-r", "-j", "h", "-t", "j", "-c", file_name};
     WordChain word_chain((std::string(file_name)));
     word_chain.BuildGraph();
-    int std_res = word_chain.GetMostCharChain('0', 'j', 'h');
+    int std_res = word_chain.GetMostCharChain(0, 'j', 'h');
     word_chain.OutputFile("../output/output2_2_std.txt");
     int res;
     int ret = controller.Cmd(sizeof(argv) / sizeof(argv[0]), const_cast<char **>(argv), &res,
@@ -233,7 +233,7 @@ TEST(correctness_test, testcase3) {
     const char *argv[] = {"Wordlist.exe", "-w", file_name};
     WordChain word_chain((std::string(file_name)));
     word_chain.BuildGraph();
-    int std_res = word_chain.GetMostWordChain('0', '0', '0');
+    int std_res = word_chain.GetMostWordChain(0, 0, 0);
     word_chain.OutputFile("../output/output3_std.txt");
     int res;
     int ret = controller.Cmd(sizeof(argv) / sizeof(argv[0]), const_cast<char **>(argv), &res, "../output/output3.txt");
@@ -246,7 +246,7 @@ TEST(correctness_test, testcase4) {
     const char *argv[] = {"Wordlist.exe", "-c", file_name};
     WordChain word_chain((std::string(file_name)));
     word_chain.BuildGraph();
-    int std_res = word_chain.GetMostCharChain('0', '0', '0');
+    int std_res = word_chain.GetMostCharChain(0, 0, 0);
     word_chain.OutputFile("../output/output4_std.txt");
     int res;
     int ret = controller.Cmd(sizeof(argv) / sizeof(argv[0]), const_cast<char **>(argv), &res, "../output/output4.txt");
@@ -259,7 +259,7 @@ TEST(correctness_test, testcase5) {
     const char *argv[] = {"Wordlist.exe", "-j", "h", "-r", "-c", file_name};
     WordChain word_chain((std::string(file_name)));
     word_chain.BuildGraph();
-    int std_res = word_chain.GetMostCharChain('0', '0', 'h');
+    int std_res = word_chain.GetMostCharChain(0, 0, 'h');
     word_chain.OutputFile("../output/output5_std.txt");
     int res;
     int ret = controller.Cmd(sizeof(argv) / sizeof(argv[0]), const_cast<char **>(argv), &res, "../output/output5.txt");
@@ -272,7 +272,7 @@ TEST(correctness_test, testcase6_1) {
     const char *argv[] = {"Wordlist.exe", "-t", "t", "-r", "-w", file_name};
     WordChain word_chain((std::string(file_name)));
     word_chain.BuildGraph();
-    int std_res = word_chain.GetMostWordChain('0', 't', '0');
+    int std_res = word_chain.GetMostWordChain(0, 't', 0);
     word_chain.OutputFile("../output/output6_1_std.txt");
     int res;
     int ret = controller.Cmd(sizeof(argv) / sizeof(argv[0]), const_cast<char **>(argv), &res,
@@ -286,7 +286,7 @@ TEST(correctness_test, testcase6_2) {
     const char *argv[] = {"Wordlist.exe", "-h", "n", "-r", "-w", file_name};
     WordChain word_chain((std::string(file_name)));
     word_chain.BuildGraph();
-    int std_res = word_chain.GetMostWordChain('n', '0', '0');
+    int std_res = word_chain.GetMostWordChain('n', 0, 0);
     word_chain.OutputFile("../output/output6_2_std.txt");
     int res;
     int ret = controller.Cmd(sizeof(argv) / sizeof(argv[0]), const_cast<char **>(argv), &res,
@@ -300,7 +300,7 @@ TEST(correctness_test, testcase7_1) {
     const char *argv[] = {"Wordlist.exe", "-r", "-w", file_name};
     WordChain word_chain((std::string(file_name)));
     word_chain.BuildGraph();
-    int std_res = word_chain.GetMostWordChain('0', '0', '0');
+    int std_res = word_chain.GetMostWordChain(0, 0, 0);
     word_chain.OutputFile("../output/output7_1_std.txt");
     int res;
     int ret = controller.Cmd(sizeof(argv) / sizeof(argv[0]), const_cast<char **>(argv), &res,
@@ -314,7 +314,7 @@ TEST(correctness_test, testcase7_2) {
     const char *argv[] = {"Wordlist.exe", "-r", "-t", "b", "-w", file_name};
     WordChain word_chain((std::string(file_name)));
     word_chain.BuildGraph();
-    int std_res = word_chain.GetMostWordChain('0', 'b', '0');
+    int std_res = word_chain.GetMostWordChain(0, 'b', 0);
     word_chain.OutputFile("../output/output7_2_std.txt");
     int res;
     int ret = controller.Cmd(sizeof(argv) / sizeof(argv[0]), const_cast<char **>(argv), &res,
@@ -328,7 +328,7 @@ TEST(correctness_test, testcase8) {
     const char *argv[] = {"Wordlist.exe", "-r", "-c", file_name};
     WordChain word_chain((std::string(file_name)));
     word_chain.BuildGraph();
-    int std_res = word_chain.GetMostCharChain('0', '0', '0');
+    int std_res = word_chain.GetMostCharChain(0, 0, 0);
     word_chain.OutputFile("../output/output8_std.txt");
     int res;
     int ret = controller.Cmd(sizeof(argv) / sizeof(argv[0]), const_cast<char **>(argv), &res, "../output/output8.txt");
@@ -341,7 +341,7 @@ TEST(correctness_test, testcase9) {
     const char *argv[] = {"Wordlist.exe", "-h", "j", "-t", "z", "-r", "-c", file_name};
     WordChain word_chain((std::string(file_name)));
     word_chain.BuildGraph();
-    int std_res = word_chain.GetMostCharChain('j', 'z', '0');
+    int std_res = word_chain.GetMostCharChain('j', 'z', 0);
     word_chain.OutputFile("../output/output9_std.txt");
     int res;
     int ret = controller.Cmd(sizeof(argv) / sizeof(argv[0]), const_cast<char **>(argv), &res, "../output/output9.txt");
@@ -354,7 +354,7 @@ TEST(correctness_test, testcase10) {
     const char *argv[] = {"Wordlist.exe", "-j", "b", "-w", file_name};
     WordChain word_chain((std::string(file_name)));
     word_chain.BuildGraph();
-    int std_res = word_chain.GetMostWordChain('0', '0', 'b');
+    int std_res = word_chain.GetMostWordChain(0, 0, 'b');
     word_chain.OutputFile("../output/output10_std.txt");
     int res;
     int ret = controller.Cmd(sizeof(argv) / sizeof(argv[0]), const_cast<char **>(argv), &res, "../output/output10.txt");

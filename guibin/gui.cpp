@@ -53,6 +53,7 @@ void WordChainUI::createControlBox() {
         functionalParamsGroup->addButton(functionalParamsRadio[i]);
         layout->addWidget(functionalParamsRadio[i], 0, 4 * i, 1, 4);
     }
+    functionalParamsRadio[0]->setChecked(true);
     for (int i = 0; i < NumLimits; ++i) {
         if (i < 3) {
             limitLabels[i] = new QLabel(limits[i]);
@@ -119,8 +120,77 @@ void WordChainUI::onInputPathChooseButtonClicked() {
     }
 }
 
+int gen_chains_all(char *words[], int len, char *result[]){
+    result[0] = new char[2], result[0][0] = 't', result[0][1] = '\0';
+    result[1] = new char[2], result[1][0] = 'e', result[1][1] = '\0';
+    result[2] = new char[2], result[2][0] = 's', result[2][1] = '\0';
+    result[3] = new char[2], result[3][0] = 't', result[3][1] = '\0';
+    result[4] = nullptr;
+    return 0;
+}
+int gen_chain_word(char *words[], int len, char *result[], char head, char tail, char reject, bool enable_loop){
+    result[0] = new char[2], result[0][0] = 't', result[0][1] = '\0';
+    result[1] = new char[2], result[1][0] = 'e', result[1][1] = '\0';
+    result[2] = new char[2], result[2][0] = 's', result[2][1] = '\0';
+    result[3] = new char[2], result[3][0] = 't', result[3][1] = '\0';
+    result[4] = nullptr;
+    return 0;
+}
+int gen_chain_char(char *words[], int len, char *result[], char head, char tail, char reject, bool enable_loop){
+    result[0] = new char[2], result[0][0] = 't', result[0][1] = '\0';
+    result[1] = new char[2], result[1][0] = 'e', result[1][1] = '\0';
+    result[2] = new char[2], result[2][0] = 's', result[2][1] = '\0';
+    result[3] = new char[2], result[3][0] = 't', result[3][1] = '\0';
+    result[4] = nullptr;
+    return 0;
+}
+
 void WordChainUI::onSolveButtonClicked() {
-    QString outputContent = "666";  // todo
+    char functionalParam = functionalParamsRadio[0]->isChecked() ? 'n' :
+                           functionalParamsRadio[1]->isChecked() ? 'w' :
+                           functionalParamsRadio[2]->isChecked() ? 'c' : 0;
+    char head = limitChar[0]->text().toStdString().length() > 0 ? tolower(limitChar[0]->text().toStdString()[0]) : 0;
+    char tail = limitChar[1]->text().toStdString().length() > 0 ? tolower(limitChar[1]->text().toStdString()[0]) : 0;
+    char reject = limitChar[2]->text().toStdString().length() > 0 ? tolower(limitChar[2]->text().toStdString()[0]) : 0;
+    bool enable_loop = allowRingsRadio->isChecked();
+    char *words[200000];
+    char *res[20000];
+    std::string inputContent = inputContentTextEdit->toPlainText().toStdString();
+    std::string s;
+    int len = 0;
+    for (int i = 0; i < inputContent.length(); ++i) {
+        char c = inputContent[i];
+        if (isupper(c)) s += (char) tolower(c);
+        else if (islower(c)) s += c;
+        else {
+            if (s.length() > 0) {
+                words[len] = new char[s.length() + 1];
+                for (int j = 0; j < s.length(); ++j) {
+                    words[len][j] = s[j];
+                }
+                words[len++][s.length()]='\0';
+                s = "";
+            }
+        }
+    }
+    switch (functionalParam) {
+        case 'n':
+            gen_chains_all(words, len, res);
+            break;
+        case 'w':
+            gen_chain_word(words,len, res, head, tail, reject, enable_loop);
+            break;
+        case 'c':
+            gen_chain_char(words,len, res, head, tail, reject, enable_loop);
+            break;
+        default:
+            // never hit here
+            break;
+    }
+    QStringList strList;
+    int i = 0;
+    while(res[i]!= nullptr) strList << QString(res[i++]);
+    QString outputContent = strList.join("\n");
     outputContentTextEdit->setText(outputContent);
 }
 

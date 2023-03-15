@@ -10,7 +10,7 @@
 > - 教学班级：周四班
 > - 项目地址：https://github.com/seeeagull/Word_Chain
 
-### PSP表格-预期
+### [res]PSP表格-预期
 
 | **PSP2.1**                              | **Personal Software Process Stages**    | **预估耗时（分钟）** |
 | :-------------------------------------- | :-------------------------------------- | :------------------- |
@@ -31,7 +31,7 @@
 | · Postmortem & Process Improvement Plan | · 事后总结, 并提出过程改进计划          | 80                   |
 |                                         | 合计                                    | 2420                 |
 
-### 设计理念
+### [res]设计理念
 
 > todo 看教科书和其它资料中关于 Information Hiding，Interface Design，Loose Coupling 的章节，说明你们在结对编程中是如何利用这些方法对接口进行设计的。
 
@@ -45,7 +45,7 @@
 
 
 
-### 开发环境下编译通过无警告
+### [res]开发环境下编译通过无警告
 
 > todo 展示在所在开发环境下编译器编译通过无警告的截图
 
@@ -53,7 +53,7 @@
 
 > todo 阅读有关 UML 的内容，画出 UML 图显示计算模块部分各个实体之间的关系（画一个图即可）https://en.wikipedia.org/wiki/Unified_Modeling_Language
 
-### 计算模块接口部分的性能改进
+### [res]计算模块接口部分的性能改进
 
 > todo 记录在改进计算模块性能上所花费的时间，并展示你程序中消耗最大的函数，陈述你的性能改进策略。
 
@@ -152,21 +152,20 @@ todo
 
 todo 12 13未构造
 
-| case | intsr                                       | 场景                              | expcode             |
-| ---- | ------------------------------------------- | --------------------------------- | ------------------- |
-| 1    | Wordlist.exe -n                             | 参数中没有文件                    | NO_FILE_PATH        |
-| 2    | Wordlist.exe -n testcase1.txt testcase2.txt | 参数中多个文件                    | MULTI_FILE_PATH     |
-| 3    | Wordlist.exe -n testcase0.txt               | 参数中文件不存在                  | FILE_NOT_EXISTS     |
-| 4    | Wordlist.exe -n testcase11.c                | 参数中文件不是txt文件             | FILE_TYPE_ERROR     |
-| 5    | Wordlist.exe -q testcase1.txt               | 非法参数                          | ILLEGAL_PARAM       |
-| 6    | Wordlist.exe -h a -t s testcase1.txt        | 无功能性参数                      | NO_FUNCTIONAL_PARAM |
-| 7    | Wordlist.exe -n -w testcase1.txt            | 参数冲突                          | PARAMS_CONFLICT     |
-| 8    | Wordlist.exe -w -w  testcase1.txt           | 多次指定相同参数                  | DUPLICATE_PARAM     |
-| 9    | Wordlist.exe -h                             | -h -t -j参数没有接字符串          | CHAR_NOT_ASSIGN     |
-| 10   | Wordlist.exe -h AB                          | -h -t -j参数接的字符串不合法      | ILLEGAL_CHAR        |
-| 11   | Wordlist.exe -w testcase5.txt               | 未指定-r但出现环                  | UNEXPECTED_LOOP     |
-| 12   | todo                                        | 单词数超过20000                   | LENGTH_OVERFLOW     |
-| 13   | 用户输入单词不合法                          | 仅可以是{\space}\*{\\w}\*{\space} | ILLEGAL_INPUT       |
+| case | intsr                                       | 场景                         | expcode             |
+| ---- | ------------------------------------------- | ---------------------------- | ------------------- |
+| 1    | Wordlist.exe -n                             | 参数中没有文件               | NO_FILE_PATH        |
+| 2    | Wordlist.exe -n testcase1.txt testcase2.txt | 参数中多个文件               | MULTI_FILE_PATH     |
+| 3    | Wordlist.exe -n testcase0.txt               | 参数中文件不存在             | FILE_NOT_EXISTS     |
+| 4    | Wordlist.exe -n testcase11.c                | 参数中文件不是txt文件        | FILE_TYPE_ERROR     |
+| 5    | Wordlist.exe -q testcase1.txt               | 非法参数                     | ILLEGAL_PARAM       |
+| 6    | Wordlist.exe -h a -t s testcase1.txt        | 无功能性参数                 | NO_FUNCTIONAL_PARAM |
+| 7    | Wordlist.exe -n -w testcase1.txt            | 参数冲突                     | PARAMS_CONFLICT     |
+| 8    | Wordlist.exe -w -w  testcase1.txt           | 多次指定相同参数             | DUPLICATE_PARAM     |
+| 9    | Wordlist.exe -h                             | -h -t -j参数没有接字符串     | CHAR_NOT_ASSIGN     |
+| 10   | Wordlist.exe -h AB                          | -h -t -j参数接的字符串不合法 | ILLEGAL_CHAR        |
+| 11   | Wordlist.exe -w testcase5.txt               | 未指定-r但出现环             | UNEXPECTED_LOOP     |
+| 12   | todo                                        | 单词数超过20000              | LENGTH_OVERFLOW     |
 
 对应的testcase代码如下。
 
@@ -257,25 +256,61 @@ todo 12 13
 
 界面模块采用C++的Qt6实现，整体效果如下：
 
-- macos
+- macos运行实例
 
     todo 图片
 
-- windows
+- windows运行实例
 
     todo 图片
 
-UI分成两个部分。上侧用于选择目标功能、进行限制、点击求解、导入待处理txt文件、保存求解结果；下侧分成两部分，左侧用于展示待处理文本，右侧用于展示求解结果。
+#### UI布局及使用流程
+
+UI分成两个部分。上侧用于选择目标功能、进行限制、点击求解、导入待处理txt文件、保存求解结果；下侧分成两部分，左侧用于展示待处理文本，右侧用于展示求解结果。用户使用流程为：
+
+1. 点击“导入”导入txt文件，或者在左侧手动输入待处理数据。待处理数据可以包括非英文字符，按照`单词的定义为：被非英文字符间隔的连续英文字符序列`处理
+2. 选择上方功能性参数和中间辅助性参数
+3. 点击求解，求解结果将显示在右下方窗口
+4. 如需保存求解结果，点击“导出”并在弹出窗口中设置保存文件路径及文件名
+
+#### UI部分实现
+
+##### UI层面添加约束解决异常
+
+| case | intsr                                       | 场景                         | expcode             |
+| ---- | ------------------------------------------- | ---------------------------- | ------------------- |
+| 1    | Wordlist.exe -n                             | 参数中没有文件               | NO_FILE_PATH        |
+| 2    | Wordlist.exe -n testcase1.txt testcase2.txt | 参数中多个文件               | MULTI_FILE_PATH     |
+| 3    | Wordlist.exe -n testcase0.txt               | 参数中文件不存在             | FILE_NOT_EXISTS     |
+| 4    | Wordlist.exe -n testcase11.c                | 参数中文件不是txt文件        | FILE_TYPE_ERROR     |
+| 5    | Wordlist.exe -q testcase1.txt               | 非法参数                     | ILLEGAL_PARAM       |
+| 6    | Wordlist.exe -h a -t s testcase1.txt        | 无功能性参数                 | NO_FUNCTIONAL_PARAM |
+| 7    | Wordlist.exe -n -w testcase1.txt            | 参数冲突                     | PARAMS_CONFLICT     |
+| 8    | Wordlist.exe -w -w  testcase1.txt           | 多次指定相同参数             | DUPLICATE_PARAM     |
+| 9    | Wordlist.exe -h                             | -h -t -j参数没有接字符串     | CHAR_NOT_ASSIGN     |
+| 10   | Wordlist.exe -h AB                          | -h -t -j参数接的字符串不合法 | ILLEGAL_CHAR        |
+| 11   | Wordlist.exe -w testcase5.txt               | 未指定-r但出现环             | UNEXPECTED_LOOP     |
+| 12   | todo                                        | 单词数超过20000              | LENGTH_OVERFLOW     |
+
+对异常的处理通常有两种：1. UI进行较少的限制，用户触发异常提示用户重新输入 或2. UI直接进行约束
+
+对大部分异常(expcode =1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 12, 13)，我们采用了第二种方式添加约束保证用户不会触发；对于需要根据是否形成环路判断的异常(expcode = 11)则采用第一种方式在用户触发异常后提示用户出现环需要点击“允许环”参数进行触发，对各异常的实现如下：
+
+```c++
+// expcode=1，
+```
+
+
 
 ### 界面模块与计算模块的对接
 
 > todo 详细地描述 UI 模块的设计与两个模块的对接，并在博客中截图实现的功能。
 
-### 结对过程
+### [res]结对过程
 
 > todo 提供两人在讨论的结对图像资料（比如 Live Share 的截图）。关于如何远程进行结对参见作业最后的注意事项。
 
-### 优缺点
+### [res]优缺点
 
 > todo 看教科书和其它参考书，网站中关于结对编程的章节，例如：http://www.cnblogs.com/xinz/archive/2011/08/07/2130332.html ，说明结对编程的优点和缺点。同时描述结对的每一个人的优点和缺点在哪里（要列出至少三个优点和一个缺点）。
 
@@ -316,9 +351,10 @@ UI分成两个部分。上侧用于选择目标功能、进行限制、点击求
 
 ### todo
 
-- dll
 - 对接GUI
 - 覆盖率 gcov
 - robustness测试
-- 性能测试
 - 20000测试
+- 出现环抛出异常弹出界面
+- 默认选择一个功能参数
+- 分词

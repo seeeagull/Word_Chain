@@ -220,6 +220,9 @@ int Controller::Cmd(int argc, char **argv, int *res, const char *file_name) {
         default:
             break;
     }
+    if (wordlist.size() > 20000) {
+        return kLengthOverflow;
+    }
     return kNoError;
 }
 

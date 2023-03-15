@@ -452,16 +452,12 @@ TEST(robustness_test, testcase11) {
     EXPECT_EQ(ret, kUnexpectedLoop);
 }
 
-//TEST(robustness_test, testcase12) {
-//    // todo
-//    int res;
-//    int ret = controller.Cmd(sizeof(argv)/sizeof(argv[0]), argv, "../exp12.txt", &res);
-//    EXPECT_EQ(ret, kLengthOverflow);
-//}
-//
-//TEST(robustness_test, testcase13) {
-//    // todo
-//}
+TEST(robustness_test, testcase12) {
+    const char *argv[] = {"Wordlist.exe", "-w", "../testcase/testcase13.txt"};
+    int res;
+    int ret = controller.Cmd(sizeof(argv) / sizeof(argv[0]), const_cast<char **>(argv), &res, "../exp12.txt");
+    EXPECT_EQ(ret, kLengthOverflow);
+}
 
 int main(int argc, char **argv) {
     ::testing::InitGoogleTest(&argc, argv);

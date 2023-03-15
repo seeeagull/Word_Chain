@@ -81,9 +81,10 @@
 | 7        | 有   | 有   | 有        | 有       | 有       | 合法       | 有自环的完全图               | [-w -r]\[-w -t b -r]                |
 | 8        | 有   | 有   | 无        | 有       | 有       | 合法       | 只有一个环，每个单词都有自环 | [-c -r]                             |
 | 9        | 有   | 有   | 有        | 有       | 有       | 合法       | 平平无奇                     | [-c -h j -t z -r]                   |
-| 10       | 无   | 无   | 无        | 无       | 无       | 合法？todo | 只有一个单词，长度很长       | [-w -j b]                           |
+| 10       | 无   | 无   | 无        | 无       | 无       | 合法       | 只有一个单词，长度很长       | [-w -j b]                           |
 | 11       |      |      |           |          |          | 不合法     | 非txt文件                    |                                     |
 | 12       |      |      |           |          |          | 合法       | 文件不含单词                 | [-n]                                |
+| 13       | 有   | 有   | 有        | 无       | 无       | 不合法     | 输出结果有20001个单词        |                                     |
 
 #### 正确性测试
 
@@ -163,7 +164,7 @@ todo
 | 9    | Wordlist.exe -h                             | -h -t -j参数没有接字符串     | CHAR_NOT_ASSIGN     |
 | 10   | Wordlist.exe -h AB                          | -h -t -j参数接的字符串不合法 | ILLEGAL_CHAR        |
 | 11   | Wordlist.exe -w testcase5.txt               | 未指定-r但出现环             | UNEXPECTED_LOOP     |
-| 12   | todo                                        | 单词数超过20000              | LENGTH_OVERFLOW     |
+| 12   | Wordlist.exe -w testcase13.txt              | 输出单词数超过20000          | LENGTH_OVERFLOW     |
 
 对应的testcase代码如下。
 
@@ -245,7 +246,12 @@ TEST(robustness_test, testcase11) {
     EXPECT_EQ(ret, kUnexpectedLoop);
 }
 
-todo 12 13
+TEST(robustness_test, testcase12) {
+    const char *argv[] = {"Wordlist.exe", "-w", "../testcase/testcase13.txt"};
+    int res;
+    int ret = controller.Cmd(sizeof(argv) / sizeof(argv[0]), const_cast<char **>(argv), &res, "../exp12.txt");
+    EXPECT_EQ(ret, kLengthOverflow);
+}
 ```
 
 ### UI设计
@@ -346,6 +352,4 @@ UI分成两个部分。上侧用于选择目标功能、进行限制、点击求
 ### todo
 
 - 覆盖率 gcov
-- robustness测试
-- 20000测试
 

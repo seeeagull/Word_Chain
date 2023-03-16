@@ -403,9 +403,6 @@ int Graph::FindLongestChainWithoutLoops(bool weighted, std::vector<StringPointer
     while (!q.empty()) {
         char now = q.front();
         q.pop();
-        if (length[now] < 0 && head_ == now) {
-            length[now] = 0;
-        }
         if (self_loop_[now] && length[now] >= 0) {
             length[now] += weighted ? self_loop_[now]->length : 1;
         }

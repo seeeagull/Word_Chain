@@ -12,7 +12,7 @@
 #endif
 
 #include "./types.h"
-#include "./graph.h"
+#include "../compute/graph.h"
 
 EXPOSED_FUNCTION int gen_chains_all(char* words[], int len, char* result[]);
 EXPOSED_FUNCTION int gen_chain_word(char* words[], int len, char* result[], char head, char tail, char reject, bool enable_loop);

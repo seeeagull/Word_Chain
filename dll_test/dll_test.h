@@ -7,7 +7,6 @@
 
 #include <iostream>
 #include <cstring>
-#include "./dll_test.h"
 
 #ifdef CORE
 #define EXPOSED_FUNCTION extern "C" __declspec(dllexport)

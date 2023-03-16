@@ -3,6 +3,7 @@
 /.idea/
 CMakeLists.txt
 /compute/CMakeLists.txt
+/core/CMakeLists.txt
 source.txt
 simple.txt
 solution.txt

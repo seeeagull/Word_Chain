@@ -12,7 +12,7 @@
 #include <memory>
 #include <iostream>
 #include <fstream>
-#include "./types.h"
+#include "../core/types.h"
 
 class FileIo {
     typedef std::shared_ptr<std::string> StringPointer;

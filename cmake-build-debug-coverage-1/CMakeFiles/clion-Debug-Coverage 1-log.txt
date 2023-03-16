@@ -1,0 +1,5 @@
+/Applications/CLion.app/Contents/bin/cmake/mac/bin/cmake -DCMAKE_BUILD_TYPE=Debug "-DCMAKE_CXX_FLAGS=-fprofile-instr-generate -fcoverage-mapping" "-DCMAKE_C_FLAGS=-fprofile-instr-generate -fcoverage-mapping" -S /Users/liuming/CLionProjects/Word_Chain1 -B /Users/liuming/CLionProjects/Word_Chain1/cmake-build-debug-coverage-1
+-- Could NOT find WrapVulkanHeaders (missing: Vulkan_INCLUDE_DIR) 
+-- Configuring done
+-- Generating done
+-- Build files have been written to: /Users/liuming/CLionProjects/Word_Chain1/cmake-build-debug-coverage-1

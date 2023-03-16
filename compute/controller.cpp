@@ -190,10 +190,8 @@ int Controller::Cmd(int argc, char **argv, int *res, const char *file_name) {
         case kFindWordChainWithMostWords:
             *res = graph.FindLongestChain(false, wordlist);
             break;
-        case kFindWordChainWithMostLetters:
-            *res = graph.FindLongestChain(true, wordlist);
-            break;
         default:
+            *res = graph.FindLongestChain(true, wordlist);
             break;
     }
     if (wordlist.size() > 20000) {
@@ -201,4 +199,3 @@ int Controller::Cmd(int argc, char **argv, int *res, const char *file_name) {
     }
     return kNoError;
 }
-

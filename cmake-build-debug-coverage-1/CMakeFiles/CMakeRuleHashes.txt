@@ -1,0 +1,3 @@
+# Hashes of file build rules.
+79fff8ee2860471ca111dd99d45760ad CMakeFiles/MyTests_autogen
+f3d1c0beaf4638af6a6637f5e85aef35 CMakeFiles/WordChain_autogen

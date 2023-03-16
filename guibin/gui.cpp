@@ -5,8 +5,8 @@
 #include <QApplication>
 #include <QMessageBox>
 #include <iostream>
-#include "../compute/types.h"
-#include "../compute/core.h"
+#include "../core/types.h"
+#include "../core/core.h"
 
 #include "gui.h"
 

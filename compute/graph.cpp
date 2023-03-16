@@ -419,7 +419,8 @@ int Graph::FindLongestChainWithoutLoops(bool weighted, std::vector<StringPointer
             --in_degree[tar];
             if (in_degree[tar] == 0) {
                 if (tail_ == 30 || tail_ == tar) {
-                    if (optimal == -1 || length[tar] > length[optimal]) {
+                    if ((optimal == -1 && length[tar] >= 0)
+                        || (optimal >= 0 && length[tar] > length[optimal])) {
                         optimal = tar;
                     }
                 }

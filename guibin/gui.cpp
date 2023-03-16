@@ -5,6 +5,8 @@
 #include <QApplication>
 #include <QMessageBox>
 #include <iostream>
+#include <sstream>
+#include <iomanip>
 #include "../core/types.h"
 #include "../core/core.h"
 
@@ -56,7 +58,8 @@ void WordChainUI::createControlBox() {
         functionalParamsGroup->addButton(functionalParamsRadio[i]);
         layout->addWidget(functionalParamsRadio[i], 0, 4 * i, 1, 4);
     }
-    functionalParamsRadio[0]->setChecked(true);
+    connect(functionalParamsRadio[0], SIGNAL(toggled(bool)), this, SLOT(onFunctionalParamNButtonClicked(bool)));
+    functionalParamsRadio[1]->setChecked(true);
     for (int i = 0; i < NumLimits; ++i) {
         if (i < 3) {
             limitLabels[i] = new QLabel(limits[i]);
@@ -125,33 +128,6 @@ void WordChainUI::onInputPathChooseButtonClicked() {
     }
 }
 
-//int gen_chains_all(char *words[], int len, char *result[]) {
-//    result[0] = new char[2], result[0][0] = 't', result[0][1] = '\0';
-//    result[1] = new char[2], result[1][0] = 'e', result[1][1] = '\0';
-//    result[2] = new char[2], result[2][0] = 's', result[2][1] = '\0';
-//    result[3] = new char[2], result[3][0] = 't', result[3][1] = '\0';
-//    result[4] = nullptr;
-//    return -11;
-//}
-//
-//int gen_chain_word(char *words[], int len, char *result[], char head, char tail, char reject, bool enable_loop) {
-//    result[0] = new char[2], result[0][0] = 't', result[0][1] = '\0';
-//    result[1] = new char[2], result[1][0] = 'e', result[1][1] = '\0';
-//    result[2] = new char[2], result[2][0] = 's', result[2][1] = '\0';
-//    result[3] = new char[2], result[3][0] = 't', result[3][1] = '\0';
-//    result[4] = nullptr;
-//    return -12;
-//}
-//
-//int gen_chain_char(char *words[], int len, char *result[], char head, char tail, char reject, bool enable_loop) {
-//    result[0] = new char[2], result[0][0] = 't', result[0][1] = '\0';
-//    result[1] = new char[2], result[1][0] = 'e', result[1][1] = '\0';
-//    result[2] = new char[2], result[2][0] = 's', result[2][1] = '\0';
-//    result[3] = new char[2], result[3][0] = 't', result[3][1] = '\0';
-//    result[4] = nullptr;
-//    return 0;
-//}
-
 void WordChainUI::onSolveButtonClicked() {
     char functionalParam = functionalParamsRadio[0]->isChecked() ? 'n' :
                            functionalParamsRadio[1]->isChecked() ? 'w' :
@@ -207,7 +183,9 @@ void WordChainUI::onSolveButtonClicked() {
         }
         return;
     }
-    std::string usedTimePrompt = "用时: " + std::to_string(abs(elapsed / 1000)) + "秒";
+    std::ostringstream usedTimePromptOStringStream;
+    usedTimePromptOStringStream << std::fixed << std::setprecision(3) << elapsed / 1000000000;
+    std::string usedTimePrompt = "用时: " + usedTimePromptOStringStream.str() + "秒";
     QString usedTimePromptQ = QString::fromStdString(usedTimePrompt);
     usedTimeLabel->setText(usedTimePromptQ);
     QStringList strList;
@@ -228,6 +206,25 @@ void WordChainUI::onOutputPathChooseButtonClicked() {
         QString outputContent = outputContentTextEdit->toPlainText();
         outputFile.write(outputContent.toUtf8());
         outputFile.close();
+    }
+}
+
+void WordChainUI::onFunctionalParamNButtonClicked(bool checked) {
+    std::cout << 1 << std::endl;
+    if (checked) {
+        limitChar[0]->clear();
+        limitChar[1]->clear();
+        limitChar[2]->clear();
+        allowRingsRadio->setChecked(false);
+        limitChar[0]->setEnabled(false);
+        limitChar[1]->setEnabled(false);
+        limitChar[2]->setEnabled(false);
+        allowRingsRadio->setEnabled(false);
+    } else {
+        limitChar[0]->setEnabled(true);
+        limitChar[1]->setEnabled(true);
+        limitChar[2]->setEnabled(true);
+        allowRingsRadio->setEnabled(true);
     }
 }
 

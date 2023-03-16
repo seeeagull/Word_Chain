@@ -561,7 +561,7 @@ TEST(robustness_test, testcase12_2) {
 
 - macos运行实例
 
-    todo 图片
+    
 
 - windows运行实例
 
@@ -620,8 +620,8 @@ QString inputPath = QFileDialog::getOpenFileName(this, dlgTitle, curPath, filter
       inputContentTextEdit->setText(inputContent);
   }
 // expcode=5，非法参数，只有控制面板的参数可以选择
-// expcode=6，无功能性参数，默认选择-n
-functionalParamsRadio[0]->setChecked(true);
+// expcode=6，无功能性参数，默认选择-w
+functionalParamsRadio[1]->setChecked(true);
 // expcode=7，参数冲突，功能性参数使用radioButton组，只能选择一个
 functionalParamsGroup = new QButtonGroup;
   for (int i = 0; i < NumFunctions; ++i) {
@@ -629,6 +629,8 @@ functionalParamsGroup = new QButtonGroup;
       functionalParamsGroup->addButton(functionalParamsRadio[i]);
       layout->addWidget(functionalParamsRadio[i], 0, 4 * i, 1, 4);
   }
+// expcode=7，-n不能同时选择-h -t -j -r，设置选择-n时无法选择这四个参数
+todo
 // expcode=8，多次指定相同参数，UI只有选择与不选择两个状态，没有选择次数
 // expcode=9，-h -t -j参数没有接字符串，保证这三个参数后面的选择框要么不选表示未指定，要么输入一个英文字母
 // expcode=10，-h -t -j参数接的字符串不合法，通过Regex限定输入字符一定为英文字母
@@ -793,3 +795,10 @@ UI调用
 ### 附加-模块松耦合
 
 > todo 在博客中指明合作小组两位同学的学号，分析两组不同的模块合并之后出现的问题，为何会出现这样的问题，以及是如何根据反馈改进自己模块的。
+
+
+
+
+
+
+

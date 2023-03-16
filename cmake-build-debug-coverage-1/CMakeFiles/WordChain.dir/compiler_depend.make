@@ -3476,6 +3476,7 @@ CMakeFiles/WordChain.dir/guibin/gui.cpp.o: /Users/liuming/CLionProjects/Word_Cha
   /usr/local/Cellar/qt/6.4.2_2/lib/QtWidgets.framework/Headers/QApplication \
   /usr/local/Cellar/qt/6.4.2_2/lib/QtWidgets.framework/Headers/QMessageBox \
   /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX13.1.sdk/usr/include/c++/v1/iostream \
+  /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX13.1.sdk/usr/include/c++/v1/sstream \
   /Users/liuming/CLionProjects/Word_Chain1/core/types.h \
   /Users/liuming/CLionProjects/Word_Chain1/core/core.h \
   /Users/liuming/CLionProjects/Word_Chain1/core/types.h \
@@ -3487,6 +3488,8 @@ CMakeFiles/WordChain.dir/guibin/gui.cpp.o: /Users/liuming/CLionProjects/Word_Cha
   /Users/liuming/CLionProjects/Word_Chain1/guibin/gui.h \
   /usr/local/Cellar/qt/6.4.2_2/lib/QtWidgets.framework/Headers/QDialog
 
+
+/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX13.1.sdk/usr/include/c++/v1/sstream:
 
 /usr/local/Cellar/qt/6.4.2_2/lib/QtWidgets.framework/Headers/QMessageBox:
 

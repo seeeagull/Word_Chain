@@ -40,6 +40,7 @@ private slots:
     void onInputPathChooseButtonClicked();
     void onSolveButtonClicked();
     void onOutputPathChooseButtonClicked();
+    void onFunctionalParamNButtonClicked(bool checked);
 
 private:
     void createMenu();

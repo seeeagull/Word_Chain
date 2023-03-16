@@ -26,12 +26,14 @@ QT_WARNING_PUSH
 QT_WARNING_DISABLE_DEPRECATED
 namespace {
 struct qt_meta_stringdata_WordChainUI_t {
-    uint offsetsAndSizes[10];
+    uint offsetsAndSizes[14];
     char stringdata0[12];
     char stringdata1[31];
     char stringdata2[1];
     char stringdata3[21];
     char stringdata4[32];
+    char stringdata5[32];
+    char stringdata6[8];
 };
 #define QT_MOC_LITERAL(ofs, len) \
     uint(sizeof(qt_meta_stringdata_WordChainUI_t::offsetsAndSizes) + ofs), len 
@@ -41,13 +43,17 @@ Q_CONSTINIT static const qt_meta_stringdata_WordChainUI_t qt_meta_stringdata_Wor
         QT_MOC_LITERAL(12, 30),  // "onInputPathChooseButtonClicked"
         QT_MOC_LITERAL(43, 0),  // ""
         QT_MOC_LITERAL(44, 20),  // "onSolveButtonClicked"
-        QT_MOC_LITERAL(65, 31)   // "onOutputPathChooseButtonClicked"
+        QT_MOC_LITERAL(65, 31),  // "onOutputPathChooseButtonClicked"
+        QT_MOC_LITERAL(97, 31),  // "onFunctionalParamNButtonClicked"
+        QT_MOC_LITERAL(129, 7)   // "checked"
     },
     "WordChainUI",
     "onInputPathChooseButtonClicked",
     "",
     "onSolveButtonClicked",
-    "onOutputPathChooseButtonClicked"
+    "onOutputPathChooseButtonClicked",
+    "onFunctionalParamNButtonClicked",
+    "checked"
 };
 #undef QT_MOC_LITERAL
 } // unnamed namespace
@@ -58,7 +64,7 @@ Q_CONSTINIT static const uint qt_meta_data_WordChainUI[] = {
       10,       // revision
        0,       // classname
        0,    0, // classinfo
-       3,   14, // methods
+       4,   14, // methods
        0,    0, // properties
        0,    0, // enums/sets
        0,    0, // constructors
@@ -66,14 +72,16 @@ Q_CONSTINIT static const uint qt_meta_data_WordChainUI[] = {
        0,       // signalCount
 
  // slots: name, argc, parameters, tag, flags, initial metatype offsets
-       1,    0,   32,    2, 0x08,    1 /* Private */,
-       3,    0,   33,    2, 0x08,    2 /* Private */,
-       4,    0,   34,    2, 0x08,    3 /* Private */,
+       1,    0,   38,    2, 0x08,    1 /* Private */,
+       3,    0,   39,    2, 0x08,    2 /* Private */,
+       4,    0,   40,    2, 0x08,    3 /* Private */,
+       5,    1,   41,    2, 0x08,    4 /* Private */,
 
  // slots: parameters
     QMetaType::Void,
     QMetaType::Void,
     QMetaType::Void,
+    QMetaType::Void, QMetaType::Bool,    6,
 
        0        // eod
 };
@@ -92,7 +100,10 @@ Q_CONSTINIT const QMetaObject WordChainUI::staticMetaObject = { {
         // method 'onSolveButtonClicked'
         QtPrivate::TypeAndForceComplete<void, std::false_type>,
         // method 'onOutputPathChooseButtonClicked'
-        QtPrivate::TypeAndForceComplete<void, std::false_type>
+        QtPrivate::TypeAndForceComplete<void, std::false_type>,
+        // method 'onFunctionalParamNButtonClicked'
+        QtPrivate::TypeAndForceComplete<void, std::false_type>,
+        QtPrivate::TypeAndForceComplete<bool, std::false_type>
     >,
     nullptr
 } };
@@ -106,10 +117,10 @@ void WordChainUI::qt_static_metacall(QObject *_o, QMetaObject::Call _c, int _id,
         case 0: _t->onInputPathChooseButtonClicked(); break;
         case 1: _t->onSolveButtonClicked(); break;
         case 2: _t->onOutputPathChooseButtonClicked(); break;
+        case 3: _t->onFunctionalParamNButtonClicked((*reinterpret_cast< std::add_pointer_t<bool>>(_a[1]))); break;
         default: ;
         }
     }
-    (void)_a;
 }
 
 const QMetaObject *WordChainUI::metaObject() const
@@ -131,13 +142,13 @@ int WordChainUI::qt_metacall(QMetaObject::Call _c, int _id, void **_a)
     if (_id < 0)
         return _id;
     if (_c == QMetaObject::InvokeMetaMethod) {
-        if (_id < 3)
+        if (_id < 4)
             qt_static_metacall(this, _c, _id, _a);
-        _id -= 3;
+        _id -= 4;
     } else if (_c == QMetaObject::RegisterMethodArgumentMetaType) {
-        if (_id < 3)
+        if (_id < 4)
             *reinterpret_cast<QMetaType *>(_a[0]) = QMetaType();
-        _id -= 3;
+        _id -= 4;
     }
     return _id;
 }

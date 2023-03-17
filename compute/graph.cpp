@@ -387,7 +387,7 @@ int Graph::FindLongestChainWithoutLoops(bool weighted, std::vector<StringPointer
     }
 
     char optimal = -1;
-    int max_length = -1;
+    int max_length = 0;
     std::vector<StringPointer> prev(26, nullptr);
     std::deque<StringPointer> answer{};
     std::vector<int> length(26, -1e9);

@@ -1,5 +1,5 @@
 /Users/liuming/CLionProjects/Word_Chain1/cmake-build-debug-coverage-1/CMakeFiles/MyTests.dir
-/Users/liuming/CLionProjects/Word_Chain1/cmake-build-debug-coverage-1/CMakeFiles/WordChain.dir
+/Users/liuming/CLionProjects/Word_Chain1/cmake-build-debug-coverage-1/CMakeFiles/WordChainQt5.dir
 /Users/liuming/CLionProjects/Word_Chain1/cmake-build-debug-coverage-1/CMakeFiles/test.dir
 /Users/liuming/CLionProjects/Word_Chain1/cmake-build-debug-coverage-1/CMakeFiles/edit_cache.dir
 /Users/liuming/CLionProjects/Word_Chain1/cmake-build-debug-coverage-1/CMakeFiles/rebuild_cache.dir
@@ -8,4 +8,4 @@
 /Users/liuming/CLionProjects/Word_Chain1/cmake-build-debug-coverage-1/CMakeFiles/install/local.dir
 /Users/liuming/CLionProjects/Word_Chain1/cmake-build-debug-coverage-1/CMakeFiles/install/strip.dir
 /Users/liuming/CLionProjects/Word_Chain1/cmake-build-debug-coverage-1/CMakeFiles/MyTests_autogen.dir
-/Users/liuming/CLionProjects/Word_Chain1/cmake-build-debug-coverage-1/CMakeFiles/WordChain_autogen.dir
+/Users/liuming/CLionProjects/Word_Chain1/cmake-build-debug-coverage-1/CMakeFiles/WordChainQt5_autogen.dir

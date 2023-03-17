@@ -38,15 +38,15 @@ if(NOT DEFINED CMAKE_OBJDUMP)
 endif()
 
 if(CMAKE_INSTALL_COMPONENT STREQUAL "Unspecified" OR NOT CMAKE_INSTALL_COMPONENT)
-  file(INSTALL DESTINATION "${CMAKE_INSTALL_PREFIX}/bin" TYPE EXECUTABLE FILES "/Users/liuming/CLionProjects/Word_Chain1/cmake-build-debug-coverage/WordChain")
-  if(EXISTS "$ENV{DESTDIR}${CMAKE_INSTALL_PREFIX}/bin/WordChain" AND
-     NOT IS_SYMLINK "$ENV{DESTDIR}${CMAKE_INSTALL_PREFIX}/bin/WordChain")
+  file(INSTALL DESTINATION "${CMAKE_INSTALL_PREFIX}/bin" TYPE EXECUTABLE FILES "/Users/liuming/CLionProjects/Word_Chain1/cmake-build-debug-coverage/WordChainQt5")
+  if(EXISTS "$ENV{DESTDIR}${CMAKE_INSTALL_PREFIX}/bin/WordChainQt5" AND
+     NOT IS_SYMLINK "$ENV{DESTDIR}${CMAKE_INSTALL_PREFIX}/bin/WordChainQt5")
     execute_process(COMMAND /usr/bin/install_name_tool
       -delete_rpath "/Users/liuming/CLionProjects/Word_Chain1/lib"
-      -delete_rpath "/usr/local/Cellar/qt/6.4.2_2/lib"
-      "$ENV{DESTDIR}${CMAKE_INSTALL_PREFIX}/bin/WordChain")
+      -delete_rpath "/Users/liuming/Qt5.14.2/5.14.2/clang_64/lib"
+      "$ENV{DESTDIR}${CMAKE_INSTALL_PREFIX}/bin/WordChainQt5")
     if(CMAKE_INSTALL_DO_STRIP)
-      execute_process(COMMAND "/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/strip" -u -r "$ENV{DESTDIR}${CMAKE_INSTALL_PREFIX}/bin/WordChain")
+      execute_process(COMMAND "/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/strip" -u -r "$ENV{DESTDIR}${CMAKE_INSTALL_PREFIX}/bin/WordChainQt5")
     endif()
   endif()
 endif()

@@ -1,0 +1,207 @@
+{
+	"BUILD_DIR" : "/Users/liuming/CLionProjects/Word_Chain1/cmake-build-debug-coverage-1/WordChainQt5_autogen",
+	"CMAKE_BINARY_DIR" : "/Users/liuming/CLionProjects/Word_Chain1/cmake-build-debug-coverage-1",
+	"CMAKE_CURRENT_BINARY_DIR" : "/Users/liuming/CLionProjects/Word_Chain1/cmake-build-debug-coverage-1",
+	"CMAKE_CURRENT_SOURCE_DIR" : "/Users/liuming/CLionProjects/Word_Chain1",
+	"CMAKE_EXECUTABLE" : "/Applications/CLion.app/Contents/bin/cmake/mac/bin/cmake",
+	"CMAKE_LIST_FILES" : 
+	[
+		"/Users/liuming/CLionProjects/Word_Chain1/CMakeLists.txt",
+		"/Users/liuming/CLionProjects/Word_Chain1/cmake-build-debug-coverage-1/CMakeFiles/3.24.2/CMakeSystem.cmake",
+		"/Applications/CLion.app/Contents/bin/cmake/mac/share/cmake-3.24/Modules/CMakeSystemSpecificInitialize.cmake",
+		"/Applications/CLion.app/Contents/bin/cmake/mac/share/cmake-3.24/Modules/Platform/Darwin-Initialize.cmake",
+		"/Users/liuming/CLionProjects/Word_Chain1/cmake-build-debug-coverage-1/CMakeFiles/3.24.2/CMakeCCompiler.cmake",
+		"/Users/liuming/CLionProjects/Word_Chain1/cmake-build-debug-coverage-1/CMakeFiles/3.24.2/CMakeCXXCompiler.cmake",
+		"/Applications/CLion.app/Contents/bin/cmake/mac/share/cmake-3.24/Modules/CMakeSystemSpecificInformation.cmake",
+		"/Applications/CLion.app/Contents/bin/cmake/mac/share/cmake-3.24/Modules/CMakeGenericSystem.cmake",
+		"/Applications/CLion.app/Contents/bin/cmake/mac/share/cmake-3.24/Modules/CMakeInitializeConfigs.cmake",
+		"/Applications/CLion.app/Contents/bin/cmake/mac/share/cmake-3.24/Modules/Platform/Darwin.cmake",
+		"/Applications/CLion.app/Contents/bin/cmake/mac/share/cmake-3.24/Modules/Platform/UnixPaths.cmake",
+		"/Applications/CLion.app/Contents/bin/cmake/mac/share/cmake-3.24/Modules/CMakeCInformation.cmake",
+		"/Applications/CLion.app/Contents/bin/cmake/mac/share/cmake-3.24/Modules/CMakeLanguageInformation.cmake",
+		"/Applications/CLion.app/Contents/bin/cmake/mac/share/cmake-3.24/Modules/Compiler/AppleClang-C.cmake",
+		"/Applications/CLion.app/Contents/bin/cmake/mac/share/cmake-3.24/Modules/Compiler/Clang.cmake",
+		"/Applications/CLion.app/Contents/bin/cmake/mac/share/cmake-3.24/Modules/Compiler/CMakeCommonCompilerMacros.cmake",
+		"/Applications/CLion.app/Contents/bin/cmake/mac/share/cmake-3.24/Modules/Compiler/GNU.cmake",
+		"/Applications/CLion.app/Contents/bin/cmake/mac/share/cmake-3.24/Modules/Compiler/CMakeCommonCompilerMacros.cmake",
+		"/Applications/CLion.app/Contents/bin/cmake/mac/share/cmake-3.24/Modules/Platform/Apple-AppleClang-C.cmake",
+		"/Applications/CLion.app/Contents/bin/cmake/mac/share/cmake-3.24/Modules/Platform/Apple-Clang-C.cmake",
+		"/Applications/CLion.app/Contents/bin/cmake/mac/share/cmake-3.24/Modules/Platform/Apple-Clang.cmake",
+		"/Applications/CLion.app/Contents/bin/cmake/mac/share/cmake-3.24/Modules/CMakeCommonLanguageInclude.cmake",
+		"/Applications/CLion.app/Contents/bin/cmake/mac/share/cmake-3.24/Modules/CMakeCXXInformation.cmake",
+		"/Applications/CLion.app/Contents/bin/cmake/mac/share/cmake-3.24/Modules/CMakeLanguageInformation.cmake",
+		"/Applications/CLion.app/Contents/bin/cmake/mac/share/cmake-3.24/Modules/Compiler/AppleClang-CXX.cmake",
+		"/Applications/CLion.app/Contents/bin/cmake/mac/share/cmake-3.24/Modules/Compiler/Clang.cmake",
+		"/Applications/CLion.app/Contents/bin/cmake/mac/share/cmake-3.24/Modules/Platform/Apple-AppleClang-CXX.cmake",
+		"/Applications/CLion.app/Contents/bin/cmake/mac/share/cmake-3.24/Modules/Platform/Apple-Clang-CXX.cmake",
+		"/Applications/CLion.app/Contents/bin/cmake/mac/share/cmake-3.24/Modules/Platform/Apple-Clang.cmake",
+		"/Applications/CLion.app/Contents/bin/cmake/mac/share/cmake-3.24/Modules/CMakeCommonLanguageInclude.cmake",
+		"/Applications/CLion.app/Contents/bin/cmake/mac/share/cmake-3.24/Modules/FindGTest.cmake",
+		"/Applications/CLion.app/Contents/bin/cmake/mac/share/cmake-3.24/Modules/GoogleTest.cmake",
+		"/Applications/CLion.app/Contents/bin/cmake/mac/share/cmake-3.24/Modules/FindPackageHandleStandardArgs.cmake",
+		"/Applications/CLion.app/Contents/bin/cmake/mac/share/cmake-3.24/Modules/FindPackageMessage.cmake",
+		"/Users/liuming/anaconda3/lib/cmake/GTest/GTestConfigVersion.cmake",
+		"/Users/liuming/anaconda3/lib/cmake/GTest/GTestConfig.cmake",
+		"/Applications/CLion.app/Contents/bin/cmake/mac/share/cmake-3.24/Modules/CMakeFindDependencyMacro.cmake",
+		"/Applications/CLion.app/Contents/bin/cmake/mac/share/cmake-3.24/Modules/FindThreads.cmake",
+		"/Applications/CLion.app/Contents/bin/cmake/mac/share/cmake-3.24/Modules/CheckLibraryExists.cmake",
+		"/Applications/CLion.app/Contents/bin/cmake/mac/share/cmake-3.24/Modules/CheckIncludeFile.cmake",
+		"/Applications/CLion.app/Contents/bin/cmake/mac/share/cmake-3.24/Modules/CheckCSourceCompiles.cmake",
+		"/Applications/CLion.app/Contents/bin/cmake/mac/share/cmake-3.24/Modules/Internal/CheckSourceCompiles.cmake",
+		"/Applications/CLion.app/Contents/bin/cmake/mac/share/cmake-3.24/Modules/FindPackageHandleStandardArgs.cmake",
+		"/Applications/CLion.app/Contents/bin/cmake/mac/share/cmake-3.24/Modules/FindPackageMessage.cmake",
+		"/Users/liuming/anaconda3/lib/cmake/GTest/GTestTargets.cmake",
+		"/Users/liuming/anaconda3/lib/cmake/GTest/GTestTargets-noconfig.cmake",
+		"/Applications/CLion.app/Contents/bin/cmake/mac/share/cmake-3.24/Modules/FindThreads.cmake",
+		"/Applications/CLion.app/Contents/bin/cmake/mac/share/cmake-3.24/Modules/CheckLibraryExists.cmake",
+		"/Applications/CLion.app/Contents/bin/cmake/mac/share/cmake-3.24/Modules/CheckIncludeFile.cmake",
+		"/Applications/CLion.app/Contents/bin/cmake/mac/share/cmake-3.24/Modules/CheckCSourceCompiles.cmake",
+		"/Applications/CLion.app/Contents/bin/cmake/mac/share/cmake-3.24/Modules/FindPackageHandleStandardArgs.cmake",
+		"/Applications/CLion.app/Contents/bin/cmake/mac/share/cmake-3.24/Modules/FindPackageMessage.cmake",
+		"/Users/liuming/Qt5.14.2/5.14.2/clang_64/lib/cmake/Qt5Widgets/Qt5WidgetsConfigVersion.cmake",
+		"/Users/liuming/Qt5.14.2/5.14.2/clang_64/lib/cmake/Qt5Widgets/Qt5WidgetsConfig.cmake",
+		"/Users/liuming/Qt5.14.2/5.14.2/clang_64/lib/cmake/Qt5Gui/Qt5GuiConfigVersion.cmake",
+		"/Users/liuming/Qt5.14.2/5.14.2/clang_64/lib/cmake/Qt5Gui/Qt5GuiConfig.cmake",
+		"/Users/liuming/Qt5.14.2/5.14.2/clang_64/lib/cmake/Qt5Core/Qt5CoreConfigVersion.cmake",
+		"/Users/liuming/Qt5.14.2/5.14.2/clang_64/lib/cmake/Qt5Core/Qt5CoreConfig.cmake",
+		"/Users/liuming/Qt5.14.2/5.14.2/clang_64/lib/cmake/Qt5Core/Qt5CoreConfigExtras.cmake",
+		"/Users/liuming/Qt5.14.2/5.14.2/clang_64/lib/cmake/Qt5Core/Qt5CoreConfigExtrasMkspecDir.cmake",
+		"/Users/liuming/Qt5.14.2/5.14.2/clang_64/lib/cmake/Qt5Core/Qt5CoreMacros.cmake",
+		"/Applications/CLion.app/Contents/bin/cmake/mac/share/cmake-3.24/Modules/CMakeParseArguments.cmake",
+		"/Users/liuming/Qt5.14.2/5.14.2/clang_64/lib/cmake/Qt5Gui/Qt5Gui_QCocoaIntegrationPlugin.cmake",
+		"/Users/liuming/Qt5.14.2/5.14.2/clang_64/lib/cmake/Qt5Gui/Qt5Gui_QGifPlugin.cmake",
+		"/Users/liuming/Qt5.14.2/5.14.2/clang_64/lib/cmake/Qt5Gui/Qt5Gui_QICNSPlugin.cmake",
+		"/Users/liuming/Qt5.14.2/5.14.2/clang_64/lib/cmake/Qt5Gui/Qt5Gui_QICOPlugin.cmake",
+		"/Users/liuming/Qt5.14.2/5.14.2/clang_64/lib/cmake/Qt5Gui/Qt5Gui_QJpegPlugin.cmake",
+		"/Users/liuming/Qt5.14.2/5.14.2/clang_64/lib/cmake/Qt5Gui/Qt5Gui_QMacHeifPlugin.cmake",
+		"/Users/liuming/Qt5.14.2/5.14.2/clang_64/lib/cmake/Qt5Gui/Qt5Gui_QMacJp2Plugin.cmake",
+		"/Users/liuming/Qt5.14.2/5.14.2/clang_64/lib/cmake/Qt5Gui/Qt5Gui_QMinimalIntegrationPlugin.cmake",
+		"/Users/liuming/Qt5.14.2/5.14.2/clang_64/lib/cmake/Qt5Gui/Qt5Gui_QOffscreenIntegrationPlugin.cmake",
+		"/Users/liuming/Qt5.14.2/5.14.2/clang_64/lib/cmake/Qt5Gui/Qt5Gui_QSvgIconPlugin.cmake",
+		"/Users/liuming/Qt5.14.2/5.14.2/clang_64/lib/cmake/Qt5Gui/Qt5Gui_QSvgPlugin.cmake",
+		"/Users/liuming/Qt5.14.2/5.14.2/clang_64/lib/cmake/Qt5Gui/Qt5Gui_QTgaPlugin.cmake",
+		"/Users/liuming/Qt5.14.2/5.14.2/clang_64/lib/cmake/Qt5Gui/Qt5Gui_QTiffPlugin.cmake",
+		"/Users/liuming/Qt5.14.2/5.14.2/clang_64/lib/cmake/Qt5Gui/Qt5Gui_QTuioTouchPlugin.cmake",
+		"/Users/liuming/Qt5.14.2/5.14.2/clang_64/lib/cmake/Qt5Gui/Qt5Gui_QVirtualKeyboardPlugin.cmake",
+		"/Users/liuming/Qt5.14.2/5.14.2/clang_64/lib/cmake/Qt5Gui/Qt5Gui_QWbmpPlugin.cmake",
+		"/Users/liuming/Qt5.14.2/5.14.2/clang_64/lib/cmake/Qt5Gui/Qt5Gui_QWebGLIntegrationPlugin.cmake",
+		"/Users/liuming/Qt5.14.2/5.14.2/clang_64/lib/cmake/Qt5Gui/Qt5Gui_QWebpPlugin.cmake",
+		"/Users/liuming/Qt5.14.2/5.14.2/clang_64/lib/cmake/Qt5Gui/Qt5Gui_QXdgDesktopPortalThemePlugin.cmake",
+		"/Users/liuming/Qt5.14.2/5.14.2/clang_64/lib/cmake/Qt5Gui/Qt5GuiConfigExtras.cmake",
+		"/Users/liuming/Qt5.14.2/5.14.2/clang_64/lib/cmake/Qt5Widgets/Qt5Widgets_QMacStylePlugin.cmake",
+		"/Users/liuming/Qt5.14.2/5.14.2/clang_64/lib/cmake/Qt5Widgets/Qt5WidgetsConfigExtras.cmake",
+		"/Users/liuming/Qt5.14.2/5.14.2/clang_64/lib/cmake/Qt5Widgets/Qt5WidgetsMacros.cmake",
+		"/Applications/CLion.app/Contents/bin/cmake/mac/share/cmake-3.24/Modules/CMakeParseArguments.cmake"
+	],
+	"CMAKE_SOURCE_DIR" : "/Users/liuming/CLionProjects/Word_Chain1",
+	"DEP_FILE" : "",
+	"DEP_FILE_RULE_NAME" : "",
+	"HEADERS" : 
+	[
+		[
+			"/Users/liuming/CLionProjects/Word_Chain1/compute/controller.h",
+			"Mu",
+			"PUBYIFWMDN/moc_controller.cpp",
+			null
+		],
+		[
+			"/Users/liuming/CLionProjects/Word_Chain1/compute/file_io.h",
+			"Mu",
+			"PUBYIFWMDN/moc_file_io.cpp",
+			null
+		],
+		[
+			"/Users/liuming/CLionProjects/Word_Chain1/compute/graph.h",
+			"Mu",
+			"PUBYIFWMDN/moc_graph.cpp",
+			null
+		],
+		[
+			"/Users/liuming/CLionProjects/Word_Chain1/core/core.h",
+			"Mu",
+			"TAC5DWH4SE/moc_core.cpp",
+			null
+		],
+		[
+			"/Users/liuming/CLionProjects/Word_Chain1/guibin_qt5/gui_qt5.h",
+			"Mu",
+			"7K3E3VRXZI/moc_gui_qt5.cpp",
+			null
+		]
+	],
+	"HEADER_EXTENSIONS" : [ "h", "hh", "h++", "hm", "hpp", "hxx", "in", "txx" ],
+	"INCLUDE_DIR" : "/Users/liuming/CLionProjects/Word_Chain1/cmake-build-debug-coverage-1/WordChainQt5_autogen/include",
+	"MOC_COMPILATION_FILE" : "/Users/liuming/CLionProjects/Word_Chain1/cmake-build-debug-coverage-1/WordChainQt5_autogen/mocs_compilation.cpp",
+	"MOC_DEFINITIONS" : [ "QT_CORE_LIB", "QT_GUI_LIB", "QT_WIDGETS_LIB" ],
+	"MOC_DEPEND_FILTERS" : 
+	[
+		[
+			"Q_PLUGIN_METADATA",
+			"[\n][ \t]*Q_PLUGIN_METADATA[ \t]*\\([^\\)]*FILE[ \t]*\"([^\"]+)\""
+		]
+	],
+	"MOC_INCLUDES" : 
+	[
+		"/Users/liuming/CLionProjects/Word_Chain1/include",
+		"/Users/liuming/Qt5.14.2/5.14.2/clang_64/lib/QtWidgets.framework",
+		"/Users/liuming/Qt5.14.2/5.14.2/clang_64/lib/QtWidgets.framework/Headers",
+		"/Users/liuming/Qt5.14.2/5.14.2/clang_64/lib/QtGui.framework",
+		"/Users/liuming/Qt5.14.2/5.14.2/clang_64/lib/QtGui.framework/Headers",
+		"/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX13.1.sdk/System/Library/Frameworks/OpenGL.framework/Headers",
+		"/Users/liuming/Qt5.14.2/5.14.2/clang_64/lib/QtCore.framework",
+		"/Users/liuming/Qt5.14.2/5.14.2/clang_64/lib/QtCore.framework/Headers",
+		"/Users/liuming/Qt5.14.2/5.14.2/clang_64/mkspecs/macx-clang",
+		"/usr/include",
+		"/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX13.1.sdk/usr/include"
+	],
+	"MOC_MACRO_NAMES" : [ "Q_OBJECT", "Q_GADGET", "Q_NAMESPACE", "Q_NAMESPACE_EXPORT" ],
+	"MOC_OPTIONS" : [],
+	"MOC_PATH_PREFIX" : false,
+	"MOC_PREDEFS_CMD" : 
+	[
+		"/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/c++",
+		"-dM",
+		"-E",
+		"-c",
+		"/Applications/CLion.app/Contents/bin/cmake/mac/share/cmake-3.24/Modules/CMakeCXXCompilerABI.cpp"
+	],
+	"MOC_PREDEFS_FILE" : "/Users/liuming/CLionProjects/Word_Chain1/cmake-build-debug-coverage-1/WordChainQt5_autogen/moc_predefs.h",
+	"MOC_RELAXED_MODE" : false,
+	"MOC_SKIP" : 
+	[
+		"/Users/liuming/CLionProjects/Word_Chain1/cmake-build-debug-coverage-1/MyTests_autogen/mocs_compilation.cpp"
+	],
+	"MULTI_CONFIG" : false,
+	"PARALLEL" : 6,
+	"PARSE_CACHE_FILE" : "/Users/liuming/CLionProjects/Word_Chain1/cmake-build-debug-coverage-1/CMakeFiles/WordChainQt5_autogen.dir/ParseCache.txt",
+	"QT_MOC_EXECUTABLE" : "/Users/liuming/Qt5.14.2/5.14.2/clang_64/bin/moc",
+	"QT_UIC_EXECUTABLE" : "",
+	"QT_VERSION_MAJOR" : 5,
+	"QT_VERSION_MINOR" : 14,
+	"SETTINGS_FILE" : "/Users/liuming/CLionProjects/Word_Chain1/cmake-build-debug-coverage-1/CMakeFiles/WordChainQt5_autogen.dir/AutogenUsed.txt",
+	"SOURCES" : 
+	[
+		[
+			"/Users/liuming/CLionProjects/Word_Chain1/compute/controller.cpp",
+			"Mu",
+			null
+		],
+		[
+			"/Users/liuming/CLionProjects/Word_Chain1/compute/file_io.cpp",
+			"Mu",
+			null
+		],
+		[
+			"/Users/liuming/CLionProjects/Word_Chain1/compute/graph.cpp",
+			"Mu",
+			null
+		],
+		[ "/Users/liuming/CLionProjects/Word_Chain1/core/core.cpp", "Mu", null ],
+		[
+			"/Users/liuming/CLionProjects/Word_Chain1/guibin_qt5/gui_qt5.cpp",
+			"Mu",
+			null
+		]
+	],
+	"VERBOSITY" : 0
+}

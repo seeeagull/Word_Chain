@@ -1,0 +1,88 @@
+{
+	"configurations" : 
+	[
+		{
+			"directories" : 
+			[
+				{
+					"build" : ".",
+					"hasInstallRule" : true,
+					"jsonFile" : "directory-.-Debug-0c5f702620dcf02e84d2.json",
+					"minimumCMakeVersion" : 
+					{
+						"string" : "3.24"
+					},
+					"projectIndex" : 0,
+					"source" : ".",
+					"targetIndexes" : 
+					[
+						0,
+						1,
+						2,
+						3
+					]
+				}
+			],
+			"name" : "Debug",
+			"projects" : 
+			[
+				{
+					"directoryIndexes" : 
+					[
+						0
+					],
+					"name" : "Word_Chain1",
+					"targetIndexes" : 
+					[
+						0,
+						1,
+						2,
+						3
+					]
+				}
+			],
+			"targets" : 
+			[
+				{
+					"directoryIndex" : 0,
+					"id" : "MyTests::@6890427a1f51a3e7e1df",
+					"jsonFile" : "target-MyTests-Debug-970797cd5e54f44716fd.json",
+					"name" : "MyTests",
+					"projectIndex" : 0
+				},
+				{
+					"directoryIndex" : 0,
+					"id" : "MyTests_autogen::@6890427a1f51a3e7e1df",
+					"jsonFile" : "target-MyTests_autogen-Debug-2156a296c2328a19b40e.json",
+					"name" : "MyTests_autogen",
+					"projectIndex" : 0
+				},
+				{
+					"directoryIndex" : 0,
+					"id" : "WordChainQt5::@6890427a1f51a3e7e1df",
+					"jsonFile" : "target-WordChainQt5-Debug-9048ac3c230f6b661411.json",
+					"name" : "WordChainQt5",
+					"projectIndex" : 0
+				},
+				{
+					"directoryIndex" : 0,
+					"id" : "WordChainQt5_autogen::@6890427a1f51a3e7e1df",
+					"jsonFile" : "target-WordChainQt5_autogen-Debug-088d6cdcccdb147937f5.json",
+					"name" : "WordChainQt5_autogen",
+					"projectIndex" : 0
+				}
+			]
+		}
+	],
+	"kind" : "codemodel",
+	"paths" : 
+	{
+		"build" : "/Users/liuming/CLionProjects/Word_Chain1/cmake-build-debug-coverage",
+		"source" : "/Users/liuming/CLionProjects/Word_Chain1"
+	},
+	"version" : 
+	{
+		"major" : 2,
+		"minor" : 4
+	}
+}

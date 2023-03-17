@@ -185,17 +185,17 @@ MyTests/fast:
 .PHONY : MyTests/fast
 
 #=============================================================================
-# Target rules for targets named WordChain
+# Target rules for targets named WordChainQt5
 
 # Build rule for target.
-WordChain: cmake_check_build_system
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 WordChain
-.PHONY : WordChain
+WordChainQt5: cmake_check_build_system
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 WordChainQt5
+.PHONY : WordChainQt5
 
 # fast build rule for target.
-WordChain/fast:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/WordChain.dir/build.make CMakeFiles/WordChain.dir/build
-.PHONY : WordChain/fast
+WordChainQt5/fast:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/WordChainQt5.dir/build.make CMakeFiles/WordChainQt5.dir/build
+.PHONY : WordChainQt5/fast
 
 #=============================================================================
 # Target rules for targets named MyTests_autogen
@@ -211,17 +211,17 @@ MyTests_autogen/fast:
 .PHONY : MyTests_autogen/fast
 
 #=============================================================================
-# Target rules for targets named WordChain_autogen
+# Target rules for targets named WordChainQt5_autogen
 
 # Build rule for target.
-WordChain_autogen: cmake_check_build_system
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 WordChain_autogen
-.PHONY : WordChain_autogen
+WordChainQt5_autogen: cmake_check_build_system
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 WordChainQt5_autogen
+.PHONY : WordChainQt5_autogen
 
 # fast build rule for target.
-WordChain_autogen/fast:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/WordChain_autogen.dir/build.make CMakeFiles/WordChain_autogen.dir/build
-.PHONY : WordChain_autogen/fast
+WordChainQt5_autogen/fast:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/WordChainQt5_autogen.dir/build.make CMakeFiles/WordChainQt5_autogen.dir/build
+.PHONY : WordChainQt5_autogen/fast
 
 MyTests_autogen/mocs_compilation.o: MyTests_autogen/mocs_compilation.cpp.o
 .PHONY : MyTests_autogen/mocs_compilation.o
@@ -247,29 +247,29 @@ MyTests_autogen/mocs_compilation.cpp.s:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/MyTests.dir/build.make CMakeFiles/MyTests.dir/MyTests_autogen/mocs_compilation.cpp.s
 .PHONY : MyTests_autogen/mocs_compilation.cpp.s
 
-WordChain_autogen/mocs_compilation.o: WordChain_autogen/mocs_compilation.cpp.o
-.PHONY : WordChain_autogen/mocs_compilation.o
+WordChainQt5_autogen/mocs_compilation.o: WordChainQt5_autogen/mocs_compilation.cpp.o
+.PHONY : WordChainQt5_autogen/mocs_compilation.o
 
 # target to build an object file
-WordChain_autogen/mocs_compilation.cpp.o:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/WordChain.dir/build.make CMakeFiles/WordChain.dir/WordChain_autogen/mocs_compilation.cpp.o
-.PHONY : WordChain_autogen/mocs_compilation.cpp.o
+WordChainQt5_autogen/mocs_compilation.cpp.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/WordChainQt5.dir/build.make CMakeFiles/WordChainQt5.dir/WordChainQt5_autogen/mocs_compilation.cpp.o
+.PHONY : WordChainQt5_autogen/mocs_compilation.cpp.o
 
-WordChain_autogen/mocs_compilation.i: WordChain_autogen/mocs_compilation.cpp.i
-.PHONY : WordChain_autogen/mocs_compilation.i
+WordChainQt5_autogen/mocs_compilation.i: WordChainQt5_autogen/mocs_compilation.cpp.i
+.PHONY : WordChainQt5_autogen/mocs_compilation.i
 
 # target to preprocess a source file
-WordChain_autogen/mocs_compilation.cpp.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/WordChain.dir/build.make CMakeFiles/WordChain.dir/WordChain_autogen/mocs_compilation.cpp.i
-.PHONY : WordChain_autogen/mocs_compilation.cpp.i
+WordChainQt5_autogen/mocs_compilation.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/WordChainQt5.dir/build.make CMakeFiles/WordChainQt5.dir/WordChainQt5_autogen/mocs_compilation.cpp.i
+.PHONY : WordChainQt5_autogen/mocs_compilation.cpp.i
 
-WordChain_autogen/mocs_compilation.s: WordChain_autogen/mocs_compilation.cpp.s
-.PHONY : WordChain_autogen/mocs_compilation.s
+WordChainQt5_autogen/mocs_compilation.s: WordChainQt5_autogen/mocs_compilation.cpp.s
+.PHONY : WordChainQt5_autogen/mocs_compilation.s
 
 # target to generate assembly for a file
-WordChain_autogen/mocs_compilation.cpp.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/WordChain.dir/build.make CMakeFiles/WordChain.dir/WordChain_autogen/mocs_compilation.cpp.s
-.PHONY : WordChain_autogen/mocs_compilation.cpp.s
+WordChainQt5_autogen/mocs_compilation.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/WordChainQt5.dir/build.make CMakeFiles/WordChainQt5.dir/WordChainQt5_autogen/mocs_compilation.cpp.s
+.PHONY : WordChainQt5_autogen/mocs_compilation.cpp.s
 
 compute/controller.o: compute/controller.cpp.o
 .PHONY : compute/controller.o
@@ -277,7 +277,7 @@ compute/controller.o: compute/controller.cpp.o
 # target to build an object file
 compute/controller.cpp.o:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/MyTests.dir/build.make CMakeFiles/MyTests.dir/compute/controller.cpp.o
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/WordChain.dir/build.make CMakeFiles/WordChain.dir/compute/controller.cpp.o
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/WordChainQt5.dir/build.make CMakeFiles/WordChainQt5.dir/compute/controller.cpp.o
 .PHONY : compute/controller.cpp.o
 
 compute/controller.i: compute/controller.cpp.i
@@ -286,7 +286,7 @@ compute/controller.i: compute/controller.cpp.i
 # target to preprocess a source file
 compute/controller.cpp.i:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/MyTests.dir/build.make CMakeFiles/MyTests.dir/compute/controller.cpp.i
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/WordChain.dir/build.make CMakeFiles/WordChain.dir/compute/controller.cpp.i
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/WordChainQt5.dir/build.make CMakeFiles/WordChainQt5.dir/compute/controller.cpp.i
 .PHONY : compute/controller.cpp.i
 
 compute/controller.s: compute/controller.cpp.s
@@ -295,7 +295,7 @@ compute/controller.s: compute/controller.cpp.s
 # target to generate assembly for a file
 compute/controller.cpp.s:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/MyTests.dir/build.make CMakeFiles/MyTests.dir/compute/controller.cpp.s
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/WordChain.dir/build.make CMakeFiles/WordChain.dir/compute/controller.cpp.s
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/WordChainQt5.dir/build.make CMakeFiles/WordChainQt5.dir/compute/controller.cpp.s
 .PHONY : compute/controller.cpp.s
 
 compute/file_io.o: compute/file_io.cpp.o
@@ -304,7 +304,7 @@ compute/file_io.o: compute/file_io.cpp.o
 # target to build an object file
 compute/file_io.cpp.o:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/MyTests.dir/build.make CMakeFiles/MyTests.dir/compute/file_io.cpp.o
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/WordChain.dir/build.make CMakeFiles/WordChain.dir/compute/file_io.cpp.o
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/WordChainQt5.dir/build.make CMakeFiles/WordChainQt5.dir/compute/file_io.cpp.o
 .PHONY : compute/file_io.cpp.o
 
 compute/file_io.i: compute/file_io.cpp.i
@@ -313,7 +313,7 @@ compute/file_io.i: compute/file_io.cpp.i
 # target to preprocess a source file
 compute/file_io.cpp.i:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/MyTests.dir/build.make CMakeFiles/MyTests.dir/compute/file_io.cpp.i
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/WordChain.dir/build.make CMakeFiles/WordChain.dir/compute/file_io.cpp.i
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/WordChainQt5.dir/build.make CMakeFiles/WordChainQt5.dir/compute/file_io.cpp.i
 .PHONY : compute/file_io.cpp.i
 
 compute/file_io.s: compute/file_io.cpp.s
@@ -322,7 +322,7 @@ compute/file_io.s: compute/file_io.cpp.s
 # target to generate assembly for a file
 compute/file_io.cpp.s:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/MyTests.dir/build.make CMakeFiles/MyTests.dir/compute/file_io.cpp.s
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/WordChain.dir/build.make CMakeFiles/WordChain.dir/compute/file_io.cpp.s
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/WordChainQt5.dir/build.make CMakeFiles/WordChainQt5.dir/compute/file_io.cpp.s
 .PHONY : compute/file_io.cpp.s
 
 compute/graph.o: compute/graph.cpp.o
@@ -331,7 +331,7 @@ compute/graph.o: compute/graph.cpp.o
 # target to build an object file
 compute/graph.cpp.o:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/MyTests.dir/build.make CMakeFiles/MyTests.dir/compute/graph.cpp.o
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/WordChain.dir/build.make CMakeFiles/WordChain.dir/compute/graph.cpp.o
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/WordChainQt5.dir/build.make CMakeFiles/WordChainQt5.dir/compute/graph.cpp.o
 .PHONY : compute/graph.cpp.o
 
 compute/graph.i: compute/graph.cpp.i
@@ -340,7 +340,7 @@ compute/graph.i: compute/graph.cpp.i
 # target to preprocess a source file
 compute/graph.cpp.i:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/MyTests.dir/build.make CMakeFiles/MyTests.dir/compute/graph.cpp.i
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/WordChain.dir/build.make CMakeFiles/WordChain.dir/compute/graph.cpp.i
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/WordChainQt5.dir/build.make CMakeFiles/WordChainQt5.dir/compute/graph.cpp.i
 .PHONY : compute/graph.cpp.i
 
 compute/graph.s: compute/graph.cpp.s
@@ -349,7 +349,7 @@ compute/graph.s: compute/graph.cpp.s
 # target to generate assembly for a file
 compute/graph.cpp.s:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/MyTests.dir/build.make CMakeFiles/MyTests.dir/compute/graph.cpp.s
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/WordChain.dir/build.make CMakeFiles/WordChain.dir/compute/graph.cpp.s
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/WordChainQt5.dir/build.make CMakeFiles/WordChainQt5.dir/compute/graph.cpp.s
 .PHONY : compute/graph.cpp.s
 
 core/core.o: core/core.cpp.o
@@ -358,7 +358,7 @@ core/core.o: core/core.cpp.o
 # target to build an object file
 core/core.cpp.o:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/MyTests.dir/build.make CMakeFiles/MyTests.dir/core/core.cpp.o
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/WordChain.dir/build.make CMakeFiles/WordChain.dir/core/core.cpp.o
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/WordChainQt5.dir/build.make CMakeFiles/WordChainQt5.dir/core/core.cpp.o
 .PHONY : core/core.cpp.o
 
 core/core.i: core/core.cpp.i
@@ -367,7 +367,7 @@ core/core.i: core/core.cpp.i
 # target to preprocess a source file
 core/core.cpp.i:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/MyTests.dir/build.make CMakeFiles/MyTests.dir/core/core.cpp.i
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/WordChain.dir/build.make CMakeFiles/WordChain.dir/core/core.cpp.i
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/WordChainQt5.dir/build.make CMakeFiles/WordChainQt5.dir/core/core.cpp.i
 .PHONY : core/core.cpp.i
 
 core/core.s: core/core.cpp.s
@@ -376,32 +376,32 @@ core/core.s: core/core.cpp.s
 # target to generate assembly for a file
 core/core.cpp.s:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/MyTests.dir/build.make CMakeFiles/MyTests.dir/core/core.cpp.s
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/WordChain.dir/build.make CMakeFiles/WordChain.dir/core/core.cpp.s
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/WordChainQt5.dir/build.make CMakeFiles/WordChainQt5.dir/core/core.cpp.s
 .PHONY : core/core.cpp.s
 
-guibin/gui.o: guibin/gui.cpp.o
-.PHONY : guibin/gui.o
+guibin_qt5/gui_qt5.o: guibin_qt5/gui_qt5.cpp.o
+.PHONY : guibin_qt5/gui_qt5.o
 
 # target to build an object file
-guibin/gui.cpp.o:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/WordChain.dir/build.make CMakeFiles/WordChain.dir/guibin/gui.cpp.o
-.PHONY : guibin/gui.cpp.o
+guibin_qt5/gui_qt5.cpp.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/WordChainQt5.dir/build.make CMakeFiles/WordChainQt5.dir/guibin_qt5/gui_qt5.cpp.o
+.PHONY : guibin_qt5/gui_qt5.cpp.o
 
-guibin/gui.i: guibin/gui.cpp.i
-.PHONY : guibin/gui.i
+guibin_qt5/gui_qt5.i: guibin_qt5/gui_qt5.cpp.i
+.PHONY : guibin_qt5/gui_qt5.i
 
 # target to preprocess a source file
-guibin/gui.cpp.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/WordChain.dir/build.make CMakeFiles/WordChain.dir/guibin/gui.cpp.i
-.PHONY : guibin/gui.cpp.i
+guibin_qt5/gui_qt5.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/WordChainQt5.dir/build.make CMakeFiles/WordChainQt5.dir/guibin_qt5/gui_qt5.cpp.i
+.PHONY : guibin_qt5/gui_qt5.cpp.i
 
-guibin/gui.s: guibin/gui.cpp.s
-.PHONY : guibin/gui.s
+guibin_qt5/gui_qt5.s: guibin_qt5/gui_qt5.cpp.s
+.PHONY : guibin_qt5/gui_qt5.s
 
 # target to generate assembly for a file
-guibin/gui.cpp.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/WordChain.dir/build.make CMakeFiles/WordChain.dir/guibin/gui.cpp.s
-.PHONY : guibin/gui.cpp.s
+guibin_qt5/gui_qt5.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/WordChainQt5.dir/build.make CMakeFiles/WordChainQt5.dir/guibin_qt5/gui_qt5.cpp.s
+.PHONY : guibin_qt5/gui_qt5.cpp.s
 
 test/test.o: test/test.cpp.o
 .PHONY : test/test.o
@@ -441,15 +441,15 @@ help:
 	@echo "... rebuild_cache"
 	@echo "... test"
 	@echo "... MyTests_autogen"
-	@echo "... WordChain_autogen"
+	@echo "... WordChainQt5_autogen"
 	@echo "... MyTests"
-	@echo "... WordChain"
+	@echo "... WordChainQt5"
 	@echo "... MyTests_autogen/mocs_compilation.o"
 	@echo "... MyTests_autogen/mocs_compilation.i"
 	@echo "... MyTests_autogen/mocs_compilation.s"
-	@echo "... WordChain_autogen/mocs_compilation.o"
-	@echo "... WordChain_autogen/mocs_compilation.i"
-	@echo "... WordChain_autogen/mocs_compilation.s"
+	@echo "... WordChainQt5_autogen/mocs_compilation.o"
+	@echo "... WordChainQt5_autogen/mocs_compilation.i"
+	@echo "... WordChainQt5_autogen/mocs_compilation.s"
 	@echo "... compute/controller.o"
 	@echo "... compute/controller.i"
 	@echo "... compute/controller.s"
@@ -462,9 +462,9 @@ help:
 	@echo "... core/core.o"
 	@echo "... core/core.i"
 	@echo "... core/core.s"
-	@echo "... guibin/gui.o"
-	@echo "... guibin/gui.i"
-	@echo "... guibin/gui.s"
+	@echo "... guibin_qt5/gui_qt5.o"
+	@echo "... guibin_qt5/gui_qt5.i"
+	@echo "... guibin_qt5/gui_qt5.s"
 	@echo "... test/test.o"
 	@echo "... test/test.i"
 	@echo "... test/test.s"

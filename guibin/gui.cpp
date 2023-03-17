@@ -148,11 +148,11 @@ void WordChainUI::onSolveButtonClicked() {
         else if (c >= 'a' && c <= 'z')
             s += c;
         else {
-            if ((int)s.size() > 1) {
-                char* tmp = (char*)malloc(s.length() + 1);
+            if ((int) s.size() > 1) {
+                char *tmp = (char *) malloc(s.length() + 1);
                 if (tmp != nullptr) {
-                    char* str = tmp;
-                    for (char i : s) {
+                    char *str = tmp;
+                    for (char i: s) {
                         (*str++) = i;
                     }
                     (*str) = '\0';
@@ -163,11 +163,11 @@ void WordChainUI::onSolveButtonClicked() {
             s = "";
         }
     }
-    if ((int)s.size() > 1) {
-        char* tmp = (char*)malloc(s.length() + 1);
+    if ((int) s.size() > 1) {
+        char *tmp = (char *) malloc(s.length() + 1);
         if (tmp != nullptr) {
-            char* str = tmp;
-            for (char i : s) {
+            char *str = tmp;
+            for (char i: s) {
                 (*str++) = i;
             }
             (*str) = '\0';
@@ -212,7 +212,9 @@ void WordChainUI::onSolveButtonClicked() {
     while (res[i] != nullptr) strList << QString(res[i++]);
     QString outputContent = strList.join("\n");
     outputContentTextEdit->setText(outputContent);
-
+    for (int j = 0; j < len; ++j) {
+        free(words[j]);
+    }
 }
 
 void WordChainUI::onOutputPathChooseButtonClicked() {
@@ -230,7 +232,6 @@ void WordChainUI::onOutputPathChooseButtonClicked() {
 }
 
 void WordChainUI::onFunctionalParamNButtonClicked(bool checked) {
-    std::cout << 1 << std::endl;
     if (checked) {
         limitChar[0]->clear();
         limitChar[1]->clear();

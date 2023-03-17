@@ -6,6 +6,7 @@
 #include <QMessageBox>
 #include <iostream>
 #include <iomanip>
+#include <sstream>
 #include "../core/types.h"
 #include "../core/core.h"
 
@@ -142,17 +143,36 @@ void WordChainUI::onSolveButtonClicked() {
     int len = 0;
     for (int i = 0; i < inputContent.length(); ++i) {
         char c = inputContent[i];
-        if (isupper(c)) s += (char) tolower(c);
-        else if (islower(c)) s += c;
+        if (c >= 'A' && c <= 'Z')
+            s += char(c - 'A' + 'a');
+        else if (c >= 'a' && c <= 'z')
+            s += c;
         else {
-            if (s.length() > 0) {
-                words[len] = new char[s.length() + 1];
-                for (int j = 0; j < s.length(); ++j) {
-                    words[len][j] = s[j];
+            if ((int)s.size() > 1) {
+                char* tmp = (char*)malloc(s.length() + 1);
+                if (tmp != nullptr) {
+                    char* str = tmp;
+                    for (char i : s) {
+                        (*str++) = i;
+                    }
+                    (*str) = '\0';
+                    words[len] = tmp;
+                    ++len;
                 }
-                words[len++][s.length()] = '\0';
-                s = "";
             }
+            s = "";
+        }
+    }
+    if ((int)s.size() > 1) {
+        char* tmp = (char*)malloc(s.length() + 1);
+        if (tmp != nullptr) {
+            char* str = tmp;
+            for (char i : s) {
+                (*str++) = i;
+            }
+            (*str) = '\0';
+            words[len] = tmp;
+            ++len;
         }
     }
     QElapsedTimer timer;
@@ -192,6 +212,7 @@ void WordChainUI::onSolveButtonClicked() {
     while (res[i] != nullptr) strList << QString(res[i++]);
     QString outputContent = strList.join("\n");
     outputContentTextEdit->setText(outputContent);
+
 }
 
 void WordChainUI::onOutputPathChooseButtonClicked() {

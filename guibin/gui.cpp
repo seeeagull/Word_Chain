@@ -5,7 +5,6 @@
 #include <QApplication>
 #include <QMessageBox>
 #include <iostream>
-#include <sstream>
 #include <iomanip>
 #include "../core/types.h"
 #include "../core/core.h"

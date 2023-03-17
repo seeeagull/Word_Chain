@@ -5,21 +5,21 @@
 #ifndef WORDLIST_EXE_CORE_H
 #define WORDLIST_EXE_CORE_H
 
-//#ifdef CORE
-//#define EXPOSED_FUNCTION extern "C" __declspec(dllexport)
-//#else
-//#define EXPOSED_FUNCTION extern "C" __declspec(dllimport)
-//#endif
+#ifdef CORE
+#define EXPOSED_FUNCTION extern "C" __declspec(dllexport)
+#else
+#define EXPOSED_FUNCTION extern "C" __declspec(dllimport)
+#endif
 
 #include "./types.h"
 #include "../compute/graph.h"
 
-//EXPOSED_FUNCTION int gen_chains_all(char* words[], int len, char* result[]);
-//EXPOSED_FUNCTION int gen_chain_word(char* words[], int len, char* result[], char head, char tail, char reject, bool enable_loop);
-//EXPOSED_FUNCTION int gen_chain_char(char* words[], int len, char* result[], char head, char tail, char reject, bool enable_loop);
-int gen_chains_all(char* words[], int len, char* result[]);
-int gen_chain_word(char* words[], int len, char* result[], char head, char tail, char reject, bool enable_loop);
-int gen_chain_char(char* words[], int len, char* result[], char head, char tail, char reject, bool enable_loop);
+EXPOSED_FUNCTION int gen_chains_all(char* words[], int len, char* result[]);
+EXPOSED_FUNCTION int gen_chain_word(char* words[], int len, char* result[], char head, char tail, char reject, bool enable_loop);
+EXPOSED_FUNCTION int gen_chain_char(char* words[], int len, char* result[], char head, char tail, char reject, bool enable_loop);
+//int gen_chains_all(char* words[], int len, char* result[]);
+//int gen_chain_word(char* words[], int len, char* result[], char head, char tail, char reject, bool enable_loop);
+//int gen_chain_char(char* words[], int len, char* result[], char head, char tail, char reject, bool enable_loop);
 
 static void AddWords(const std::shared_ptr<Graph>& graph, char *words[], int len) {
     std::set<std::string> unique_words{};
@@ -45,17 +45,17 @@ static void HandleAdditionalParams(const std::shared_ptr<Graph>& graph,
     }
     if (tail == 0) {
     } else if (tail >= 'a' && tail <= 'z') {
-        graph->SetHead(tail - 'a');
+        graph->SetTail(tail - 'a');
     } else if (tail >= 'A' && tail <='Z') {
-        graph->SetHead(tail - 'A');
+        graph->SetTail(tail - 'A');
     } else {
         throw IllegalCharException();
     }
     if (reject == 0) {
     } else if (reject >= 'a' && reject <= 'z') {
-        graph->SetHead(reject - 'a');
+        graph->SetBannedHead(reject - 'a');
     } else if (reject >= 'A' && reject <='Z') {
-        graph->SetHead(reject - 'A');
+        graph->SetBannedHead(reject - 'A');
     } else {
         throw IllegalCharException();
     }

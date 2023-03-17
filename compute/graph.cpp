@@ -14,12 +14,10 @@ Graph::Graph() {
 }
 
 void Graph::AddWord(const StringPointer& word) {
-    if (word->at(0) - 'a' != banned_head_) {
-        Edge edge(edges_num_, word);
-        edges_[edge.src]->push_back(std::make_shared<Edge>(edge));
-        edges_map_[edges_num_] = std::make_shared<Edge>(edge);
-        ++edges_num_;
-    }
+    Edge edge(edges_num_, word);
+    edges_[edge.src]->push_back(std::make_shared<Edge>(edge));
+    edges_map_[edges_num_] = std::make_shared<Edge>(edge);
+    ++edges_num_;
 }
 
 void Graph::SetHead(char h) {
@@ -54,6 +52,14 @@ bool Graph::DetectLoop() {
         }
     }
     if (has_loop_) {
+        if (banned_head_ != 30) {
+            for (auto& it : edges_map_) {
+                if (it.second->src == banned_head_) {
+                    it.second = nullptr;
+                }
+            }
+            edges_[banned_head_]->clear();
+        }
         return true;
     }
     for (char i = 0; i < 26; ++i) {
@@ -63,6 +69,14 @@ bool Graph::DetectLoop() {
                 break;
             }
         }
+    }
+    if (banned_head_ != 30) {
+        for (auto& it : edges_map_) {
+            if (it.second->src == banned_head_) {
+                it.second = nullptr;
+            }
+        }
+        edges_[banned_head_]->clear();
     }
     return has_loop_;
 }
@@ -400,6 +414,9 @@ int Graph::FindLongestChainWithoutLoops(bool weighted, std::vector<StringPointer
 
     for(int i = 0; i < edges_num_; i++) {
         auto edge = edges_map_[i];
+        if (edge == nullptr) {
+            continue;
+        }
         char u = edge->src, v = edge->tar;
         if(head_ == 30 || head_ == u) {
             if(u == v){

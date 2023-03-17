@@ -59,6 +59,9 @@ bool Graph::DetectLoop() {
                 }
             }
             edges_[banned_head_]->clear();
+            if (self_loop_[banned_head_]) {
+                self_loop_[banned_head_] = nullptr;
+            }
         }
         return true;
     }
@@ -77,6 +80,9 @@ bool Graph::DetectLoop() {
             }
         }
         edges_[banned_head_]->clear();
+        if (self_loop_[banned_head_]) {
+            self_loop_[banned_head_] = nullptr;
+        }
     }
     return has_loop_;
 }

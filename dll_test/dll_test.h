@@ -61,8 +61,9 @@ void dll_test() {
     }
     len = wordCount;
     char *result[10000];
-    char head = 'a', tail = 'c', reject = 'b';
-    int ret = gen_chain_word(words, len, result, head, tail, reject, true);
+//    char head = 'a', tail = 'c', reject = 'b';
+//    int ret = gen_chain_word(words, len, result, head, tail, reject, true);
+    int ret = gen_chains_all(words, len, result);
     std::cout << ret << std::endl;
     int i = 0;
     while (strlen(result[i]) > 0) {

@@ -356,90 +356,85 @@ int Graph::FindLongestChainWithLoops(bool weighted, std::vector<StringPointer>& 
 }
 
 int Graph::FindLongestChainWithoutLoops(bool weighted, std::vector<StringPointer>& wordlist) {
+    int dfn_cnt = 0, fa_num = 0;
+    std::vector<int> dfn(26);
+    std::vector<int> low(26);
+    std::stack<int> stack{};
+    std::vector<bool> instack(26);
+    std::vector<int> fa(26);
+    for (char i = 0; i < 26; ++i) {
+        if (dfn[i] == 0) {
+            Tarjan(i, dfn_cnt, fa_num, dfn, low, stack, instack, fa);
+        }
+    }
+    std::vector<char> id(26);
+    for (char i = 0; i < 26; ++i) {
+        id[fa[i] - 1] = i;
+    }
+
     char optimal = -1;
+    int max_length = -1;
     std::vector<StringPointer> prev(26, nullptr);
     std::deque<StringPointer> answer{};
-    std::queue<char> q{};
-    std::queue<char> first_q{};
-    std::vector<int> in_degree(26);
-    std::vector<int> length(26);
-    for (char i = 0; i < 26; ++i) {
-        length[i] = -1;
-        for (const auto& it : *edges_[i]) {
-            if (i != it->tar) {
-                ++in_degree[it->tar];
-            }
-        }
-    }
-    for (char i = 0; i < 26; ++i) {
-        if (head_ == 30 || head_ == i) {
+    std::vector<int> length(26, -1e9);
+    for(char x = 0; x < 26; ++x){
+        char i = id[x];
+        if (tail_ == 30 || tail_ == i) {
             length[i] = 0;
         }
-        if (in_degree[i] == 0) {
-            if (self_loop_[i]) {
-                q.push(i);
-            } else {
-                first_q.push(i);
+        for(const auto& it : *edges_[i]){
+            int j = it->tar;
+            if(i == j) {
+                continue;
+            }
+            int len = length[j] + (weighted ? it->length : 1);
+            if(length[j] >= 0 && len > length[i]) {
+                length[i] = len;
+                prev[i] = it->word;
             }
         }
+        if (self_loop_[i] && length[i] >= 0) {
+            length[i] += weighted ? self_loop_[i]->length : 1;
+        }
     }
-    while (!first_q.empty()) {
-        char now = first_q.front();
-        first_q.pop();
-        for (const auto& it : *edges_[now]) {
-            auto tar = it->tar;
-            int len = weighted ? it->length : 1;
-            if (length[now] == 0 && len > length[tar]) {
-                length[tar] = len;
-                prev[tar] = it->word;
-            }
-            --in_degree[tar];
-            if (in_degree[tar] == 0) {
-                q.push(tar);
+
+    for(int i = 0; i < edges_num_; i++) {
+        auto edge = edges_map_[i];
+        char u = edge->src, v = edge->tar;
+        if(head_ == 30 || head_ == u) {
+            if(u == v){
+                if(length[u] == (weighted ? edge->length : 1)) {
+                    continue;
+                }
+                if(max_length < length[u]) {
+                    max_length = length[u];
+                    optimal = u;
+                }
+            } else {
+                if(length[v] <= 0) {
+                    continue;
+                }
+                int len = length[v] + (weighted ? edge->length : 1);
+                if(max_length < len) {
+                    max_length = len;
+                    optimal = u;
+                    prev[u] = edge->word;
+                }
             }
         }
     }
 
-    while (!q.empty()) {
-        char now = q.front();
-        q.pop();
-        if (self_loop_[now] && length[now] >= 0) {
-            length[now] += weighted ? self_loop_[now]->length : 1;
-        }
-        for (const auto& it : *edges_[now]) {
-            auto tar = it->tar;
-            if (tar == now) {
-                continue;
-            }
-            int len = weighted ? it->length : 1;
-            if (length[now] >= 0 && length[now] + len > length[tar]) {
-                length[tar] = length[now] + len;
-                prev[tar] = it->word;
-            }
-            --in_degree[tar];
-            if (in_degree[tar] == 0) {
-                if (tail_ == 30 || tail_ == tar) {
-                    if ((optimal == -1 && length[tar] >= 0)
-                        || (optimal >= 0 && length[tar] > length[optimal])) {
-                        optimal = tar;
-                    }
-                }
-                q.push(tar);
-            }
-        }
-    }
-    int ret = 0;
     if (optimal != -1) {
-        ret = length[optimal];
         while (prev[optimal] != nullptr) {
             if (self_loop_[optimal] != nullptr) {
-                answer.push_front(self_loop_[optimal]->word);
+                answer.push_back(self_loop_[optimal]->word);
             }
-            answer.push_front(prev[optimal]);
-            optimal = (prev[optimal])->at(0) - 'a';
+            answer.push_back(prev[optimal]);
+            int len = prev[optimal]->length();
+            optimal = (prev[optimal])->at(len - 1) - 'a';
         }
         if (self_loop_[optimal] != nullptr) {
-            answer.push_front(self_loop_[optimal]->word);
+            answer.push_back(self_loop_[optimal]->word);
         }
         for (const auto &it: answer) {
             if (file_io_) {
@@ -448,5 +443,5 @@ int Graph::FindLongestChainWithoutLoops(bool weighted, std::vector<StringPointer
             wordlist.push_back(it);
         }
     }
-    return ret;
+    return max_length;
 }

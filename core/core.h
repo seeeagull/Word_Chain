@@ -82,6 +82,7 @@ static void Vector2Result(std::vector<std::shared_ptr<std::string>> vec, char* r
         if (p != nullptr) *p = 0;
         p++;
     }
+    result[size] = nullptr;
 }
 
 #endif //WORDLIST_EXE_CORE_H

@@ -67,9 +67,9 @@ void Controller::ParseCmd(int argc, char *argv[]) {
                     throw IllegalCharException();
                 }
                 if (argv[i + 1][0] >= 'A' && argv[i + 1][0] <= 'Z') {
-                    head = argv[i + 1][0] - 'A';
+                    head_ = argv[i + 1][0] - 'A';
                 } else if (argv[i + 1][0] >= 'a' && argv[i + 1][0] <= 'z') {
-                    head = argv[i + 1][0] - 'a';
+                    head_ = argv[i + 1][0] - 'a';
                 } else {
                     throw IllegalCharException();
                 }
@@ -86,9 +86,9 @@ void Controller::ParseCmd(int argc, char *argv[]) {
                     throw IllegalCharException();
                 }
                 if (argv[i + 1][0] >= 'A' && argv[i + 1][0] <= 'Z') {
-                    tail = argv[i + 1][0] - 'A';
+                    tail_ = argv[i + 1][0] - 'A';
                 } else if (argv[i + 1][0] >= 'a' && argv[i + 1][0] <= 'z') {
-                    tail = argv[i + 1][0] - 'a';
+                    tail_ = argv[i + 1][0] - 'a';
                 } else {
                     throw IllegalCharException();
                 }
@@ -134,7 +134,7 @@ void Controller::ParseCmd(int argc, char *argv[]) {
         throw NoFunctionalParamException();
     }
     if (function_type_ == kFindAllWordChains &&
-        (head != 30 || tail != 30 || banned_head_ != 30 || allow_loop_)) {
+        (head_ != 30 || tail_ != 30 || banned_head_ != 30 || allow_loop_)) {
         throw ParamsConflictException();
     }
 }
@@ -161,10 +161,10 @@ int Controller::Cmd(int argc, char **argv, int *res, const char *file_name) {
     } catch (IllegalCharException &e) {
         return kIllegalChar;
     }
-    graph.SetHead(head);
-    graph.SetTail(tail);
-    graph.SetBannedHead(banned_head_);
-    graph.SetFileIO(&file_io_);
+    graph_.SetHead(head_);
+    graph_.SetTail(tail_);
+    graph_.SetBannedHead(banned_head_);
+    graph_.SetFileIO(&file_io_);
     file_io_.SetInputFile(std::make_shared<std::string>(input_file_));
     std::string output_file(file_name);
     file_io_.SetOutputFile(std::make_shared<std::string>(output_file));
@@ -176,22 +176,22 @@ int Controller::Cmd(int argc, char **argv, int *res, const char *file_name) {
     }
 
     for (const auto &it: words) {
-        graph.AddWord(it);
+        graph_.AddWord(it);
     }
-    bool has_loop = graph.DetectLoop();
+    bool has_loop = graph_.DetectLoop();
     if (has_loop && !allow_loop_) {
         return kUnexpectedLoop;
     }
     std::vector<std::shared_ptr<std::string>> wordlist{};
     switch (function_type_) {
         case kFindAllWordChains:
-            *res = graph.FindAllWordChains(wordlist);
+            *res = graph_.FindAllWordChains(wordlist);
             break;
         case kFindWordChainWithMostWords:
-            *res = graph.FindLongestChain(false, wordlist);
+            *res = graph_.FindLongestChain(false, wordlist);
             break;
         default:
-            *res = graph.FindLongestChain(true, wordlist);
+            *res = graph_.FindLongestChain(true, wordlist);
             break;
     }
     if (*res == kLengthOverflow || wordlist.size() > 20000) {

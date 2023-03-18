@@ -29,7 +29,7 @@ public:
 private:
     StringPointer input_file_;
     std::string output_file_ = "./solution.txt";
-    std::ofstream target;
+    std::ofstream target_;
 };
 
 #endif //WORD_CHAIN_FILE_IO_H

@@ -7,12 +7,11 @@
 #include "./file_io.h"
 
 FileIo::FileIo() {
-    target.open(output_file_);
+    target_.open(output_file_);
 }
 
 FileIo::~FileIo() {
-    // TODO: others?
-    target.close();
+    target_.close();
 }
 
 void FileIo::SetInputFile(StringPointer file) {
@@ -59,20 +58,20 @@ void FileIo::ReadFile(std::vector<StringPointer>& words) {
 }
 
 void FileIo::PrintNumber(int number) {
-    target << number << std::endl;
+    target_ << number << std::endl;
 }
 
 void FileIo::PrintLine(std::deque<StringPointer>* words) {
     int length = words->size();
     for (int i = 0; i < length; ++i) {
         if (i != 0) {
-            target << " ";
+            target_ << " ";
         }
-        target << *(*words)[i];
+        target_ << *(*words)[i];
     }
-    target << std::endl;
+    target_ << std::endl;
 }
 
 void FileIo::PrintWord(const StringPointer& word) {
-    target << *word << std::endl;
+    target_ << *word << std::endl;
 }

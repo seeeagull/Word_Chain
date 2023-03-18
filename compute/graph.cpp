@@ -171,6 +171,9 @@ int Graph::FindAllWordChains(std::vector<StringPointer>& wordlist) {
             }
         }
     }
+    if (total_chains > 20000) {
+        return kLengthOverflow;
+    }
     if (file_io_) {
         file_io_->PrintNumber(total_chains);
     }
@@ -288,6 +291,9 @@ int Graph::FindLongestChainWithLoops(bool weighted, std::vector<StringPointer>& 
             Tarjan(i, dfn_cnt, fa_num, dfn, low, stack, instack, fa);
         }
     }
+    dfn.clear();
+    low.clear();
+    instack.clear();
 
     std::map<std::pair<char, char>, int> pos{};
     for (char i = 0; i < 26; ++i) {
@@ -342,10 +348,8 @@ int Graph::FindLongestChainWithLoops(bool weighted, std::vector<StringPointer>& 
     }
 
     State cur(last_pos);
+    std::vector<std::shared_ptr<std::string>> ans{};
     if (max_id != -1) {
-        if (file_io_) {
-            file_io_->PrintWord(edges_map_[max_id]->word);
-        }
         wordlist.push_back(edges_map_[max_id]->word);
         last_pos = edges_map_[max_id]->tar;
         if (fa[edges_map_[max_id]->src] == fa[edges_map_[max_id]->tar]) {
@@ -358,9 +362,6 @@ int Graph::FindLongestChainWithLoops(bool weighted, std::vector<StringPointer>& 
         while ((to = longest[cur].second) != -1) {
             auto edge = std::make_pair(last_pos, to);
             auto id = edges2_[edge][pos[edge]].second;
-            if (file_io_) {
-                file_io_->PrintWord(edges_map_[id]->word);
-            }
             wordlist.push_back(edges_map_[id]->word);
             if (fa[last_pos] == fa[to]) {
                 cur.set(id);
@@ -370,6 +371,14 @@ int Graph::FindLongestChainWithLoops(bool weighted, std::vector<StringPointer>& 
             pos[edge] += 1;
             last_pos = to;
             cur.last_pos = to;
+        }
+        if (wordlist.size() > 20000) {
+            return kLengthOverflow;
+        }
+        if (file_io_) {
+            for (const auto &it: wordlist) {
+                file_io_->PrintWord(it);
+            }
         }
     }
     return max_length;
@@ -387,6 +396,9 @@ int Graph::FindLongestChainWithoutLoops(bool weighted, std::vector<StringPointer
             Tarjan(i, dfn_cnt, fa_num, dfn, low, stack, instack, fa);
         }
     }
+    dfn.clear();
+    low.clear();
+    instack.clear();
     std::vector<char> id(26);
     for (char i = 0; i < 26; ++i) {
         id[fa[i] - 1] = i;
@@ -418,6 +430,8 @@ int Graph::FindLongestChainWithoutLoops(bool weighted, std::vector<StringPointer
         }
     }
 
+
+    std::vector<StringPointer> first_edge(26, nullptr);
     for(int i = 0; i < edges_num_; i++) {
         auto edge = edges_map_[i];
         if (edge == nullptr) {
@@ -432,6 +446,7 @@ int Graph::FindLongestChainWithoutLoops(bool weighted, std::vector<StringPointer
                 if(max_length < length[u]) {
                     max_length = length[u];
                     optimal = u;
+                    first_edge[u] = prev[u];
                 }
             } else {
                 if(length[v] <= 0) {
@@ -441,13 +456,14 @@ int Graph::FindLongestChainWithoutLoops(bool weighted, std::vector<StringPointer
                 if(max_length < len) {
                     max_length = len;
                     optimal = u;
-                    prev[u] = edge->word;
+                    first_edge[u] = edge->word;
                 }
             }
         }
     }
 
     if (optimal != -1) {
+        prev[optimal] = first_edge[optimal];
         while (prev[optimal] != nullptr) {
             if (self_loop_[optimal] != nullptr) {
                 answer.push_back(self_loop_[optimal]->word);
@@ -458,6 +474,9 @@ int Graph::FindLongestChainWithoutLoops(bool weighted, std::vector<StringPointer
         }
         if (self_loop_[optimal] != nullptr) {
             answer.push_back(self_loop_[optimal]->word);
+        }
+        if (answer.size() > 20000) {
+            return kLengthOverflow;
         }
         for (const auto &it: answer) {
             if (file_io_) {

@@ -194,7 +194,7 @@ int Controller::Cmd(int argc, char **argv, int *res, const char *file_name) {
             *res = graph.FindLongestChain(true, wordlist);
             break;
     }
-    if (wordlist.size() > 20000) {
+    if (*res == kLengthOverflow || wordlist.size() > 20000) {
         return kLengthOverflow;
     }
     return kNoError;

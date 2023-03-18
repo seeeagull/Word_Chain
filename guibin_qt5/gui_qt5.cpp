@@ -8,9 +8,18 @@
 #include <iomanip>
 #include <sstream>
 #include "../core/types.h"
-#include "../core/core.h"
 
 #include "gui_qt5.h"
+
+#ifdef CORE
+#define EXPOSED_FUNCTION extern "C" __declspec(dllexport)
+#else
+#define EXPOSED_FUNCTION extern "C" __declspec(dllimport)
+#endif
+
+EXPOSED_FUNCTION int gen_chains_all(char* words[], int len, char* result[]);
+EXPOSED_FUNCTION int gen_chain_word(char* words[], int len, char* result[], char head, char tail, char reject, bool enable_loop);
+EXPOSED_FUNCTION int gen_chain_char(char* words[], int len, char* result[], char head, char tail, char reject, bool enable_loop);
 
 WordChainUIQt5::WordChainUIQt5() {
     createMenu();
@@ -141,7 +150,7 @@ void WordChainUIQt5::onSolveButtonClicked() {
     std::string inputContent = inputContentTextEdit->toPlainText().toStdString();
     std::string s;
     int len = 0;
-    for (int i = 0; i < inputContent.length(); ++i) {
+    for (int i = 0; i < (int)inputContent.length(); ++i) {
         char c = inputContent[i];
         if (c >= 'A' && c <= 'Z')
             s += char(c - 'A' + 'a');

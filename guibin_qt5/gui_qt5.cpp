@@ -129,7 +129,7 @@ void WordChainUIQt5::onInputPathChooseButtonClicked() {
         QString line = inputContentTextStream.readLine();
         QString inputContent;
         while (!line.isNull()) {
-            inputContent.append(line);
+            inputContent.append(line).append('\n');
             line = inputContentTextStream.readLine();
         }
         inputPathLineEdit->setText(inputPath);

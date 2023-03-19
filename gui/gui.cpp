@@ -8,18 +8,17 @@
 #include <iomanip>
 #include <sstream>
 #include "../core/types.h"
-
 #include "gui.h"
 
-#ifdef CORE
-#define EXPOSED_FUNCTION extern "C" __declspec(dllexport)
-#else
-#define EXPOSED_FUNCTION extern "C" __declspec(dllimport)
-#endif
+#pragma comment(linker, "/subsystem:\"windows\" /entry:\"mainCRTStartup\"")
 
-EXPOSED_FUNCTION int gen_chains_all(char* words[], int len, char* result[]);
-EXPOSED_FUNCTION int gen_chain_word(char* words[], int len, char* result[], char head, char tail, char reject, bool enable_loop);
-EXPOSED_FUNCTION int gen_chain_char(char* words[], int len, char* result[], char head, char tail, char reject, bool enable_loop);
+typedef int (*gen_all)(char*[], int, char*[]);
+
+typedef int (*gen_max)(char*[], int, char*[], char, char, char, bool);
+
+gen_all gen_chains_all;
+gen_max gen_chain_word;
+gen_max gen_chain_char;
 
 WordChainUIQt5::WordChainUIQt5() {
     createMenu();
@@ -259,8 +258,29 @@ void WordChainUIQt5::onFunctionalParamNButtonClicked(bool checked) {
 }
 
 int main(int argc, char *argv[]) {
+
     QApplication app(argc, argv);
+    // 加载dll
+    HINSTANCE core_lib;
+    core_lib = LoadLibrary("core.dll");
+    // 加载失败时弹窗报错
+    if (core_lib == nullptr) {
+        QMessageBox::critical(nullptr, "严重错误", "不能正确加载core.dll, 请检查运行环境",
+                              QMessageBox::Escape, QMessageBox::Escape);
+        return -1;
+    }
+    gen_chains_all = (gen_all) GetProcAddress(core_lib, "gen_chains_all");
+    gen_chain_word = (gen_max) GetProcAddress(core_lib, "gen_chain_word");
+    gen_chain_char = (gen_max) GetProcAddress(core_lib, "gen_chain_char");
+
+    if (gen_chains_all == nullptr || gen_chain_word == nullptr || gen_chain_char == nullptr) {
+        QMessageBox::critical(nullptr, "严重错误", "core.dll不含必须的函数",
+                              QMessageBox::Escape, QMessageBox::Escape);
+    }
+
     WordChainUIQt5 wordChainUiQt5;
     wordChainUiQt5.show();
-    return QApplication::exec();
+    auto ret = QApplication::exec();
+    FreeLibrary(core_lib);
+    return ret;
 }

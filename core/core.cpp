@@ -12,7 +12,7 @@ int gen_chains_all(char* words[], int len, char* result[]) {
         HandleEnableLoop(graph_pointer, false);
     } catch (UnexpectedLoopException& e) {
         std::cout << "error: " << e.what() << std::endl;
-        return -11;
+        return 0x80000001;
     }
     std::vector<std::shared_ptr<std::string>> wordlist{};
     int ret = graph_pointer->FindAllWordChains(wordlist);
@@ -37,7 +37,7 @@ int gen_chain_word(char* words[], int len, char* result[], char head, char tail,
         HandleEnableLoop(graph_pointer, enable_loop);
     } catch (UnexpectedLoopException& e) {
         std::cout << "error: " << e.what() << std::endl;
-        return -11;
+        return 0x80000001;
     }
     std::vector<std::shared_ptr<std::string>> wordlist{};
     int ret = graph_pointer->FindLongestChain(false, wordlist);
@@ -62,7 +62,7 @@ int gen_chain_char(char* words[], int len, char* result[], char head, char tail,
         HandleEnableLoop(graph_pointer, enable_loop);
     } catch (UnexpectedLoopException& e) {
         std::cout << "error: " << e.what() << std::endl;
-        return -11;
+        return 0x80000001;
     }
     std::vector<std::shared_ptr<std::string>> wordlist{};
     int ret = graph_pointer->FindLongestChain(true, wordlist);

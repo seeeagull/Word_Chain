@@ -204,7 +204,7 @@ void WordChainUIQt5::onSolveButtonClicked() {
     }
     qint64 elapsed = timer.nsecsElapsed();
     if (ret < 0) {
-        if (ret == -kUnexpectedLoop) {
+        if (ret == 0x80000001) {
             QMessageBox::information(nullptr, "提示", "输入存在环，请勾选\"允许出现环\"");
         } else if (ret == -kLengthOverflow) {
             QMessageBox::information(nullptr, "提示", "输出单词链过长");

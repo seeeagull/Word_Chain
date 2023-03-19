@@ -180,7 +180,7 @@ int Controller::Cmd(int argc, char **argv, int *res, const char *file_name) {
     }
     bool has_loop = graph_.DetectLoop();
     if (has_loop && !allow_loop_) {
-        return kUnexpectedLoop;
+        return 0x80000001;
     }
     std::vector<std::shared_ptr<std::string>> wordlist{};
     switch (function_type_) {

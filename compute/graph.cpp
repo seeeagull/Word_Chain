@@ -172,7 +172,7 @@ int Graph::FindAllWordChains(std::vector<StringPointer>& wordlist) {
         }
     }
     if (total_chains > 20000) {
-        return kLengthOverflow;
+        return -kLengthOverflow;
     }
     if (file_io_) {
         file_io_->PrintNumber(total_chains);
@@ -373,7 +373,7 @@ int Graph::FindLongestChainWithLoops(bool weighted, std::vector<StringPointer>& 
             cur.last_pos = to;
         }
         if (wordlist.size() > 20000) {
-            return kLengthOverflow;
+            return -kLengthOverflow;
         }
         if (file_io_) {
             for (const auto &it: wordlist) {
@@ -476,7 +476,7 @@ int Graph::FindLongestChainWithoutLoops(bool weighted, std::vector<StringPointer
             answer.push_back(self_loop_[optimal]->word);
         }
         if (answer.size() > 20000) {
-            return kLengthOverflow;
+            return -kLengthOverflow;
         }
         for (const auto &it: answer) {
             if (file_io_) {

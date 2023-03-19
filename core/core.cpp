@@ -16,7 +16,7 @@ int gen_chains_all(char* words[], int len, char* result[]) {
     }
     std::vector<std::shared_ptr<std::string>> wordlist{};
     int ret = graph_pointer->FindAllWordChains(wordlist);
-    if (ret == kLengthOverflow || wordlist.size() > 20000) {
+    if (ret == -kLengthOverflow || wordlist.size() > 20000) {
         return -12;
     }
     Vector2Result(wordlist, result);
@@ -41,7 +41,7 @@ int gen_chain_word(char* words[], int len, char* result[], char head, char tail,
     }
     std::vector<std::shared_ptr<std::string>> wordlist{};
     int ret = graph_pointer->FindLongestChain(false, wordlist);
-    if (ret == kLengthOverflow || wordlist.size() > 20000) {
+    if (ret == -kLengthOverflow || wordlist.size() > 20000) {
         return -12;
     }
     Vector2Result(wordlist, result);
@@ -66,7 +66,7 @@ int gen_chain_char(char* words[], int len, char* result[], char head, char tail,
     }
     std::vector<std::shared_ptr<std::string>> wordlist{};
     int ret = graph_pointer->FindLongestChain(true, wordlist);
-    if (ret == kLengthOverflow || wordlist.size() > 20000) {
+    if (ret == -kLengthOverflow || wordlist.size() > 20000) {
         return -12;
     }
     Vector2Result(wordlist, result);

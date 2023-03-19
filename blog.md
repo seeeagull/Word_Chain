@@ -724,8 +724,8 @@ void WordChainUI::onSolveButtonClicked() {
   char functionalParam = functionalParamsRadio[0]->isChecked() ? 'n' :
                          functionalParamsRadio[1]->isChecked() ? 'w' :
                          functionalParamsRadio[2]->isChecked() ? 'c' : 0;
-  char head = limitChar[0]->text().toStdString().length() > 0 ? tolower(limitChar[0]->text().toStdString()[0]) : 0;
-  char tail = limitChar[1]->text().toStdString().length() > 0 ? tolower(limitChar[1]->text().toStdString()[0]) : 0;
+  char head_ = limitChar[0]->text().toStdString().length() > 0 ? tolower(limitChar[0]->text().toStdString()[0]) : 0;
+  char tail_ = limitChar[1]->text().toStdString().length() > 0 ? tolower(limitChar[1]->text().toStdString()[0]) : 0;
   char reject = limitChar[2]->text().toStdString().length() > 0 ? tolower(limitChar[2]->text().toStdString()[0]) : 0;
   bool enable_loop = allowRingsRadio->isChecked();
   char *words[200000];
@@ -756,10 +756,10 @@ void WordChainUI::onSolveButtonClicked() {
           ret = gen_chains_all(words, len, res);
           break;
       case 'w':
-          ret = gen_chain_word(words, len, res, head, tail, reject, enable_loop);
+          ret = gen_chain_word(words, len, res, head_, tail_, reject, enable_loop);
           break;
       case 'c':
-          ret = gen_chain_char(words, len, res, head, tail, reject, enable_loop);
+          ret = gen_chain_char(words, len, res, head_, tail_, reject, enable_loop);
           break;
       default:
           // never hit here

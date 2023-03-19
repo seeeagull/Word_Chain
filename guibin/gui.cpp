@@ -9,7 +9,7 @@
 #include <sstream>
 #include "../core/types.h"
 
-#include "gui_qt5.h"
+#include "gui.h"
 
 #ifdef CORE
 #define EXPOSED_FUNCTION extern "C" __declspec(dllexport)

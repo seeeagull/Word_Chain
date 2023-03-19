@@ -1,9 +1,17 @@
 /build/
 /cmake-build-debug/
+/cmake-build-debug-coverage/
+/cmake-build-debug-coverage-1/
+/cmake-build-debug-mingw-1/
+/guibin_depre/
+/image/
 /.idea/
+.DS_Store
 CMakeLists.txt
+CMakeLists.txt.user
 /compute/CMakeLists.txt
 /core/CMakeLists.txt
+core.dll
 source.txt
 simple.txt
 solution.txt
